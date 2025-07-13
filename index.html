@@ -70,7 +70,6 @@
   </div>
 
   <script>
-    console.log('Script loaded');
     const stars = document.querySelectorAll('.stars span');
     const ratingContainer = document.getElementById('rating');
     let selectedValue = 0;
@@ -86,7 +85,6 @@
     }
 
     ratingContainer.addEventListener('mouseover', (event) => {
-      console.log('Mouseover event:', event.target);
       if (event.target.tagName === 'SPAN') {
         const value = event.target.dataset.value;
         updateStars(value);
@@ -94,15 +92,12 @@
     });
 
     ratingContainer.addEventListener('mouseout', () => {
-      console.log('Mouseout event');
       updateStars(selectedValue);
     });
 
     ratingContainer.addEventListener('click', (event) => {
-      console.log('Click event:', event.target);
       if (event.target.tagName === 'SPAN') {
         selectedValue = parseInt(event.target.dataset.value);
-        console.log('Selected value:', selectedValue);
         updateStars(selectedValue);
 
         document.getElementById('resenaBtn').classList.add('hidden');
