@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const codigoContainer  = document.getElementById('codigoContainer');
   const codigoRecompensa = document.getElementById('codigoRecompensa');
   const resenaBtn        = document.getElementById('resenaBtn');
-  const container        = document.querySelector('.container');
 
   const prizes = ['Postre','Café','Mojito','Cono Helado','Chupito','Refresco','Cerveza','Tapa'];
   const N          = prizes.length;        // 8
@@ -61,8 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(() => {
       isSpinning = false;
-      hide(rouletteContainer);
-      show(container);
 
       /* Código premio */
       const randomDigits = Math.random().toString().slice(2,5); // 3 dígitos
@@ -74,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------------------- Helpers ---------------------- */
   const show = el => { el.classList.remove('hidden'); el.classList.add('fade-in'); };
-  const hide = el => { el.classList.add('hidden');   el.classList.remove('fade-in'); };
   window.showRoulette = rating => {
     currentRating = rating;
     createWheelTexts();
