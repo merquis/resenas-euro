@@ -5,27 +5,46 @@
   height: 320px;
   border-radius: 50%;
   overflow: hidden;
-  /* la rueda ya coloreada: */
+
+  /* ▼ FLECHA FIJA EN LA PARTE SUPERIOR */
+  /*  Se dibuja antes de la rueda para quedar encima */
+}
+#rouletteWheel::before{         /*   ←  pseudo-elemento flecha */
+  content: '';
+  position: absolute;
+  top: -14px;                   /* sobresale por encima del círculo */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left : 13px solid transparent;  /* base del triángulo */
+  border-right: 13px solid transparent;
+  border-bottom: 20px solid #e74c3c;     /* color de la flecha */
+  z-index: 3;                            /* por encima de todo */
+}
+
+/* la rueda ya coloreada: */
+#rouletteWheel{
   background: conic-gradient(
-    #e67e22 0deg          45deg,   /* Postre   */
-    #e74c3c 45deg         90deg,   /* Café     */
-    #2980b9 90deg        135deg,   /* Mojito   */
-    #8e44ad 135deg       180deg,   /* Cono...  */
-    #27ae60 180deg       225deg,   /* Chupito  */
-    #f1c40f 225deg       270deg,   /* Refresco */
-    #3498db 270deg       315deg,   /* Cerveza  */
-    #9b59b6 315deg       360deg    /* Tapa     */
+    #e67e22 0deg   45deg,   /* Postre   */
+    #e74c3c 45deg  90deg,   /* Café     */
+    #2980b9 90deg 135deg,   /* Mojito   */
+    #8e44ad 135deg 180deg,  /* Cono...  */
+    #27ae60 180deg 225deg,  /* Chupito  */
+    #f1c40f 225deg 270deg,  /* Refresco */
+    #3498db 270deg 315deg,  /* Cerveza  */
+    #9b59b6 315deg 360deg   /* Tapa     */
   );
 }
 
 /* capa de textos */
-#rouletteTextLayer {
+#rouletteTextLayer{
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
 
-.roulette-text {
+.roulette-text{
   position: absolute;
   font-weight: 700;
   color: #fff;
