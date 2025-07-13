@@ -82,6 +82,7 @@
     const valorarBtnContainer = document.getElementById('valorarBtnContainer');
     const valorarBtn = document.getElementById('valorarBtn');
     let selectedValue = 0;
+    let ratingLocked = false;
     
     function updateStars(value) {
       stars.forEach((star, index) => {
@@ -100,6 +101,7 @@
     });
     
     ratingContainer.addEventListener('mouseover', (event) => {
+      if (ratingLocked) return;
       if (event.target.tagName === 'SPAN') {
         const value = parseInt(event.target.dataset.value);
         updateStars(value);
@@ -107,26 +109,28 @@
     });
     
     ratingContainer.addEventListener('mouseout', () => {
+      if (ratingLocked) return;
       updateStars(selectedValue);
     });
     
     ratingContainer.addEventListener('click', (event) => {
+      if (ratingLocked) return;
       if (event.target.tagName === 'SPAN') {
         selectedValue = parseInt(event.target.dataset.value);
         updateStars(selectedValue);
-        valorarBtnContainer.classList.remove('hidden');
+
+        if (selectedValue === 5) {
+          goToReview();
+        } else {
+          valorarBtnContainer.classList.remove('hidden');
+        }
       }
     });
 
     valorarBtn.addEventListener('click', () => {
-      document.getElementById('resenaBtn').classList.add('hidden');
-      document.getElementById('formulario').classList.add('hidden');
-
-      if (selectedValue === 5) {
-        document.getElementById('resenaBtn').classList.remove('hidden');
-      } else {
-        document.getElementById('formulario').classList.remove('hidden');
-      }
+      ratingLocked = true;
+      valorarBtnContainer.classList.add('hidden');
+      document.getElementById('formulario').classList.remove('hidden');
     });
     
     function goToReview() {
