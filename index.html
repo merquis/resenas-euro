@@ -20,6 +20,8 @@
     }
     .stars span {
       padding: 0 5px;
+      color: #ccc; /* Color gris por defecto */
+      transition: color 0.2s ease;
     }
     .hidden {
       display: none;
@@ -46,7 +48,7 @@
   <h2>🎁 ¡Elige tu sorpresa! / Pick your reward!</h2>
   <p>Antes, por favor valora tu experiencia con nosotros:<br>
      Before that, please rate your experience:</p>
-
+  
   <div class="stars" id="rating">
     <span data-value="1">⭐</span>
     <span data-value="2">⭐</span>
@@ -54,7 +56,7 @@
     <span data-value="4">⭐</span>
     <span data-value="5">⭐</span>
   </div>
-
+  
   <div id="formulario" class="hidden">
     <h3>Gracias, ¿cómo podríamos mejorar? / Thanks, how can we improve?</h3>
     <form id="feedbackForm">
@@ -63,46 +65,47 @@
       <button type="submit">Enviar / Send</button>
     </form>
   </div>
-
+  
   <div id="resenaBtn" class="hidden">
     <p>¡Gracias! Ahora puedes dejarnos tu reseña en Google:</p>
     <button onclick="goToReview()">Ir a Google / Go to Google</button>
   </div>
-
+  
   <script>
     const stars = document.querySelectorAll('.stars span');
     const ratingContainer = document.getElementById('rating');
     let selectedValue = 0;
-
+    
     function updateStars(value) {
-      stars.forEach(star => {
-        if (star.dataset.value <= value) {
-          star.style.color = '#f39c12';
+      stars.forEach((star, index) => {
+        const starValue = parseInt(star.dataset.value);
+        if (starValue <= value) {
+          star.style.color = '#f39c12'; // Dorado para estrellas seleccionadas
         } else {
-          star.style.color = '#aaa';
+          star.style.color = '#ccc'; // Gris claro para estrellas no seleccionadas
         }
       });
     }
-
+    
     ratingContainer.addEventListener('mouseover', (event) => {
       if (event.target.tagName === 'SPAN') {
         const value = event.target.dataset.value;
         updateStars(value);
       }
     });
-
+    
     ratingContainer.addEventListener('mouseout', () => {
       updateStars(selectedValue);
     });
-
+    
     ratingContainer.addEventListener('click', (event) => {
       if (event.target.tagName === 'SPAN') {
         selectedValue = parseInt(event.target.dataset.value);
         updateStars(selectedValue);
-
+        
         document.getElementById('resenaBtn').classList.add('hidden');
         document.getElementById('formulario').classList.add('hidden');
-
+        
         if (selectedValue === 5) {
           document.getElementById('resenaBtn').classList.remove('hidden');
         } else {
@@ -110,15 +113,15 @@
         }
       }
     });
-
+    
     // Set initial state
     updateStars(selectedValue);
-
+    
     function goToReview() {
       // Reemplaza con tu URL real de reseñas
       window.location.href = "https://search.google.com/local/writereview?placeid=TU_PLACE_ID";
     }
-
+    
     document.getElementById('feedbackForm').addEventListener('submit', function(e) {
       e.preventDefault();
       alert("Gracias por tu comentario. Lo tendremos en cuenta.");
