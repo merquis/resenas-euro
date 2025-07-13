@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     es: {
       title: '¡Tu opinión tiene premio!',
       subtitle: 'Antes de tu sorpresa, ¿qué tal fue tu experiencia? Ayúdanos a mejorar valorando con las estrellas.',
+      rouletteTitle: '¡Gira y gana!',
+      rouletteSubtitle: '¡Tu suerte está en juego!',
       confirm: 'Confirmar',
       confirmRating: 'Confirmar valoración',
       rewardCode: 'Código de recompensa',
@@ -28,6 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
     en: {
       title: 'Your opinion has a prize!',
       subtitle: 'Before your reward, how was your experience? Help us improve by rating with the stars.',
+      rouletteTitle: 'Spin and win!',
+      rouletteSubtitle: 'Your luck is on the line!',
       confirm: 'Confirm',
       confirmRating: 'Confirm rating',
       rewardCode: 'Reward code',
@@ -52,6 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
     de: {
       title: 'Deine Meinung hat einen Preis!',
       subtitle: 'Wie war deine Erfahrung, bevor du deine Belohnung erhältst? Hilf uns, uns zu verbessern, indem du mit den Sternen bewertest.',
+      rouletteTitle: 'Drehen und gewinnen!',
+      rouletteSubtitle: 'Dein Glück steht auf dem Spiel!',
       confirm: 'Bestätigen',
       confirmRating: 'Bewertung bestätigen',
       rewardCode: 'Belohnungscode',
@@ -76,6 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
     fr: {
       title: 'Votre avis a un prix!',
       subtitle: 'Avant votre récompense, comment s\'est passée votre expérience ? Aidez-nous à nous améliorer en notant avec les étoiles.',
+      rouletteTitle: 'Tournez et gagnez!',
+      rouletteSubtitle: 'Votre chance est en jeu!',
       confirm: 'Confirmer',
       confirmRating: 'Confirmer la note',
       rewardCode: 'Code de récompense',
@@ -126,6 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const rouletteContainer = document.getElementById('rouletteContainer');
   const ratingSection     = document.querySelector('.rating-section');
   const spinBtn           = document.getElementById('spinBtn');
+  const container         = document.querySelector('.container');
+  const rouletteScreen    = document.querySelector('.roulette-screen');
 
   const languageDropdown  = document.getElementById('languageDropdown');
   const languageBtn       = document.getElementById('languageBtn');
@@ -252,9 +262,8 @@ document.addEventListener('DOMContentLoaded', () => {
   /* -------------------- Feedback form -------------------- */
   feedbackForm.addEventListener('submit', e => {
     e.preventDefault();
-    hide(ratingSection);
-    hide(formulario);
-    show(rouletteContainer);
+    hide(container);
+    show(rouletteScreen);
     window.showRoulette(selectedValue);
   });
 

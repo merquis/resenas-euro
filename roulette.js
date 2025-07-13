@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const codigoContainer  = document.getElementById('codigoContainer');
   const codigoRecompensa = document.getElementById('codigoRecompensa');
   const resenaBtn        = document.getElementById('resenaBtn');
-  const header           = document.querySelector('.header');
+  const container        = document.querySelector('.container');
+  const rouletteScreen   = document.querySelector('.roulette-screen');
 
   let prizes       = [];
   let N            = 0;
@@ -65,13 +66,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(() => {
       isSpinning = false;
-      hide(rouletteContainer);
+      hide(rouletteScreen);
+      show(container);
 
-      /* Cambiar header y mostrar premio */
+      // Ocultamos las partes que no queremos ver en la pantalla final
+      hide(document.querySelector('.rating-section'));
+      hide(document.getElementById('formulario'));
+
+      // Cambiamos el header para el mensaje final
+      const header = container.querySelector('.header');
       const title = header.querySelector('h1');
       const subtitle = header.querySelector('p');
       title.innerHTML = `<span class="emoji">🎉</span> <span>¡Enhorabuena!</span>`;
       subtitle.textContent = 'Aquí tienes tu premio. ¡Que lo disfrutes!';
+
 
       const randomDigits = Math.random().toString().slice(2,5); // 3 dígitos
       const finalPrize = window.getTranslatedPrizes()[prizeIndex];
