@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isSpinning) return;
     isSpinning = true;
     spinBtn.disabled = true;
+    hide(spinBtn);
 
     const randomSpins   = Math.floor(Math.random()*5)+5;   // 5-9 giros
     const prizeIndex    = Math.floor(Math.random()*N);
@@ -71,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------------------- Helpers ---------------------- */
   const show = el => { el.classList.remove('hidden'); el.classList.add('fade-in'); };
+  const hide = el => { el.classList.add('hidden');   el.classList.remove('fade-in'); };
   window.showRoulette = rating => {
     currentRating = rating;
     createWheelTexts();
