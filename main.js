@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* -------------------- Translations -------------------- */
   const translations = {
     es: {
-      title: '¡Elige tu sorpresa!',
+      title: '¡Tu opinión tiene premio!',
       subtitle: 'Antes de tu sorpresa, ¿qué tal fue tu experiencia? Ayúdanos a mejorar valorando con las estrellas.',
       confirm: 'Confirmar',
       confirmRating: 'Confirmar valoración',
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
       prizes: ['Postre','Café','Mojito','Cono Helado','Chupito','Refresco','Cerveza','Tapa']
     },
     en: {
-      title: 'Pick your reward!',
+      title: 'Your opinion has a prize!',
       subtitle: 'Before your reward, how was your experience? Help us improve by rating with the stars.',
       confirm: 'Confirm',
       confirmRating: 'Confirm rating',
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
       prizes: ['Dessert','Coffee','Mojito','Ice Cream Cone','Shot','Soft Drink','Beer','Tapa']
     },
     de: {
-      title: 'Wähle deine Belohnung!',
+      title: 'Deine Meinung hat einen Preis!',
       subtitle: 'Wie war deine Erfahrung, bevor du deine Belohnung erhältst? Hilf uns, uns zu verbessern, indem du mit den Sternen bewertest.',
       confirm: 'Bestätigen',
       confirmRating: 'Bewertung bestätigen',
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
       prizes: ['Dessert','Kaffee','Mojito','Eistüte','Kurzer','Erfrischungsgetränk','Bier','Tapa']
     },
     fr: {
-      title: 'Choisissez votre récompense!',
+      title: 'Votre avis a un prix!',
       subtitle: 'Avant votre récompense, comment s\'est passée votre expérience ? Aidez-nous à nous améliorer en notant avec les étoiles.',
       confirm: 'Confirmer',
       confirmRating: 'Confirmer la note',
@@ -125,6 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const resenaBtn         = document.getElementById('resenaBtn');
   const rouletteContainer = document.getElementById('rouletteContainer');
   const ratingSection     = document.querySelector('.rating-section');
+  const spinBtn           = document.getElementById('spinBtn');
 
   const languageDropdown  = document.getElementById('languageDropdown');
   const languageBtn       = document.getElementById('languageBtn');
@@ -170,6 +171,17 @@ document.addEventListener('DOMContentLoaded', () => {
           : translations[lang].stars
       }`;
     }
+
+    // Actualizar botones dinámicos
+    if (!formulario.classList.contains('hidden')) {
+      if (feedbackTextarea.required) {
+        submitBtn.textContent = translations[lang].submitBtn;
+      } else {
+        submitBtn.textContent = translations[lang].continueBtn;
+      }
+    }
+    spinBtn.textContent = translations[lang].spinBtn;
+
     document.documentElement.lang = lang;
   }
 

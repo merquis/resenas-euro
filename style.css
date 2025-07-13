@@ -38,6 +38,13 @@ body {
   overflow-x: hidden;
 }
 
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
 body::before {
   content: '';
   position: absolute;
