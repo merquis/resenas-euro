@@ -143,9 +143,26 @@ body::before{
 .language-option.active span{color:#fff !important}
 
 /* ===================================================================== */
+/*  TÍTULO DEL RESTAURANTE                                               */
+/* ===================================================================== */
+.restaurant-title{
+  text-align:center;
+  margin:1rem 0 1.5rem;
+  padding-top:1rem;
+}
+.restaurant-title h2{
+  font-size:1.4rem;
+  font-weight:600;
+  color:var(--text-color);
+  margin:0;
+  opacity:0.8;
+  letter-spacing:0.5px;
+}
+
+/* ===================================================================== */
 /*  CABECERA / TÍTULOS                                                   */
 /* ===================================================================== */
-.header{text-align:center;margin:2rem 0 1rem}
+.header{text-align:center;margin:1.5rem 0 1rem}
 .header h1{
   font-size:2rem;
   font-weight:700;
