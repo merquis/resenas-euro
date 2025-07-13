@@ -83,7 +83,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  const languageFlags = { es: '🇪🇸', en: '🇬🇧', de: '🇩🇪', fr: '🇫🇷' };
+  const languageFlags = {
+    es: 'https://flagcdn.com/w20/es.png',
+    en: 'https://flagcdn.com/w20/gb.png',
+    de: 'https://flagcdn.com/w20/de.png',
+    fr: 'https://flagcdn.com/w20/fr.png'
+  };
   const languageCodes = { es: 'ES', en: 'EN', de: 'DE', fr: 'FR' };
 
   /* -------------------- DOM -------------------- */
@@ -121,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateLanguage(lang) {
     currentLanguage = lang;
-    currentFlag.textContent = languageFlags[lang];
+    currentFlag.style.backgroundImage = `url('${languageFlags[lang]}')`;
     currentLang.textContent = languageCodes[lang];
 
     document.querySelectorAll('.language-option').forEach(opt => {
@@ -150,7 +155,13 @@ document.addEventListener('DOMContentLoaded', () => {
   languageOptions.addEventListener('click', e => {
     const opt = e.target.closest('.language-option');
     if (opt) {
-      updateLanguage(opt.dataset.lang);
+      const lang = opt.dataset.lang;
+      updateLanguage(lang);
+      // Update flag in the options list as well
+      const optionFlag = opt.querySelector('.flag');
+      if (optionFlag) {
+        optionFlag.style.backgroundImage = `url('${languageFlags[lang]}')`;
+      }
       languageDropdown.classList.remove('open');
     }
   });
@@ -211,5 +222,14 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   /* -------------------- Init -------------------- */
+  // Set initial flags in dropdown
+  document.querySelectorAll('.language-option').forEach(opt => {
+    const lang = opt.dataset.lang;
+    const flagEl = opt.querySelector('.flag');
+    if (flagEl && languageFlags[lang]) {
+      flagEl.style.backgroundImage = `url('${languageFlags[lang]}')`;
+    }
+  });
+
   updateLanguage('es');
 });
