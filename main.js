@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     es: {
       title: '¡Tu opinión tiene premio!',
       subtitle: 'Antes de tu sorpresa, ¿qué tal fue tu experiencia? Ayúdanos a mejorar valorando con las estrellas.',
-      rouletteTitle: '¡Gira y gana!',
-      rouletteSubtitle: '¡Tu suerte está en juego!',
       confirm: 'Confirmar',
       confirmRating: 'Confirmar valoración',
       rewardCode: 'Código de recompensa',
@@ -20,18 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
       googleBtn: 'Ir a Google',
       googleReviewBtn: 'Dejar reseña en Google',
       spinBtn: 'Girar la ruleta',
-      processing: 'Procesando...',
-      sending: 'Enviando...',
-      star: 'Estrella',
-      stars: 'Estrellas',
-      thankYou: 'Gracias por tu comentario. Lo tendremos en cuenta.',
       prizes: ['Postre','Café','Mojito','Cono Helado','Chupito','Refresco','Cerveza','Tapa']
     },
     en: {
       title: 'Your opinion has a prize!',
       subtitle: 'Before your reward, how was your experience? Help us improve by rating with the stars.',
-      rouletteTitle: 'Spin and win!',
-      rouletteSubtitle: 'Your luck is on the line!',
       confirm: 'Confirm',
       confirmRating: 'Confirm rating',
       rewardCode: 'Reward code',
@@ -46,18 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
       googleBtn: 'Go to Google',
       googleReviewBtn: 'Leave Google review',
       spinBtn: 'Spin the wheel',
-      processing: 'Processing...',
-      sending: 'Sending...',
-      star: 'Star',
-      stars: 'Stars',
-      thankYou: 'Thank you for your feedback. We will take it into account.',
       prizes: ['Dessert','Coffee','Mojito','Ice Cream Cone','Shot','Soft Drink','Beer','Tapa']
     },
     de: {
       title: 'Deine Meinung hat einen Preis!',
       subtitle: 'Wie war deine Erfahrung, bevor du deine Belohnung erhältst? Hilf uns, uns zu verbessern, indem du mit den Sternen bewertest.',
-      rouletteTitle: 'Drehen und gewinnen!',
-      rouletteSubtitle: 'Dein Glück steht auf dem Spiel!',
       confirm: 'Bestätigen',
       confirmRating: 'Bewertung bestätigen',
       rewardCode: 'Belohnungscode',
@@ -72,18 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
       googleBtn: 'Zu Google',
       googleReviewBtn: 'Google-Bewertung hinterlassen',
       spinBtn: 'Dreh das Rad',
-      processing: 'Verarbeitung...',
-      sending: 'Senden...',
-      star: 'Stern',
-      stars: 'Sterne',
-      thankYou: 'Vielen Dank für dein Feedback. Wir werden es berücksichtigen.',
       prizes: ['Dessert','Kaffee','Mojito','Eistüte','Kurzer','Erfrischungsgetränk','Bier','Tapa']
     },
     fr: {
       title: 'Votre avis a un prix!',
       subtitle: 'Avant votre récompense, comment s\'est passée votre expérience ? Aidez-nous à nous améliorer en notant avec les étoiles.',
-      rouletteTitle: 'Tournez et gagnez!',
-      rouletteSubtitle: 'Votre chance est en jeu!',
       confirm: 'Confirmer',
       confirmRating: 'Confirmer la note',
       rewardCode: 'Code de récompense',
@@ -98,11 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
       googleBtn: 'Aller à Google',
       googleReviewBtn: 'Laisser un avis Google',
       spinBtn: 'Tourner la roue',
-      processing: 'Traitement...',
-      sending: 'Envoi...',
-      star: 'Étoile',
-      stars: 'Étoiles',
-      thankYou: 'Merci pour votre commentaire. Nous en tiendrons compte.',
       prizes: ['Dessert','Café','Mojito','Cornet de glace','Shot','Boisson gazeuse','Bière','Tapa']
     }
   };
@@ -118,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const languageCodes = { es: 'ES', en: 'EN', de: 'DE', fr: 'FR' };
 
   /* -------------------- DOM -------------------- */
+  const container         = document.querySelector('.container');
   const stars             = document.querySelectorAll('.star');
   const ratingContainer   = document.getElementById('rating');
   const valorarBtnContainer = document.getElementById('valorarBtnContainer');
@@ -132,10 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const submitBtn         = document.getElementById('submitText');
   const resenaBtn         = document.getElementById('resenaBtn');
   const rouletteContainer = document.getElementById('rouletteContainer');
-  const ratingSection     = document.querySelector('.rating-section');
   const spinBtn           = document.getElementById('spinBtn');
-  const container         = document.querySelector('.container');
-  const rouletteScreen    = document.querySelector('.roulette-screen');
 
   const languageDropdown  = document.getElementById('languageDropdown');
   const languageBtn       = document.getElementById('languageBtn');
@@ -168,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.querySelectorAll('[data-text]').forEach(el => {
-      el.textContent = translations[lang][el.dataset.text];
+      el.textContent = translations[lang][el.dataset.text] || el.textContent;
     });
     document.querySelectorAll('[data-placeholder]').forEach(el => {
       el.placeholder = translations[lang][el.dataset.placeholder];
@@ -182,7 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }`;
     }
 
-    // Actualizar botones dinámicos
     if (!formulario.classList.contains('hidden')) {
       if (feedbackTextarea.required) {
         submitBtn.textContent = translations[lang].submitBtn;
@@ -205,11 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (opt) {
       const lang = opt.dataset.lang;
       updateLanguage(lang);
-      // Update flag in the options list as well
-      const optionFlag = opt.querySelector('.flag');
-      if (optionFlag) {
-        optionFlag.style.backgroundImage = `url('${languageFlags[lang]}')`;
-      }
       languageDropdown.classList.remove('open');
     }
   });
@@ -263,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
   feedbackForm.addEventListener('submit', e => {
     e.preventDefault();
     hide(container);
-    show(rouletteScreen);
+    show(rouletteContainer);
     window.showRoulette(selectedValue);
   });
 
@@ -273,11 +237,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   /* -------------------- Init -------------------- */
-  // Set initial flags in dropdown
-  document.querySelectorAll('.language-option').forEach(opt => {
-    const lang = opt.dataset.lang;
-    const flagEl = opt.querySelector('.flag');
-    if (flagEl && languageFlags[lang]) {
+  document.querySelectorAll('.language-option .flag').forEach(flagEl => {
+    const lang = flagEl.parentElement.dataset.lang;
+    if (languageFlags[lang]) {
       flagEl.style.backgroundImage = `url('${languageFlags[lang]}')`;
     }
   });
