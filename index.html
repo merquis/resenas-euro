@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tu Sorpresa | Restaurante Pizzería Euro</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 2rem;
+      background-color: #fff8f0;
+    }
+    h2 {
+      color: #d35400;
+    }
+    .stars {
+      font-size: 2rem;
+      cursor: pointer;
+    }
+    .stars span {
+      padding: 0 5px;
+    }
+    .hidden {
+      display: none;
+    }
+    textarea, input {
+      display: block;
+      margin: 1rem auto;
+      width: 80%;
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #d35400;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>🎁 ¡Elige tu sorpresa! / Pick your reward!</h2>
+  <p>Antes, por favor valora tu experiencia con nosotros:<br>
+     Before that, please rate your experience:</p>
+
+  <div class="stars" id="rating">
+    <span data-value="1">⭐</span>
+    <span data-value="2">⭐</span>
+    <span data-value="3">⭐</span>
+    <span data-value="4">⭐</span>
+    <span data-value="5">⭐</span>
+  </div>
+
+  <div id="formulario" class="hidden">
+    <h3>Gracias, ¿cómo podríamos mejorar? / Thanks, how can we improve?</h3>
+    <form id="feedbackForm">
+      <textarea required placeholder="Escribe tu opinión / Write your feedback"></textarea>
+      <input type="text" placeholder="Tu nombre o email (opcional)">
+      <button type="submit">Enviar / Send</button>
+    </form>
+  </div>
+
+  <div id="resenaBtn" class="hidden">
+    <p>¡Gracias! Ahora puedes dejarnos tu reseña en Google:</p>
+    <button onclick="goToReview()">Ir a Google / Go to Google</button>
+  </div>
+
+  <script>
+    const stars = document.querySelectorAll('.stars span');
+    let selected = 0;
+
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        selected = parseInt(star.dataset.value);
+        stars.forEach(s => s.style.color = '#aaa');
+        for (let i = 0; i < selected; i++) {
+          stars[i].style.color = '#f39c12';
+        }
+
+        document.getElementById('resenaBtn').classList.add('hidden');
+        document.getElementById('formulario').classList.add('hidden');
+
+        if (selected === 5) {
+          document.getElementById('resenaBtn').classList.remove('hidden');
+        } else {
+          document.getElementById('formulario').classList.remove('hidden');
+        }
+      });
+    });
+
+    function goToReview() {
+      // Reemplaza con tu URL real de reseñas
+      window.location.href = "https://search.google.com/local/writereview?placeid=TU_PLACE_ID";
+    }
+
+    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("Gracias por tu comentario. Lo tendremos en cuenta.");
+      // Aquí puedes añadir código para enviar a N8N o similar
+      this.reset();
+    });
+  </script>
+</body>
+</html>
