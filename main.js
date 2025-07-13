@@ -21,7 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
       sending: 'Enviando...',
       star: 'Estrella',
       stars: 'Estrellas',
-      thankYou: 'Gracias por tu comentario. Lo tendremos en cuenta.'
+      thankYou: 'Gracias por tu comentario. Lo tendremos en cuenta.',
+      prizes: ['Postre','Café','Mojito','Cono Helado','Chupito','Refresco','Cerveza','Tapa']
     },
     en: {
       title: 'Pick your reward!',
@@ -43,7 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
       sending: 'Sending...',
       star: 'Star',
       stars: 'Stars',
-      thankYou: 'Thank you for your feedback. We will take it into account.'
+      thankYou: 'Thank you for your feedback. We will take it into account.',
+      prizes: ['Dessert','Coffee','Mojito','Ice Cream Cone','Shot','Soft Drink','Beer','Tapa']
     },
     de: {
       title: 'Wähle deine Belohnung!',
@@ -65,7 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
       sending: 'Senden...',
       star: 'Stern',
       stars: 'Sterne',
-      thankYou: 'Vielen Dank für dein Feedback. Wir werden es berücksichtigen.'
+      thankYou: 'Vielen Dank für dein Feedback. Wir werden es berücksichtigen.',
+      prizes: ['Dessert','Kaffee','Mojito','Eistüte','Kurzer','Erfrischungsgetränk','Bier','Tapa']
     },
     fr: {
       title: 'Choisissez votre récompense!',
@@ -87,9 +90,12 @@ document.addEventListener('DOMContentLoaded', () => {
       sending: 'Envoi...',
       star: 'Étoile',
       stars: 'Étoiles',
-      thankYou: 'Merci pour votre commentaire. Nous en tiendrons compte.'
+      thankYou: 'Merci pour votre commentaire. Nous en tiendrons compte.',
+      prizes: ['Dessert','Café','Mojito','Cornet de glace','Shot','Boisson gazeuse','Bière','Tapa']
     }
   };
+
+  window.getTranslatedPrizes = () => translations[currentLanguage].prizes;
 
   const languageFlags = {
     es: 'https://flagcdn.com/w20/es.png',

@@ -8,15 +8,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const resenaBtn        = document.getElementById('resenaBtn');
   const header           = document.querySelector('.header');
 
-  const prizes = ['Postre','Café','Mojito','Cono Helado','Chupito','Refresco','Cerveza','Tapa'];
-  const N          = prizes.length;        // 8
-  const sliceAngle = 360 / N;              // 45°
-
+  let prizes       = [];
+  let N            = 0;
+  let sliceAngle   = 0;
   let isSpinning   = false;
   let currentRating= 0;
 
   /* ---------------------- Crea SOLO la capa de textos ---------------------- */
   function createWheelTexts () {
+    prizes = window.getTranslatedPrizes();
+    N = prizes.length;
+    sliceAngle = 360 / N;
+
     textLayer.innerHTML = '';               // limpia
     const R  = wheel.offsetWidth / 2;       // radio
     const cx = R, cy = R;
@@ -71,7 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
       subtitle.textContent = 'Aquí tienes tu premio. ¡Que lo disfrutes!';
 
       const randomDigits = Math.random().toString().slice(2,5); // 3 dígitos
-      codigoRecompensa.textContent = `${prizes[prizeIndex]} | EURO-${randomDigits}${currentRating}`;
+      const finalPrize = window.getTranslatedPrizes()[prizeIndex];
+      codigoRecompensa.textContent = `${finalPrize} | EURO-${randomDigits}${currentRating}`;
       show(codigoContainer);
       if (currentRating === 5) show(resenaBtn);
     }, 4500);
@@ -84,6 +88,13 @@ document.addEventListener('DOMContentLoaded', () => {
     currentRating = rating;
     createWheelTexts();
   };
+
+  // Redibuja la ruleta si cambia el idioma mientras está visible
+  document.getElementById('languageOptions').addEventListener('click', () => {
+    if (!rouletteContainer.classList.contains('hidden')) {
+      createWheelTexts();
+    }
+  });
 
   spinBtn.addEventListener('click', spinWheel);
   window.addEventListener('resize', createWheelTexts);  // redibuja en resize
