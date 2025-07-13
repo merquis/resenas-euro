@@ -59,7 +59,7 @@
   </div>
 
   <div id="valorarBtnContainer" class="hidden" style="margin-top: 1rem;">
-    <button id="valorarBtn">Valorar restaurante</button>
+    <button id="valorarBtn">Estrellas / Stars</button>
   </div>
   
   <div id="formulario" class="hidden">
@@ -82,6 +82,9 @@
     const ratingContainer = document.getElementById('rating');
     const valorarBtnContainer = document.getElementById('valorarBtnContainer');
     const valorarBtn = document.getElementById('valorarBtn');
+    const feedbackForm = document.getElementById('feedbackForm');
+    const opinionTextarea = feedbackForm.querySelector('textarea');
+    const formButton = feedbackForm.querySelector('button');
     let selectedValue = 0;
     let ratingLocked = false;
     
@@ -128,10 +131,15 @@
       valorarBtnContainer.classList.add('hidden');
       
       if (selectedValue === 5) {
-        goToReview();
+        opinionTextarea.classList.add('hidden');
+        opinionTextarea.required = false;
+        formButton.textContent = 'Dejar reseña en Google';
       } else {
-        document.getElementById('formulario').classList.remove('hidden');
+        opinionTextarea.classList.remove('hidden');
+        opinionTextarea.required = true;
+        formButton.textContent = 'Enviar / Send';
       }
+      document.getElementById('formulario').classList.remove('hidden');
     });
     
     function goToReview() {
@@ -139,11 +147,25 @@
       window.location.href = "https://search.google.com/local/writereview?placeid=ChIJbTuh2nOiagwR7wVm8-DJOZg";
     }
     
-    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+    feedbackForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      alert("Gracias por tu comentario. Lo tendremos en cuenta.");
-      // Aquí puedes añadir código para enviar a N8N o similar
-      this.reset();
+      const nombre = this.querySelector('input[type="text"]').value;
+      const email = this.querySelector('input[type="email"]').value;
+      
+      if (selectedValue === 5) {
+        // Aquí puedes capturar el nombre y el email
+        console.log('Nombre (5 estrellas):', nombre);
+        console.log('Email (5 estrellas):', email);
+        goToReview();
+      } else {
+        const opinion = opinionTextarea.value;
+        // Aquí puedes capturar nombre, email y opinión
+        console.log('Nombre (1-4 estrellas):', nombre);
+        console.log('Email (1-4 estrellas):', email);
+        console.log('Opinión:', opinion);
+        alert("Gracias por tu comentario. Lo tendremos en cuenta.");
+        this.reset();
+      }
     });
   </script>
 </body>
