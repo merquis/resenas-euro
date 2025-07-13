@@ -59,16 +59,6 @@
       </div>
     </div>
 
-    <div id="codigoContainer" class="hidden">
-      <div class="reward-code">
-        <div class="code" id="codigoRecompensa"></div>
-        <div class="description">
-          <span data-text="rewardCode">Código de recompensa</span><br>
-          <small><span data-text="finishReview">Finaliza tu reseña para poder canjearlo</span></small>
-        </div>
-      </div>
-    </div>
-
     <div id="formulario" class="hidden">
       <div class="form-section">
         <h3><span data-text="improveQuestion">Gracias, ¿cómo podríamos mejorar?</span></h3>
@@ -89,14 +79,6 @@
       </div>
     </div>
 
-    <div id="resenaBtn" class="hidden">
-      <div class="form-section">
-        <h3><span data-text="googleReviewTitle">¡Gracias! Ahora puedes dejarnos tu reseña en Google:</span></h3>
-        <button class="google-btn" onclick="goToReview()">
-          <span class="google-icon">🔍</span>
-          <span data-text="googleBtn">Ir a Google</span>
-        </button>
-      </div>
     </div>
   </div>
 
@@ -108,6 +90,26 @@
       <div id="rouletteTextLayer" class="roulette-layer"></div>
     </div>
     <button id="spinBtn" class="confirmation-btn">Girar la ruleta</button>
+
+    <div id="codigoContainer" class="hidden">
+      <div class="reward-code">
+        <div class="code" id="codigoRecompensa"></div>
+        <div class="description">
+          <span data-text="rewardCode">Código de recompensa</span><br>
+          <small><span data-text="finishReview">Finaliza tu reseña para poder canjearlo</span></small>
+        </div>
+      </div>
+    </div>
+
+    <div id="resenaBtn" class="hidden">
+      <div class="form-section">
+        <h3><span data-text="googleReviewTitle">¡Gracias! Ahora puedes dejarnos tu reseña en Google:</span></h3>
+        <button class="google-btn" onclick="goToReview()">
+          <span class="google-icon">🔍</span>
+          <span data-text="googleBtn">Ir a Google</span>
+        </button>
+      </div>
+    </div>
   </div>
 
   <script src="main.js" defer></script>
