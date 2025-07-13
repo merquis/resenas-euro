@@ -99,8 +99,8 @@ export class RouletteManager {
       const angleDeg = -90 + (i * this.sliceAngle) + (this.sliceAngle / 2);
       const angleRad = angleDeg * Math.PI / 180;
 
-      // Posicionar el texto al 70% del radio
-      const textRadius = 0.7 * R;
+      // Posicionar el texto al 50% del radio para centrarlo mejor en el segmento
+      const textRadius = 0.5 * R;
       const x = cx + textRadius * Math.cos(angleRad);
       const y = cy + textRadius * Math.sin(angleRad);
 
