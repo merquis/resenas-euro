@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const codigoRecompensa = document.getElementById('codigoRecompensa');
   const resenaBtn        = document.getElementById('resenaBtn');
 
-  const prizes = ['Postre','Café','Mojito','Cono Helado','Chupito','Refresco','Cerveza','Tapa'];
+  const prizes = ['Refresco','Cerveza','Tapa','Postre','Café','Mojito','Cono Helado','Chupito'];
   const N          = prizes.length;        // 8
   const sliceAngle = 360 / N;              // 45°
 
