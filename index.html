@@ -71,20 +71,39 @@
 
   <script>
     const stars = document.querySelectorAll('.stars span');
-    let selected = 0;
+    const ratingContainer = document.getElementById('rating');
+    let selectedValue = 0;
+
+    function updateStars(value) {
+      stars.forEach(star => {
+        if (star.dataset.value <= value) {
+          star.style.color = '#f39c12';
+        } else {
+          star.style.color = '#aaa';
+        }
+      });
+    }
+
+    ratingContainer.addEventListener('mouseover', (event) => {
+      if (event.target.tagName === 'SPAN') {
+        const value = event.target.dataset.value;
+        updateStars(value);
+      }
+    });
+
+    ratingContainer.addEventListener('mouseout', () => {
+      updateStars(selectedValue);
+    });
 
     stars.forEach(star => {
       star.addEventListener('click', () => {
-        selected = parseInt(star.dataset.value);
-        stars.forEach(s => s.style.color = '#aaa');
-        for (let i = 0; i < selected; i++) {
-          stars[i].style.color = '#f39c12';
-        }
+        selectedValue = parseInt(star.dataset.value);
+        updateStars(selectedValue);
 
         document.getElementById('resenaBtn').classList.add('hidden');
         document.getElementById('formulario').classList.add('hidden');
 
-        if (selected === 5) {
+        if (selectedValue === 5) {
           document.getElementById('resenaBtn').classList.remove('hidden');
         } else {
           document.getElementById('formulario').classList.remove('hidden');
