@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const wheel = document.getElementById('rouletteWheel');
+  const colorLayer = document.getElementById('rouletteColorLayer');
+  const textLayer = document.getElementById('rouletteTextLayer');
   const spinBtn = document.getElementById('spinBtn');
   const rouletteContainer = document.getElementById('rouletteContainer');
   const codigoContainer   = document.getElementById('codigoContainer');
@@ -15,22 +17,33 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentRating = 0;
 
   function createWheel() {
-    prizes.forEach((prize, i) => {
-      const section = document.createElement('div');
-      section.classList.add('roulette-section');
-      
-      const text = document.createElement('span');
-      text.classList.add('roulette-section-text');
-      text.textContent = prize;
-      
-      const textRotation = (sliceAngle / 2) - 150;
-      text.style.setProperty('--text-rotation', `${textRotation}deg`);
-      section.appendChild(text);
+    const wheelRadius = wheel.offsetWidth / 2;
 
+    prizes.forEach((prize, i) => {
+      // Create color slice
+      const colorSlice = document.createElement('div');
+      colorSlice.classList.add('roulette-section');
       const rotation = sliceAngle * i;
-      section.style.setProperty('--slice-color', colors[i]);
-      section.style.setProperty('--rotation', `${rotation}deg`);
-      wheel.appendChild(section);
+      colorSlice.style.setProperty('--slice-color', colors[i]);
+      colorSlice.style.setProperty('--rotation', `${rotation}deg`);
+      colorLayer.appendChild(colorSlice);
+
+      // Create text element
+      const textDiv = document.createElement('div');
+      textDiv.classList.add('roulette-text');
+      textDiv.textContent = prize;
+      
+      const textAngle = rotation + (sliceAngle / 2);
+      const textRadius = wheelRadius * 0.6; // 60% from center
+      
+      const x = Math.cos(textAngle * Math.PI / 180) * textRadius;
+      const y = Math.sin(textAngle * Math.PI / 180) * textRadius;
+
+      textDiv.style.left = `${wheelRadius + x}px`;
+      textDiv.style.top = `${wheelRadius + y}px`;
+      textDiv.style.transform = `translate(-50%, -50%) rotate(${textAngle + 90}deg)`;
+
+      textLayer.appendChild(textDiv);
     });
   }
 
