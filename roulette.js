@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const codigoRecompensa = document.getElementById('codigoRecompensa');
   const resenaBtn        = document.getElementById('resenaBtn');
 
-  const prizes = ['Refresco','Cerveza','Tapa','Postre','Café','Mojito','Cono Helado','Chupito'];
+  const prizes = ['Postre','Café','Mojito','Cono Helado','Chupito','Refresco','Cerveza','Tapa'];
   const N          = prizes.length;        // 8
   const sliceAngle = 360 / N;              // 45°
 
@@ -45,12 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const randomSpins   = Math.floor(Math.random()*5)+5;   // 5-9 giros
     const prizeIndex    = Math.floor(Math.random()*N);
-    const targetAngle = 270; // El puntero está en la parte superior (270 grados)
-    // El ángulo del texto φ se calcula como `(i * sliceAngle + sliceAngle / 2) - 90`.
-    // Necesitamos usar el mismo cálculo aquí para que coincida con la posición del texto.
-    const prizeMiddleAngle = (prizeIndex * sliceAngle + sliceAngle / 2) - 90;
-    const rotation = targetAngle - prizeMiddleAngle;
-    const totalRotation = randomSpins * 360 + rotation;
+    // El puntero está en la parte superior (270 grados).
+    // Calculamos la rotación necesaria para que el medio del sector del premio
+    // se alinee con el puntero.
+    const rotation = 270 - (prizeIndex * sliceAngle) - (sliceAngle / 2);
+    const totalRotation = (randomSpins * 360) + rotation;
 
     wheel.style.transition = 'transform 4.3s cubic-bezier(.17,.67,.17,1)';
     wheel.style.transform  = `rotate(${totalRotation}deg)`;
