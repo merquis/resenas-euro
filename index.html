@@ -122,6 +122,7 @@
       if (event.target.tagName === 'SPAN') {
         selectedValue = parseInt(event.target.dataset.value);
         updateStars(selectedValue);
+        valorarBtn.textContent = `${selectedValue} Estrellas / Stars`;
         valorarBtnContainer.classList.remove('hidden');
       }
     });
