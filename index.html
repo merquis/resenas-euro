@@ -5,24 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tu Sorpresa | Restaurante Pizzería Euro</title>
   <style>
+    :root {
+      --primary-color: #d35400;
+      --background-color: #fff8f0;
+      --text-color: #333;
+      --star-color: #f39c12;
+      --star-inactive-color: #ccc;
+      --success-bg: #d4edda;
+      --success-text: #155724;
+    }
     body {
-      font-family: sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       text-align: center;
-      padding: 2rem;
-      background-color: #fff8f0;
+      padding: 1rem;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 1rem;
     }
     h2 {
-      color: #d35400;
+      color: var(--primary-color);
+      font-size: 1.8rem;
+    }
+    p {
+      font-size: 1.1rem;
     }
     .stars {
-      font-size: 2rem;
+      font-size: 2.5rem;
       cursor: pointer;
-      font-family: serif; /* Para que las estrellas se vean mejor */
     }
     .stars span {
-      padding: 0 5px;
-      color: #ccc; /* Color gris por defecto */
-      transition: color 0.2s ease;
+      padding: 0 0.25rem;
+      color: var(--star-inactive-color);
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+    .stars span:hover {
+      transform: scale(1.2);
     }
     .hidden {
       display: none;
@@ -30,62 +52,92 @@
     textarea, input {
       display: block;
       margin: 1rem auto;
-      width: 80%;
-      padding: 0.5rem;
+      width: 100%;
+      max-width: 500px;
+      padding: 0.8rem;
       font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
     }
     #codigoRecompensa {
-      background-color: #d4edda;
-      color: #155724;
-      padding: 0.2rem 0.5rem;
-      border-radius: 5px;
+      display: inline-block;
+      background-color: var(--success-bg);
+      color: var(--success-text);
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      font-weight: bold;
     }
     button {
-      background-color: #d35400;
+      background-color: var(--primary-color);
       color: white;
       border: none;
-      padding: 0.7rem 1.5rem;
-      font-size: 1rem;
+      padding: 0.8rem 1.8rem;
+      font-size: 1.1rem;
       cursor: pointer;
-      border-radius: 5px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #e67e22;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+      .stars {
+        font-size: 2rem;
+      }
+      button {
+        padding: 0.7rem 1.5rem;
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body>
-  <h2>🎁 ¡Elige tu sorpresa! / Pick your reward!</h2>
-  <p>Antes, por favor valora tu experiencia con nosotros:<br>
-     Before that, please rate your experience:</p>
-  
-  <div class="stars" id="rating">
-    <span data-value="1">★</span>
-    <span data-value="2">★</span>
-    <span data-value="3">★</span>
-    <span data-value="4">★</span>
-    <span data-value="5">★</span>
-  </div>
+  <div class="container">
+    <h2>🎁 ¡Elige tu sorpresa! / Pick your reward!</h2>
+    <p>Antes, por favor valora tu experiencia con nosotros:<br>
+       Before that, please rate your experience:</p>
+    
+    <div class="stars" id="rating">
+      <span data-value="1">★</span>
+      <span data-value="2">★</span>
+      <span data-value="3">★</span>
+      <span data-value="4">★</span>
+      <span data-value="5">★</span>
+    </div>
 
-  <div id="valorarBtnContainer" class="hidden" style="margin-top: 1rem;">
-    <button id="valorarBtn">Estrellas / Stars</button>
-  </div>
+    <div id="valorarBtnContainer" class="hidden" style="margin-top: 1rem;">
+      <button id="valorarBtn">Estrellas / Stars</button>
+    </div>
 
-  <div id="codigoContainer" class="hidden" style="margin-top: 1rem;">
-    <p>Código de recompensa / Reward code: <strong id="codigoRecompensa"></strong></p>
-    <p>Finaliza tu reseña para poder canjearlo</p>
-  </div>
-  
-  <div id="formulario" class="hidden">
-    <h3>Gracias, ¿cómo podríamos mejorar? / Thanks, how can we improve?</h3>
-    <form id="feedbackForm">
-      <input type="text" placeholder="Tu nombre" required>
-      <input type="email" placeholder="Tu email" required>
-      <textarea required placeholder="Escribe tu opinión / Write your feedback"></textarea>
-      <button type="submit">Enviar / Send</button>
-    </form>
-  </div>
-  
-  <div id="resenaBtn" class="hidden">
-    <p>¡Gracias! Ahora puedes dejarnos tu reseña en Google:</p>
-    <button onclick="goToReview()">Ir a Google / Go to Google</button>
+    <div id="codigoContainer" class="hidden" style="margin-top: 1rem;">
+      <p>Código de recompensa / Reward code: <strong id="codigoRecompensa"></strong></p>
+      <p>Finaliza tu reseña para poder canjearlo</p>
+    </div>
+    
+    <div id="formulario" class="hidden">
+      <h3>Gracias, ¿cómo podríamos mejorar? / Thanks, how can we improve?</h3>
+      <form id="feedbackForm">
+        <input type="text" placeholder="Tu nombre" required>
+        <input type="email" placeholder="Tu email" required>
+        <textarea required placeholder="Escribe tu opinión / Write your feedback"></textarea>
+        <button type="submit">Enviar / Send</button>
+      </form>
+    </div>
+    
+    <div id="resenaBtn" class="hidden">
+      <p>¡Gracias! Ahora puedes dejarnos tu reseña en Google:</p>
+      <button onclick="goToReview()">Ir a Google / Go to Google</button>
+    </div>
   </div>
   
   <script>
