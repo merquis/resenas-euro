@@ -45,7 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const randomSpins   = Math.floor(Math.random()*5)+5;   // 5-9 giros
     const prizeIndex    = Math.floor(Math.random()*N);
-    const totalRotation = randomSpins*360 + prizeIndex*sliceAngle - sliceAngle/2;
+    const targetAngle = 270; // El puntero está en la parte superior (270 grados)
+    const prizeMiddleAngle = prizeIndex * sliceAngle + sliceAngle / 2;
+    const rotation = targetAngle - prizeMiddleAngle;
+    const totalRotation = randomSpins * 360 + rotation;
 
     wheel.style.transition = 'transform 4.3s cubic-bezier(.17,.67,.17,1)';
     wheel.style.transform  = `rotate(${totalRotation}deg)`;
