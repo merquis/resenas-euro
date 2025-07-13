@@ -71,9 +71,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------------------- Helpers ---------------------- */
   const show = el => { el.classList.remove('hidden'); el.classList.add('fade-in'); };
-  window.showRoulette = rating => { currentRating = rating; };
+  window.showRoulette = rating => {
+    currentRating = rating;
+    createWheelTexts();
+  };
 
   spinBtn.addEventListener('click', spinWheel);
-  createWheelTexts();
   window.addEventListener('resize', createWheelTexts);  // redibuja en resize
 });
