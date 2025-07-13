@@ -17,6 +17,7 @@
     .stars {
       font-size: 2rem;
       cursor: pointer;
+      font-family: serif; /* Para que las estrellas se vean mejor */
     }
     .stars span {
       padding: 0 5px;
@@ -50,11 +51,11 @@
      Before that, please rate your experience:</p>
   
   <div class="stars" id="rating">
-    <span data-value="1">⭐</span>
-    <span data-value="2">⭐</span>
-    <span data-value="3">⭐</span>
-    <span data-value="4">⭐</span>
-    <span data-value="5">⭐</span>
+    <span data-value="1">★</span>
+    <span data-value="2">★</span>
+    <span data-value="3">★</span>
+    <span data-value="4">★</span>
+    <span data-value="5">★</span>
   </div>
   
   <div id="formulario" class="hidden">
@@ -87,9 +88,14 @@
       });
     }
     
+    // Inicializar todas las estrellas en gris
+    stars.forEach(star => {
+      star.style.color = '#ccc';
+    });
+    
     ratingContainer.addEventListener('mouseover', (event) => {
       if (event.target.tagName === 'SPAN') {
-        const value = event.target.dataset.value;
+        const value = parseInt(event.target.dataset.value);
         updateStars(value);
       }
     });
@@ -114,12 +120,9 @@
       }
     });
     
-    // Set initial state
-    updateStars(selectedValue);
-    
     function goToReview() {
       // Reemplaza con tu URL real de reseñas
-      window.location.href = "https://search.google.com/local/writereview?placeid=TU_PLACE_ID";
+      window.location.href = "https://search.google.com/local/writereview?placeid=e770264821b4b2f0";
     }
     
     document.getElementById('feedbackForm').addEventListener('submit', function(e) {
