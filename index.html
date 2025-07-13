@@ -34,6 +34,12 @@
       padding: 0.5rem;
       font-size: 1rem;
     }
+    #codigoRecompensa {
+      background-color: #d4edda;
+      color: #155724;
+      padding: 0.2rem 0.5rem;
+      border-radius: 5px;
+    }
     button {
       background-color: #d35400;
       color: white;
@@ -137,7 +143,7 @@
       ratingLocked = true;
       valorarBtnContainer.classList.add('hidden');
       
-      const randomPart = Math.floor(1000 + Math.random() * 9000);
+      const randomPart = Math.floor(100 + Math.random() * 900);
       const codigo = `${randomPart}${selectedValue}`;
       codigoRecompensa.textContent = codigo;
       codigoContainer.classList.remove('hidden');
