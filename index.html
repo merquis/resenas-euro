@@ -883,12 +883,65 @@
       }
     });
     
-    ratingContainer.addEventListener('mouseout', () => {
-      if (ratingLocked) return;
-      updateStars(selectedValue);
-    });
-    
-    // Star click handler
-    ratingContainer.addEventListener('click', (event) => {
-      if (ratingLocked) return;
-      if (event.target.classList.contains('star'))
+   ratingContainer.addEventListener('mouseout', () => {
+  if (ratingLocked) return;
+  updateStars(0); // Quita el resaltado si aún no se ha hecho clic
+});
+
+// Selección de estrellas (clic)
+ratingContainer.addEventListener('click', (event) => {
+  if (ratingLocked) return;
+
+  const target = event.target;
+  if (target.classList.contains('star')) {
+    selectedValue = parseInt(target.dataset.value);
+    updateStars(selectedValue);
+    valorarBtn.textContent = `${selectedValue} ${selectedValue === 1 ? translations[currentLanguage].star : translations[currentLanguage].stars}`;
+    showElement(valorarBtnContainer);
+  }
+});
+
+// Confirmación de valoración
+valorarBtn.addEventListener('click', () => {
+  if (selectedValue === 0 || ratingLocked) return;
+
+  ratingLocked = true;
+  stars.forEach(star => star.classList.add('locked'));
+  valorarBtn.disabled = true;
+
+  // Mostrar código de recompensa
+  showElement(codigoContainer);
+
+  // Generar un código aleatorio
+  const generatedCode = 'EURO-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+  codigoRecompensa.textContent = generatedCode;
+
+  // Mostrar formulario si la puntuación es baja (<=3), si no, ir directamente a reseña
+  if (selectedValue <= 3) {
+    showElement(formulario);
+  } else {
+    showElement(resenaBtn);
+  }
+});
+
+// Enviar feedback
+feedbackForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const formData = new FormData(feedbackForm);
+
+  // Aquí puedes enviar los datos con fetch/AJAX si deseas
+  // Ejemplo: fetch('/api/feedback', { method: 'POST', body: formData });
+
+  // Mostrar agradecimiento (por ahora solo frontend)
+  alert(translations[currentLanguage].thankYou);
+
+  // Ocultar formulario y mostrar botón de reseña
+  hideElement(formulario);
+  showElement(resenaBtn);
+});
+
+// Redirigir a reseña en Google
+function goToReview() {
+  // Sustituye esta URL con la correcta para tu negocio
+  window.open('https://search.google.com/local/writereview?placeid=ChIJbTuh2nOiagwR7wVm8-DJOZg', '_blank');
+}
