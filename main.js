@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
     codigoRecompensa.textContent = code;
     show(codigoContainer);
 
-    if (selectedValue <= 3) {
+    if (selectedValue < 5) {
       show(formulario);
     } else {
       show(resenaBtn);
@@ -213,7 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     alert(translations[currentLanguage].thankYou);
     hide(formulario);
-    show(resenaBtn);
   });
 
   /* -------------------- Google review -------------------- */
