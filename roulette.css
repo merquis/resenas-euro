@@ -1,79 +1,37 @@
-.roulette-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  background: rgba(0,0,0,0.75);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-.roulette-container.visible {
-  opacity: 1;
-  pointer-events: all;
-}
-
-.roulette-wheel {
+/* Contenedor de 300–350 px cuadrado */
+#rouletteWheel {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 320px;
+  height: 320px;
   border-radius: 50%;
-  border: 10px solid #fff;
-  background: #ccc;
   overflow: hidden;
-  transition: transform 4s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-.roulette-layer {
+/* Capa de colores */
+#rouletteColorLayer,
+#rouletteTextLayer {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
 }
 
+/* Cada slice */
 .roulette-section {
   position: absolute;
-  width: 50%;
-  height: 50%;
+  inset: 0;
   background: var(--slice-color);
-  transform-origin: 100% 100%;
-  transform: rotate(var(--rotation));
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 0);
+  transform-origin: 50% 50%;
+  transform: rotate(var(--rotation)) skewY(var(--skew));
+  clip-path: polygon(50% 50%, 100% 0, 100% 100%); /* crea triángulo isósceles que luego se des-skew */
 }
 
+/* Texto */
 .roulette-text {
   position: absolute;
-  font-size: 1.1rem;
+  font-family: inherit;
+  font-weight: 700;
   color: #fff;
-  font-weight: bold;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-}
-
-.roulette-pointer {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -100%);
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 30px solid #ff0000;
-  z-index: 10;
-}
-
-#spinBtn {
-  margin-top: 2rem;
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-  cursor: pointer;
+  pointer-events: none;
+  white-space: nowrap;
+  user-select: none;
+  /* cualquier extra que quieras */
 }
