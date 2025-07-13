@@ -114,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const submitBtn         = document.getElementById('submitText');
   const resenaBtn         = document.getElementById('resenaBtn');
   const rouletteContainer = document.getElementById('rouletteContainer');
-  const header            = document.querySelector('.header');
   const ratingSection     = document.querySelector('.rating-section');
 
   const languageDropdown  = document.getElementById('languageDropdown');
@@ -231,7 +230,6 @@ document.addEventListener('DOMContentLoaded', () => {
   /* -------------------- Feedback form -------------------- */
   feedbackForm.addEventListener('submit', e => {
     e.preventDefault();
-    hide(header);
     hide(ratingSection);
     hide(formulario);
     show(rouletteContainer);

@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const codigoContainer  = document.getElementById('codigoContainer');
   const codigoRecompensa = document.getElementById('codigoRecompensa');
   const resenaBtn        = document.getElementById('resenaBtn');
+  const header           = document.querySelector('.header');
 
   const prizes = ['Postre','Café','Mojito','Cono Helado','Chupito','Refresco','Cerveza','Tapa'];
   const N          = prizes.length;        // 8
@@ -63,7 +64,12 @@ document.addEventListener('DOMContentLoaded', () => {
       isSpinning = false;
       hide(rouletteContainer);
 
-      /* Código premio */
+      /* Cambiar header y mostrar premio */
+      const title = header.querySelector('h1');
+      const subtitle = header.querySelector('p');
+      title.innerHTML = `<span class="emoji">🎉</span> <span>¡Enhorabuena!</span>`;
+      subtitle.textContent = 'Aquí tienes tu premio. ¡Que lo disfrutes!';
+
       const randomDigits = Math.random().toString().slice(2,5); // 3 dígitos
       codigoRecompensa.textContent = `${prizes[prizeIndex]} | EURO-${randomDigits}${currentRating}`;
       show(codigoContainer);
