@@ -185,7 +185,8 @@ document.addEventListener('DOMContentLoaded', () => {
     valorarBtn.disabled = true;
 
     // Generate reward code
-    const code = 'EURO-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+    const randomDigits = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+    const code = `EURO-${randomDigits}${selectedValue}`;
     codigoRecompensa.textContent = code;
     show(codigoContainer);
 
