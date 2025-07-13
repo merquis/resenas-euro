@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       textDiv.style.left = `${wheelRadius + x}px`;
       textDiv.style.top = `${wheelRadius + y}px`;
-      textDiv.style.transform = `translate(-50%, -50%) rotate(${textAngle - 90}deg)`;
+      textDiv.style.transform = `translate(-50%, -50%) rotate(${textAngle}deg)`;
 
       textLayer.appendChild(textDiv);
     });
