@@ -322,6 +322,7 @@ body::before{
   .container{padding:2rem;margin:.5rem;border-radius:12px}
   .language-selector{top:.5rem;right:.5rem}
   .language-btn{padding:.4rem .8rem;font-size:.8rem}
+  .restaurant-title h2{font-size:1.2rem}
   .header h1{font-size:1.7rem}
   .header .emoji{font-size:2rem}
   .star{font-size:2.5rem}
@@ -337,6 +338,7 @@ body::before{
 @media (max-width:480px){
   body{padding:.5rem}
   .container{padding:1.5rem}
+  .restaurant-title h2{font-size:1.1rem}
   .header h1{font-size:1.5rem}
   .star{font-size:2.2rem}
   .stars{gap:.2rem}
