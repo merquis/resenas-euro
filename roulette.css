@@ -1,37 +1,34 @@
-/* Contenedor de 300–350 px cuadrado */
+/* contenedor principal que luego rotamos con JS */
 #rouletteWheel {
   position: relative;
-  width: 320px;
+  width: 320px;          /* mismo ancho y alto */
   height: 320px;
   border-radius: 50%;
   overflow: hidden;
+  /* la rueda ya coloreada: */
+  background: conic-gradient(
+    #e67e22 0deg          45deg,   /* Postre   */
+    #e74c3c 45deg         90deg,   /* Café     */
+    #2980b9 90deg        135deg,   /* Mojito   */
+    #8e44ad 135deg       180deg,   /* Cono...  */
+    #27ae60 180deg       225deg,   /* Chupito  */
+    #f1c40f 225deg       270deg,   /* Refresco */
+    #3498db 270deg       315deg,   /* Cerveza  */
+    #9b59b6 315deg       360deg    /* Tapa     */
+  );
 }
 
-/* Capa de colores */
-#rouletteColorLayer,
+/* capa de textos */
 #rouletteTextLayer {
   position: absolute;
   inset: 0;
+  pointer-events: none;
 }
 
-/* Cada slice */
-.roulette-section {
-  position: absolute;
-  inset: 0;
-  background: var(--slice-color);
-  transform-origin: 50% 50%;
-  transform: rotate(var(--rotation)) skewY(var(--skew));
-  clip-path: polygon(50% 50%, 100% 0, 100% 100%); /* crea triángulo isósceles que luego se des-skew */
-}
-
-/* Texto */
 .roulette-text {
   position: absolute;
-  font-family: inherit;
   font-weight: 700;
   color: #fff;
-  pointer-events: none;
   white-space: nowrap;
   user-select: none;
-  /* cualquier extra que quieras */
 }
