@@ -228,6 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
       feedbackTextarea.required = false;
       submitBtn.textContent = translations[currentLanguage].continueBtn;
     }
+    hide(valorarBtnContainer);
   });
 
   /* -------------------- Feedback form -------------------- */
