@@ -65,8 +65,9 @@
   <div id="formulario" class="hidden">
     <h3>Gracias, ¿cómo podríamos mejorar? / Thanks, how can we improve?</h3>
     <form id="feedbackForm">
+      <input type="text" placeholder="Tu nombre" required>
+      <input type="email" placeholder="Tu email" required>
       <textarea required placeholder="Escribe tu opinión / Write your feedback"></textarea>
-      <input type="text" placeholder="Tu nombre o email (opcional)">
       <button type="submit">Enviar / Send</button>
     </form>
   </div>
@@ -118,19 +119,19 @@
       if (event.target.tagName === 'SPAN') {
         selectedValue = parseInt(event.target.dataset.value);
         updateStars(selectedValue);
-
-        if (selectedValue === 5) {
-          goToReview();
-        } else {
-          valorarBtnContainer.classList.remove('hidden');
-        }
+        valorarBtnContainer.classList.remove('hidden');
       }
     });
 
     valorarBtn.addEventListener('click', () => {
       ratingLocked = true;
       valorarBtnContainer.classList.add('hidden');
-      document.getElementById('formulario').classList.remove('hidden');
+      
+      if (selectedValue === 5) {
+        goToReview();
+      } else {
+        document.getElementById('formulario').classList.remove('hidden');
+      }
     });
     
     function goToReview() {
