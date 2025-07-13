@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const codigoRecompensa  = document.getElementById('codigoRecompensa');
   const resenaBtn         = document.getElementById('resenaBtn');
 
-  const prizes = ['Chupito', 'Cono helado', 'Mojito'];
-  const colors = ['#d35400', '#f39c12', '#00b894'];
+  const prizes = ['Chupito', 'Cono Helado', 'Mojito', 'Café', 'Postre', 'Refresco'];
+  const colors = ['#e67e22', '#e74c3c', '#2980b9', '#8e44ad', '#27ae60', '#f1c40f'];
   const numPrizes = prizes.length;
   const sliceAngle = 360 / numPrizes;
 
@@ -18,9 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
     prizes.forEach((prize, i) => {
       const section = document.createElement('div');
       section.classList.add('roulette-section');
-      section.textContent = prize;
+      
+      const text = document.createElement('span');
+      text.classList.add('roulette-section-text');
+      text.textContent = prize;
+      section.appendChild(text);
+
       const rotation = sliceAngle * i;
-      section.style.setProperty('--slice-color', colors[i % colors.length]);
+      section.style.setProperty('--slice-color', colors[i]);
       section.style.setProperty('--rotation', `${rotation}deg`);
       wheel.appendChild(section);
     });
