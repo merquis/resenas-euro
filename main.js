@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   ratingContainer.addEventListener('mouseout', () => {
-    if (!ratingLocked) updateStars(0);
+    if (!ratingLocked) updateStars(selectedValue);
   });
   ratingContainer.addEventListener('click', e => {
     if (ratingLocked) return;
