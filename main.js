@@ -113,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const feedbackTextarea  = feedbackGroup.querySelector('textarea');
   const submitBtn         = document.getElementById('submitText');
   const resenaBtn         = document.getElementById('resenaBtn');
+  const rouletteContainer = document.getElementById('rouletteContainer');
 
   const languageDropdown  = document.getElementById('languageDropdown');
   const languageBtn       = document.getElementById('languageBtn');
@@ -229,6 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
   feedbackForm.addEventListener('submit', e => {
     e.preventDefault();
     hide(formulario);
+    show(rouletteContainer);
     window.showRoulette(selectedValue);
   });
 

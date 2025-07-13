@@ -60,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(() => {
       isSpinning = false;
-      rouletteContainer.classList.remove('visible');
 
       /* Código premio */
       const randomDigits = Math.random().toString().slice(2,5); // 3 dígitos
@@ -72,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------------------- Helpers ---------------------- */
   const show = el => { el.classList.remove('hidden'); el.classList.add('fade-in'); };
-  window.showRoulette = rating => { currentRating = rating; rouletteContainer.classList.add('visible'); };
+  window.showRoulette = rating => { currentRating = rating; };
 
   spinBtn.addEventListener('click', spinWheel);
   createWheelTexts();
