@@ -62,7 +62,7 @@ body::before{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:2rem;
+  gap:1rem;
 }
 .roulette-screen{
   display:flex;
@@ -147,15 +147,15 @@ body::before{
 /* ===================================================================== */
 .restaurant-title{
   text-align:center;
-  margin:1rem 0 1.5rem;
-  padding-top:1rem;
+  margin:0 0 1.5rem;
+  width:100%;
 }
 .restaurant-title h2{
-  font-size:1.4rem;
+  font-size:1.6rem;
   font-weight:600;
-  color:var(--text-color);
+  color:#fff;
   margin:0;
-  opacity:0.8;
+  text-shadow:0 2px 4px rgba(0,0,0,0.3);
   letter-spacing:0.5px;
 }
 
