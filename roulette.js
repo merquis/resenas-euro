@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function spinWheel () {
     if (isSpinning) return;
     isSpinning = true;
+    spinBtn.disabled = true;
 
     const randomSpins   = Math.floor(Math.random()*5)+5;   // 5-9 giros
     const prizeIndex    = Math.floor(Math.random()*N);
