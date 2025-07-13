@@ -39,7 +39,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: -50px;
 }
 
 /* Puntero de la ruleta */
