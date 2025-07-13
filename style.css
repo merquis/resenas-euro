@@ -293,18 +293,18 @@ body::before{
     #3498db 270 315deg,#9b59b6 315 360deg
   );
 }
-/* Flecha puntero */
+/* Flecha fija — dentro de la ruleta — apuntando HACIA ABAJO */
 #rouletteWheel::before{
   content:'';
   position:absolute;
-  top:-14px;                              /* sobresale sobre la circunf.  */
+  top:-1px;                     /* la base toca justo el borde del círculo */
   left:50%;
   transform:translateX(-50%);
   width:0;height:0;
   border-left :13px solid transparent;
   border-right:13px solid transparent;
-  border-bottom:20px solid var(--secondary-color);   /* color puntero       */
-  z-index:5;                              /* siempre por encima           */
+  border-top:20px solid var(--secondary-color);   /*  ⬅️  ahora punta hacia abajo */
+  z-index:5;                    /* por encima de los textos */
 }
 
 /* Textos sobre la ruleta */
