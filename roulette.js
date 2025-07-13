@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
    * -------------------------------------------------- */
   function createWheel () {
     // Limpia por si volvemos a llamarla
+    colorLayer.innerHTML = '';
     textLayer.innerHTML  = '';
 
     const R       = wheel.offsetWidth / 2;    // radio (ya que es cuadrada)
@@ -33,6 +34,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const theta   = 2 * Math.PI / N;          // ángulo en radianes (≈0.785)
 
     prizes.forEach((label, i) => {
+      /* ----- S L I C E  (color) ------ */
+      const slice = document.createElement('div');
+      slice.classList.add('roulette-section');
+      // estilo vía custom properties
+      slice.style.setProperty('--slice-color', colors[i]);
+      slice.style.setProperty('--rotation',  `${i * sliceAngle}deg`);
+      slice.style.setProperty('--skew',      `${90 - sliceAngle}deg`);
+      colorLayer.appendChild(slice);
+
       /* ----- T E X T O  centrado en bisectriz ------ */
       const textDiv = document.createElement('div');
       textDiv.classList.add('roulette-text');
