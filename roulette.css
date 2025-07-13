@@ -45,7 +45,7 @@
 /* Puntero de la ruleta */
 .roulette-pointer {
   position: absolute;
-  top: -20px; /* Ajusta para que la punta toque el borde */
+  top: 100px; /* Ajustado para tener en cuenta el header */
   left: 50%;
   transform: translateX(-50%);
   width: 0;
