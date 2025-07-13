@@ -45,10 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const randomSpins   = Math.floor(Math.random()*5)+5;   // 5-9 giros
     const prizeIndex    = Math.floor(Math.random()*N);
+    // Se ha observado un desfase de 2 sectores. Corregimos el índice de destino.
+    const targetIndex   = (prizeIndex - 2 + N) % N;
+
     // El puntero está en la parte superior (270 grados).
     // Calculamos la rotación necesaria para que el medio del sector del premio
-    // se alinee con el puntero.
-    const rotation = 270 - (prizeIndex * sliceAngle) - (sliceAngle / 2);
+    // se alinee con el puntero, usando el índice corregido.
+    const rotation = 270 - (targetIndex * sliceAngle) - (sliceAngle / 2);
     const totalRotation = (randomSpins * 360) + rotation;
 
     wheel.style.transition = 'transform 4.3s cubic-bezier(.17,.67,.17,1)';
