@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const spinBtn          = document.getElementById('spinBtn');
   const rouletteContainer= document.getElementById('rouletteContainer');
   const container        = document.querySelector('.container');
+  const header           = container.querySelector('.header');
   const codigoContainer  = document.getElementById('codigoContainer');
   const codigoRecompensa = document.getElementById('codigoRecompensa');
   const resenaBtn        = document.getElementById('resenaBtn');
@@ -66,10 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
       isSpinning = false;
       hide(rouletteContainer);
       
-      const header = container.querySelector('.header');
-      const ratingSection = container.querySelector('.rating-section');
-      hide(ratingSection);
-
       const title = header.querySelector('h1');
       const subtitle = header.querySelector('p');
       title.innerHTML = `<span class="emoji">🎉</span> <span>¡Enhorabuena!</span>`;
@@ -81,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
       show(codigoContainer);
       if (currentRating === 5) show(resenaBtn);
       
-      show(container);
     }, 4500);
   }
 
