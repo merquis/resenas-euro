@@ -81,9 +81,97 @@
       }
     }
 
+    .language-selector {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 10;
+    }
+
+    .language-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .language-btn {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(211, 84, 0, 0.2);
+      border-radius: 25px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: var(--transition);
+      box-shadow: var(--shadow-light);
+    }
+
+    .language-btn:hover {
+      background: white;
+      box-shadow: var(--shadow-medium);
+    }
+
+    .language-btn .flag {
+      font-size: 1.2rem;
+    }
+
+    .language-btn .arrow {
+      font-size: 0.7rem;
+      transition: transform 0.3s ease;
+    }
+
+    .language-dropdown.open .arrow {
+      transform: rotate(180deg);
+    }
+
+    .language-options {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-medium);
+      overflow: hidden;
+      min-width: 150px;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: var(--transition);
+      pointer-events: none;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .language-dropdown.open .language-options {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+
+    .language-option {
+      padding: 0.7rem 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+
+    .language-option:hover {
+      background: var(--background-gradient);
+    }
+
+    .language-option.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
     .header {
       text-align: center;
       margin-bottom: 2rem;
+      margin-top: 1rem;
     }
 
     .header h1 {
@@ -350,6 +438,16 @@
         border-radius: 12px;
       }
 
+      .language-selector {
+        top: 0.5rem;
+        right: 0.5rem;
+      }
+
+      .language-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+      }
+
       .header h1 {
         font-size: 1.7rem;
       }
@@ -435,6 +533,15 @@
       .form-input:focus {
         background: rgba(52, 73, 94, 1);
       }
+
+      .language-btn {
+        background: rgba(52, 73, 94, 0.9);
+        color: var(--text-color);
+      }
+
+      .language-options {
+        background: rgba(44, 62, 80, 0.95);
+      }
     }
 
     /* Loading animation */
@@ -456,11 +563,39 @@
 </head>
 <body>
   <div class="container">
+    <!-- Language Selector -->
+    <div class="language-selector">
+      <div class="language-dropdown" id="languageDropdown">
+        <button class="language-btn" id="languageBtn">
+          <span class="flag" id="currentFlag">🇪🇸</span>
+          <span id="currentLang">ES</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="language-options" id="languageOptions">
+          <div class="language-option active" data-lang="es">
+            <span class="flag">🇪🇸</span>
+            <span>Español</span>
+          </div>
+          <div class="language-option" data-lang="en">
+            <span class="flag">🇬🇧</span>
+            <span>English</span>
+          </div>
+          <div class="language-option" data-lang="de">
+            <span class="flag">🇩🇪</span>
+            <span>Deutsch</span>
+          </div>
+          <div class="language-option" data-lang="fr">
+            <span class="flag">🇫🇷</span>
+            <span>Français</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="header">
-      <h1><span class="emoji">🎁</span> ¡Elige tu sorpresa!</h1>
+      <h1><span class="emoji">🎁</span> <span data-text="title">¡Elige tu sorpresa!</span></h1>
       <p class="subtitle">
-        Antes, por favor valora tu experiencia con nosotros<br>
-        <em>Before that, please rate your experience</em>
+        <span data-text="subtitle">Antes, por favor valora tu experiencia con nosotros</span>
       </p>
     </div>
 
@@ -475,7 +610,7 @@
 
       <div id="valorarBtnContainer" class="hidden">
         <button class="confirmation-btn" id="valorarBtn">
-          <span id="btnText">Confirmar valoración</span>
+          <span id="btnText" data-text="confirmRating">Confirmar valoración</span>
         </button>
       </div>
     </div>
@@ -484,27 +619,27 @@
       <div class="reward-code">
         <div class="code" id="codigoRecompensa"></div>
         <div class="description">
-          Código de recompensa / Reward code<br>
-          <small>Finaliza tu reseña para poder canjearlo</small>
+          <span data-text="rewardCode">Código de recompensa</span><br>
+          <small><span data-text="finishReview">Finaliza tu reseña para poder canjearlo</span></small>
         </div>
       </div>
     </div>
     
     <div id="formulario" class="hidden">
       <div class="form-section">
-        <h3>Gracias, ¿cómo podríamos mejorar? / Thanks, how can we improve?</h3>
+        <h3><span data-text="improveQuestion">Gracias, ¿cómo podríamos mejorar?</span></h3>
         <form id="feedbackForm">
           <div class="form-group">
-            <input type="text" class="form-input" placeholder="Tu nombre / Your name" required>
+            <input type="text" class="form-input" data-placeholder="namePlaceholder" required>
           </div>
           <div class="form-group">
-            <input type="email" class="form-input" placeholder="Tu email / Your email" required>
+            <input type="email" class="form-input" data-placeholder="emailPlaceholder" required>
           </div>
           <div class="form-group" id="textareaGroup">
-            <textarea class="form-input form-textarea" placeholder="Escribe tu opinión / Write your feedback" required></textarea>
+            <textarea class="form-input form-textarea" data-placeholder="feedbackPlaceholder" required></textarea>
           </div>
           <button type="submit" class="submit-btn">
-            <span id="submitText">Enviar / Send</span>
+            <span id="submitText" data-text="submitBtn">Enviar</span>
           </button>
         </form>
       </div>
@@ -512,16 +647,120 @@
     
     <div id="resenaBtn" class="hidden">
       <div class="form-section">
-        <h3>¡Gracias! Ahora puedes dejarnos tu reseña en Google:</h3>
+        <h3><span data-text="googleReviewTitle">¡Gracias! Ahora puedes dejarnos tu reseña en Google:</span></h3>
         <button class="google-btn" onclick="goToReview()">
           <span class="google-icon">🔍</span>
-          <span>Ir a Google / Go to Google</span>
+          <span data-text="googleBtn">Ir a Google</span>
         </button>
       </div>
     </div>
   </div>
   
   <script>
+    // Translations object
+    const translations = {
+      es: {
+        title: '¡Elige tu sorpresa!',
+        subtitle: 'Antes, por favor valora tu experiencia con nosotros',
+        confirmRating: 'Confirmar valoración',
+        rewardCode: 'Código de recompensa',
+        finishReview: 'Finaliza tu reseña para poder canjearlo',
+        improveQuestion: 'Gracias, ¿cómo podríamos mejorar?',
+        namePlaceholder: 'Tu nombre',
+        emailPlaceholder: 'Tu email',
+        feedbackPlaceholder: 'Escribe tu opinión',
+        submitBtn: 'Enviar',
+        googleReviewTitle: '¡Gracias! Ahora puedes dejarnos tu reseña en Google:',
+        googleBtn: 'Ir a Google',
+        googleReviewBtn: 'Dejar reseña en Google',
+        processing: 'Procesando...',
+        sending: 'Enviando...',
+        star: 'Estrella',
+        stars: 'Estrellas',
+        thankYou: 'Gracias por tu comentario. Lo tendremos en cuenta.'
+      },
+      en: {
+        title: 'Pick your reward!',
+        subtitle: 'Before that, please rate your experience',
+        confirmRating: 'Confirm rating',
+        rewardCode: 'Reward code',
+        finishReview: 'Finish your review to redeem it',
+        improveQuestion: 'Thanks, how can we improve?',
+        namePlaceholder: 'Your name',
+        emailPlaceholder: 'Your email',
+        feedbackPlaceholder: 'Write your feedback',
+        submitBtn: 'Send',
+        googleReviewTitle: 'Thanks! Now you can leave us your Google review:',
+        googleBtn: 'Go to Google',
+        googleReviewBtn: 'Leave Google review',
+        processing: 'Processing...',
+        sending: 'Sending...',
+        star: 'Star',
+        stars: 'Stars',
+        thankYou: 'Thank you for your feedback. We will take it into account.'
+      },
+      de: {
+        title: 'Wähle deine Belohnung!',
+        subtitle: 'Bitte bewerte zuerst deine Erfahrung',
+        confirmRating: 'Bewertung bestätigen',
+        rewardCode: 'Belohnungscode',
+        finishReview: 'Schließe deine Bewertung ab, um ihn einzulösen',
+        improveQuestion: 'Danke, wie können wir uns verbessern?',
+        namePlaceholder: 'Dein Name',
+        emailPlaceholder: 'Deine E-Mail',
+        feedbackPlaceholder: 'Schreibe dein Feedback',
+        submitBtn: 'Senden',
+        googleReviewTitle: 'Danke! Jetzt kannst du uns eine Google-Bewertung hinterlassen:',
+        googleBtn: 'Zu Google',
+        googleReviewBtn: 'Google-Bewertung hinterlassen',
+        processing: 'Verarbeitung...',
+        sending: 'Senden...',
+        star: 'Stern',
+        stars: 'Sterne',
+        thankYou: 'Vielen Dank für dein Feedback. Wir werden es berücksichtigen.'
+      },
+      fr: {
+        title: 'Choisissez votre récompense!',
+        subtitle: 'Avant cela, veuillez évaluer votre expérience',
+        confirmRating: 'Confirmer la note',
+        rewardCode: 'Code de récompense',
+        finishReview: 'Terminez votre avis pour pouvoir l\'échanger',
+        improveQuestion: 'Merci, comment pouvons-nous nous améliorer?',
+        namePlaceholder: 'Votre nom',
+        emailPlaceholder: 'Votre email',
+        feedbackPlaceholder: 'Écrivez votre avis',
+        submitBtn: 'Envoyer',
+        googleReviewTitle: 'Merci! Maintenant vous pouvez nous laisser votre avis Google:',
+        googleBtn: 'Aller à Google',
+        googleReviewBtn: 'Laisser un avis Google',
+        processing: 'Traitement...',
+        sending: 'Envoi...',
+        star: 'Étoile',
+        stars: 'Étoiles',
+        thankYou: 'Merci pour votre commentaire. Nous en tiendrons compte.'
+      }
+    };
+
+    // Language flags
+    const languageFlags = {
+      es: '🇪🇸',
+      en: '🇬🇧',
+      de: '🇩🇪',
+      fr: '🇫🇷'
+    };
+
+    // Language codes
+    const languageCodes = {
+      es: 'ES',
+      en: 'EN',
+      de: 'DE',
+      fr: 'FR'
+    };
+
+    // Current language
+    let currentLanguage = 'es';
+
+    // DOM elements
     const stars = document.querySelectorAll('.star');
     const ratingContainer = document.getElementById('rating');
     const valorarBtnContainer = document.getElementById('valorarBtnContainer');
@@ -535,10 +774,80 @@
     const opinionTextarea = feedbackForm.querySelector('textarea');
     const submitText = document.getElementById('submitText');
     const resenaBtn = document.getElementById('resenaBtn');
+
+    // Language selector elements
+    const languageDropdown = document.getElementById('languageDropdown');
+    const languageBtn = document.getElementById('languageBtn');
+    const currentFlag = document.getElementById('currentFlag');
+    const currentLang = document.getElementById('currentLang');
+    const languageOptions = document.getElementById('languageOptions');
     
     let selectedValue = 0;
     let ratingLocked = false;
-    
+
+    // Language functions
+    function updateLanguage(lang) {
+      currentLanguage = lang;
+      
+      // Update flag and code
+      currentFlag.textContent = languageFlags[lang];
+      currentLang.textContent = languageCodes[lang];
+      
+      // Update active language option
+      document.querySelectorAll('.language-option').forEach(option => {
+        option.classList.remove('active');
+        if (option.dataset.lang === lang) {
+          option.classList.add('active');
+        }
+      });
+      
+      // Update all text elements
+      document.querySelectorAll('[data-text]').forEach(element => {
+        const key = element.getAttribute('data-text');
+        if (translations[lang][key]) {
+          element.textContent = translations[lang][key];
+        }
+      });
+      
+      // Update placeholders
+      document.querySelectorAll('[data-placeholder]').forEach(element => {
+        const key = element.getAttribute('data-placeholder');
+        if (translations[lang][key]) {
+          element.placeholder = translations[lang][key];
+        }
+      });
+      
+      // Update rating button text if rating is selected
+      if (selectedValue > 0) {
+        const starWord = selectedValue === 1 ? translations[lang].star : translations[lang].stars;
+        btnText.textContent = `${selectedValue} ${starWord}`;
+      }
+      
+      // Update document language
+      document.documentElement.lang = lang;
+    }
+
+    // Language dropdown functionality
+    languageBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      languageDropdown.classList.toggle('open');
+    });
+
+    languageOptions.addEventListener('click', (e) => {
+      const option = e.target.closest('.language-option');
+      if (option) {
+        const lang = option.dataset.lang;
+        updateLanguage(lang);
+        languageDropdown.classList.remove('open');
+      }
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', () => {
+      languageDropdown.classList.remove('open');
+    });
+
+    // Star rating functionality
     function updateStars(value) {
       stars.forEach((star, index) => {
         const starValue = parseInt(star.dataset.value);
@@ -582,102 +891,4 @@
     // Star click handler
     ratingContainer.addEventListener('click', (event) => {
       if (ratingLocked) return;
-      if (event.target.classList.contains('star')) {
-        selectedValue = parseInt(event.target.dataset.value);
-        updateStars(selectedValue);
-        btnText.textContent = `${selectedValue} ${selectedValue === 1 ? 'Estrella' : 'Estrellas'} / ${selectedValue} ${selectedValue === 1 ? 'Star' : 'Stars'}`;
-        showElement(valorarBtnContainer);
-      }
-    });
-
-    // Confirmation button handler
-    valorarBtn.addEventListener('click', () => {
-      // Add loading state
-      btnText.innerHTML = 'Procesando... <span class="loading"></span>';
-      valorarBtn.disabled = true;
-      
-      setTimeout(() => {
-        ratingLocked = true;
-        stars.forEach(star => star.classList.add('locked'));
-        hideElement(valorarBtnContainer);
-        
-        // Generate reward code
-        const randomPart = Math.floor(100 + Math.random() * 900);
-        const codigo = `${randomPart}${selectedValue}`;
-        codigoRecompensa.textContent = codigo;
-        showElement(codigoContainer);
-
-        // Configure form based on rating
-        if (selectedValue === 5) {
-          hideElement(textareaGroup);
-          opinionTextarea.required = false;
-          submitText.textContent = 'Dejar reseña en Google';
-        } else {
-          showElement(textareaGroup);
-          opinionTextarea.required = true;
-          submitText.textContent = 'Enviar / Send';
-        }
-        
-        showElement(formulario);
-      }, 1000);
-    });
-    
-    // Google review redirect
-    function goToReview() {
-      window.location.href = "https://search.google.com/local/writereview?placeid=ChIJbTuh2nOiagwR7wVm8-DJOZg";
-    }
-    
-    // Form submission handler
-    feedbackForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // Add loading state
-      const submitBtn = this.querySelector('button[type="submit"]');
-      const originalText = submitText.textContent;
-      submitText.innerHTML = 'Enviando... <span class="loading"></span>';
-      submitBtn.disabled = true;
-      
-      setTimeout(() => {
-        const nombre = this.querySelector('input[type="text"]').value;
-        const email = this.querySelector('input[type="email"]').value;
-        
-        if (selectedValue === 5) {
-          // Handle 5-star rating
-          console.log('Nombre (5 estrellas):', nombre);
-          console.log('Email (5 estrellas):', email);
-          goToReview();
-        } else {
-          // Handle 1-4 star rating
-          const opinion = opinionTextarea.value;
-          console.log('Nombre (1-4 estrellas):', nombre);
-          console.log('Email (1-4 estrellas):', email);
-          console.log('Opinión:', opinion);
-          
-          // Show success message
-          hideElement(formulario);
-          showElement(resenaBtn);
-          
-          // Reset form
-          this.reset();
-        }
-        
-        submitBtn.disabled = false;
-        submitText.textContent = originalText;
-      }, 1500);
-    });
-
-    // Add keyboard navigation for accessibility
-    document.addEventListener('keydown', (e) => {
-      if (ratingLocked) return;
-      
-      if (e.key >= '1' && e.key <= '5') {
-        const value = parseInt(e.key);
-        selectedValue = value;
-        updateStars(value);
-        btnText.textContent = `${value} ${value === 1 ? 'Estrella' : 'Estrellas'} / ${value} ${value === 1 ? 'Star' : 'Stars'}`;
-        showElement(valorarBtnContainer);
-      }
-    });
-  </script>
-</body>
-</html>
+      if (event.target.classList.contains('star'))
