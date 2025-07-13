@@ -104,15 +104,8 @@ export class RouletteManager {
       const x = cx + textRadius * Math.cos(angleRad);
       const y = cy + textRadius * Math.sin(angleRad);
 
-      // Calcular la rotación del texto para que siga la dirección radial
-      // Añadir 90 grados para que el texto esté perpendicular al radio
-      let textRotation = angleDeg + 90;
-      
-      // Si el texto está en la mitad inferior, rotarlo 180 grados adicionales
-      // para que no esté al revés
-      if (angleDeg > 0 && angleDeg < 180) {
-        textRotation += 180;
-      }
+      // Rotar el texto 90 grados para que esté alineado con las líneas divisorias
+      const textRotation = angleDeg;
 
       // Aplicar estilos de posición y rotación
       textDiv.style.position = 'absolute';
