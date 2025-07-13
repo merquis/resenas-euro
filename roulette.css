@@ -62,20 +62,6 @@
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
-/* Añadir un pequeño círculo en la base de la flecha para mejor apariencia */
-.roulette-pointer::after {
-  content: '';
-  position: absolute;
-  top: -45px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20px;
-  height: 20px;
-  background: #ffc107;
-  border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
 /* Pantalla de la ruleta */
 .roulette-screen {
   position: fixed;
@@ -120,11 +106,5 @@
     border-right-width: 20px;
     border-top-width: 35px;
     top: -20px;
-  }
-  
-  .roulette-pointer::after {
-    width: 16px;
-    height: 16px;
-    top: -40px;
   }
 }

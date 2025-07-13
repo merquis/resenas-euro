@@ -90,10 +90,14 @@ export class RouletteManager {
       const x = cx + textRadius * Math.cos(angle);
       const y = cy + textRadius * Math.sin(angle);
 
+      // Calcular la rotación del texto en grados
+      // Añadir 90 grados para que el texto esté horizontal
+      const rotationDeg = (angle * 180 / Math.PI) + 90;
+
       // Posicionar y rotar el texto
       textDiv.style.left = `${x}px`;
       textDiv.style.top = `${y}px`;
-      textDiv.style.transform = `translate(-50%, -50%) rotate(${angle * 180 / Math.PI}deg)`;
+      textDiv.style.transform = `translate(-50%, -50%) rotate(${rotationDeg}deg)`;
 
       this.textLayer.appendChild(textDiv);
     });
