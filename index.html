@@ -7,169 +7,535 @@
   <style>
     :root {
       --primary-color: #d35400;
-      --background-color: #fff8f0;
-      --text-color: #333;
+      --primary-hover: #e67e22;
+      --secondary-color: #f39c12;
+      --background-gradient: linear-gradient(135deg, #fff8f0 0%, #ffeaa7 100%);
+      --card-background: rgba(255, 255, 255, 0.95);
+      --text-color: #2c3e50;
+      --text-secondary: #7f8c8d;
       --star-color: #f39c12;
-      --star-inactive-color: #ccc;
-      --success-bg: #d4edda;
-      --success-text: #155724;
-      --container-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      --star-inactive-color: #ecf0f1;
+      --success-bg: linear-gradient(135deg, #00b894, #00cec9);
+      --success-text: #ffffff;
+      --error-color: #e74c3c;
+      --border-radius: 16px;
+      --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.08);
+      --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+      --shadow-heavy: 0 12px 40px rgba(0, 0, 0, 0.15);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      text-align: center;
-      padding: 1rem;
-      background-color: var(--background-color);
-      color: var(--text-color);
-      line-height: 1.6;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+
+    * {
       margin: 0;
-    }
-    .container {
-      max-width: 90%;
-      width: 500px;
-      margin: 1rem;
-      padding: 2rem;
-      background-color: white;
-      border-radius: 15px;
-      box-shadow: var(--container-shadow);
-    }
-    h2 {
-      color: var(--primary-color);
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
-    }
-    p {
-      font-size: 1.1rem;
-      margin-bottom: 1.5rem;
-    }
-    .stars {
-      font-size: 3rem;
-      cursor: pointer;
-      margin-bottom: 1.5rem;
-    }
-    .stars span {
-      padding: 0 0.3rem;
-      color: var(--star-inactive-color);
-      transition: color 0.2s ease, transform 0.2s ease;
-    }
-    .stars span:hover {
-      transform: scale(1.2);
-    }
-    .hidden {
-      display: none;
-    }
-    textarea, input {
-      display: block;
-      margin: 1rem auto;
-      width: 100%;
-      padding: 0.8rem;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+      padding: 0;
       box-sizing: border-box;
     }
-    #codigoRecompensa {
-      display: inline-block;
-      background-color: var(--success-bg);
-      color: var(--success-text);
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 1.2rem;
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--background-gradient);
+      color: var(--text-color);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      position: relative;
+      overflow-x: hidden;
     }
-    button {
-      background-color: var(--primary-color);
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="25" cy="25" r="1" fill="%23000" opacity="0.05"/><circle cx="75" cy="75" r="1" fill="%23000" opacity="0.03"/><circle cx="50" cy="10" r="0.5" fill="%23000" opacity="0.04"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 480px;
+      width: 100%;
+      background: var(--card-background);
+      backdrop-filter: blur(10px);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-medium);
+      padding: 2.5rem;
+      position: relative;
+      transform: translateY(0);
+      animation: fadeInUp 0.6s ease-out;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .header .emoji {
+      font-size: 2.5rem;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-10px);
+      }
+      60% {
+        transform: translateY(-5px);
+      }
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .rating-section {
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .stars {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+    }
+
+    .star {
+      font-size: 3rem;
+      cursor: pointer;
+      color: var(--star-inactive-color);
+      transition: var(--transition);
+      user-select: none;
+      position: relative;
+    }
+
+    .star:hover {
+      transform: scale(1.1);
+    }
+
+    .star.active {
+      color: var(--star-color);
+      filter: drop-shadow(0 0 8px rgba(243, 156, 18, 0.4));
+    }
+
+    .star.locked {
+      cursor: default;
+    }
+
+    .confirmation-btn {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
       color: white;
       border: none;
-      padding: 0.9rem 2rem;
+      padding: 1rem 2rem;
       font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: var(--border-radius);
       cursor: pointer;
-      border-radius: 8px;
-      transition: background-color 0.3s ease, transform 0.2s ease;
+      transition: var(--transition);
+      box-shadow: var(--shadow-light);
       width: 100%;
       max-width: 300px;
+      margin: 1rem auto;
+      display: block;
+      position: relative;
+      overflow: hidden;
     }
-    button:hover {
-      background-color: #e67e22;
+
+    .confirmation-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .confirmation-btn:hover::before {
+      left: 100%;
+    }
+
+    .confirmation-btn:hover {
       transform: translateY(-2px);
+      box-shadow: var(--shadow-heavy);
     }
-    #valorarBtnContainer, #codigoContainer, #formulario, #resenaBtn {
+
+    .confirmation-btn:active {
+      transform: translateY(0);
+    }
+
+    .reward-code {
+      background: var(--success-bg);
+      color: var(--success-text);
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+      margin: 1.5rem 0;
+      box-shadow: var(--shadow-light);
+      animation: slideIn 0.5s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .reward-code .code {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+    }
+
+    .reward-code .description {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .form-section {
       margin-top: 2rem;
     }
-    @media (max-width: 600px) {
+
+    .form-section h3 {
+      color: var(--primary-color);
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid var(--star-inactive-color);
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      transition: var(--transition);
+      background: rgba(255, 255, 255, 0.8);
+      font-family: inherit;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(211, 84, 0, 0.1);
+      background: white;
+    }
+
+    .form-input::placeholder {
+      color: var(--text-secondary);
+    }
+
+    .form-textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: var(--transition);
+      width: 100%;
+      box-shadow: var(--shadow-light);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .google-btn {
+      background: linear-gradient(135deg, #4285f4, #34a853);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: var(--transition);
+      width: 100%;
+      box-shadow: var(--shadow-light);
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .google-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .google-icon {
+      font-size: 1.2rem;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
       .container {
-        padding: 1.5rem;
+        padding: 2rem;
         margin: 0.5rem;
+        border-radius: 12px;
       }
-      h2 {
-        font-size: 1.5rem;
+
+      .header h1 {
+        font-size: 1.7rem;
       }
-      p {
-        font-size: 1rem;
+
+      .header .emoji {
+        font-size: 2rem;
       }
-      .stars {
+
+      .star {
         font-size: 2.5rem;
       }
-      button {
-        padding: 0.8rem 1.5rem;
+
+      .stars {
+        gap: 0.3rem;
+      }
+
+      .subtitle {
         font-size: 1rem;
       }
+
+      .reward-code .code {
+        font-size: 1.3rem;
+      }
+
+      .confirmation-btn,
+      .submit-btn,
+      .google-btn {
+        padding: 0.9rem 1.5rem;
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 0.5rem;
+      }
+
+      .container {
+        padding: 1.5rem;
+      }
+
+      .header h1 {
+        font-size: 1.5rem;
+      }
+
+      .star {
+        font-size: 2.2rem;
+      }
+
+      .stars {
+        gap: 0.2rem;
+      }
+
+      .subtitle {
+        font-size: 0.95rem;
+      }
+
+      .form-input {
+        padding: 0.8rem;
+      }
+
+      .reward-code .code {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+      }
+    }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        --card-background: rgba(44, 62, 80, 0.95);
+        --text-color: #ecf0f1;
+        --text-secondary: #bdc3c7;
+        --star-inactive-color: #34495e;
+      }
+
+      .form-input {
+        background: rgba(52, 73, 94, 0.8);
+        color: var(--text-color);
+      }
+
+      .form-input:focus {
+        background: rgba(52, 73, 94, 1);
+      }
+    }
+
+    /* Loading animation */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 0.8s linear infinite;
+      margin-left: 10px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>🎁 ¡Elige tu sorpresa! / Pick your reward!</h2>
-    <p>Antes, por favor valora tu experiencia con nosotros:<br>
-       Before that, please rate your experience:</p>
-    
-    <div class="stars" id="rating">
-      <span data-value="1">★</span>
-      <span data-value="2">★</span>
-      <span data-value="3">★</span>
-      <span data-value="4">★</span>
-      <span data-value="5">★</span>
+    <div class="header">
+      <h1><span class="emoji">🎁</span> ¡Elige tu sorpresa!</h1>
+      <p class="subtitle">
+        Antes, por favor valora tu experiencia con nosotros<br>
+        <em>Before that, please rate your experience</em>
+      </p>
     </div>
 
-    <div id="valorarBtnContainer" class="hidden" style="margin-top: 1rem;">
-      <button id="valorarBtn">Estrellas / Stars</button>
+    <div class="rating-section">
+      <div class="stars" id="rating">
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
+      </div>
+
+      <div id="valorarBtnContainer" class="hidden">
+        <button class="confirmation-btn" id="valorarBtn">
+          <span id="btnText">Confirmar valoración</span>
+        </button>
+      </div>
     </div>
 
-    <div id="codigoContainer" class="hidden" style="margin-top: 1rem;">
-      <p>Código de recompensa / Reward code: <strong id="codigoRecompensa"></strong></p>
-      <p>Finaliza tu reseña para poder canjearlo</p>
+    <div id="codigoContainer" class="hidden">
+      <div class="reward-code">
+        <div class="code" id="codigoRecompensa"></div>
+        <div class="description">
+          Código de recompensa / Reward code<br>
+          <small>Finaliza tu reseña para poder canjearlo</small>
+        </div>
+      </div>
     </div>
     
     <div id="formulario" class="hidden">
-      <h3>Gracias, ¿cómo podríamos mejorar? / Thanks, how can we improve?</h3>
-      <form id="feedbackForm">
-        <input type="text" placeholder="Tu nombre" required>
-        <input type="email" placeholder="Tu email" required>
-        <textarea required placeholder="Escribe tu opinión / Write your feedback"></textarea>
-        <button type="submit">Enviar / Send</button>
-      </form>
+      <div class="form-section">
+        <h3>Gracias, ¿cómo podríamos mejorar? / Thanks, how can we improve?</h3>
+        <form id="feedbackForm">
+          <div class="form-group">
+            <input type="text" class="form-input" placeholder="Tu nombre / Your name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" class="form-input" placeholder="Tu email / Your email" required>
+          </div>
+          <div class="form-group" id="textareaGroup">
+            <textarea class="form-input form-textarea" placeholder="Escribe tu opinión / Write your feedback" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">
+            <span id="submitText">Enviar / Send</span>
+          </button>
+        </form>
+      </div>
     </div>
     
     <div id="resenaBtn" class="hidden">
-      <p>¡Gracias! Ahora puedes dejarnos tu reseña en Google:</p>
-      <button onclick="goToReview()">Ir a Google / Go to Google</button>
+      <div class="form-section">
+        <h3>¡Gracias! Ahora puedes dejarnos tu reseña en Google:</h3>
+        <button class="google-btn" onclick="goToReview()">
+          <span class="google-icon">🔍</span>
+          <span>Ir a Google / Go to Google</span>
+        </button>
+      </div>
     </div>
   </div>
   
   <script>
-    const stars = document.querySelectorAll('.stars span');
+    const stars = document.querySelectorAll('.star');
     const ratingContainer = document.getElementById('rating');
     const valorarBtnContainer = document.getElementById('valorarBtnContainer');
     const valorarBtn = document.getElementById('valorarBtn');
+    const btnText = document.getElementById('btnText');
     const codigoContainer = document.getElementById('codigoContainer');
     const codigoRecompensa = document.getElementById('codigoRecompensa');
+    const formulario = document.getElementById('formulario');
     const feedbackForm = document.getElementById('feedbackForm');
+    const textareaGroup = document.getElementById('textareaGroup');
     const opinionTextarea = feedbackForm.querySelector('textarea');
-    const formButton = feedbackForm.querySelector('button');
+    const submitText = document.getElementById('submitText');
+    const resenaBtn = document.getElementById('resenaBtn');
+    
     let selectedValue = 0;
     let ratingLocked = false;
     
@@ -177,21 +543,32 @@
       stars.forEach((star, index) => {
         const starValue = parseInt(star.dataset.value);
         if (starValue <= value) {
-          star.style.color = '#f39c12'; // Dorado para estrellas seleccionadas
+          star.classList.add('active');
         } else {
-          star.style.color = '#ccc'; // Gris claro para estrellas no seleccionadas
+          star.classList.remove('active');
         }
       });
     }
     
-    // Inicializar todas las estrellas en gris
+    function showElement(element) {
+      element.classList.remove('hidden');
+      element.classList.add('fade-in');
+    }
+    
+    function hideElement(element) {
+      element.classList.add('hidden');
+      element.classList.remove('fade-in');
+    }
+    
+    // Initialize all stars as inactive
     stars.forEach(star => {
-      star.style.color = '#ccc';
+      star.classList.remove('active');
     });
     
+    // Star hover effects
     ratingContainer.addEventListener('mouseover', (event) => {
       if (ratingLocked) return;
-      if (event.target.tagName === 'SPAN') {
+      if (event.target.classList.contains('star')) {
         const value = parseInt(event.target.dataset.value);
         updateStars(value);
       }
@@ -202,60 +579,103 @@
       updateStars(selectedValue);
     });
     
+    // Star click handler
     ratingContainer.addEventListener('click', (event) => {
       if (ratingLocked) return;
-      if (event.target.tagName === 'SPAN') {
+      if (event.target.classList.contains('star')) {
         selectedValue = parseInt(event.target.dataset.value);
         updateStars(selectedValue);
-        valorarBtn.textContent = `${selectedValue} Estrellas / Stars`;
-        valorarBtnContainer.classList.remove('hidden');
+        btnText.textContent = `${selectedValue} ${selectedValue === 1 ? 'Estrella' : 'Estrellas'} / ${selectedValue} ${selectedValue === 1 ? 'Star' : 'Stars'}`;
+        showElement(valorarBtnContainer);
       }
     });
 
+    // Confirmation button handler
     valorarBtn.addEventListener('click', () => {
-      ratingLocked = true;
-      valorarBtnContainer.classList.add('hidden');
+      // Add loading state
+      btnText.innerHTML = 'Procesando... <span class="loading"></span>';
+      valorarBtn.disabled = true;
       
-      const randomPart = Math.floor(100 + Math.random() * 900);
-      const codigo = `${randomPart}${selectedValue}`;
-      codigoRecompensa.textContent = codigo;
-      codigoContainer.classList.remove('hidden');
+      setTimeout(() => {
+        ratingLocked = true;
+        stars.forEach(star => star.classList.add('locked'));
+        hideElement(valorarBtnContainer);
+        
+        // Generate reward code
+        const randomPart = Math.floor(100 + Math.random() * 900);
+        const codigo = `${randomPart}${selectedValue}`;
+        codigoRecompensa.textContent = codigo;
+        showElement(codigoContainer);
 
-      if (selectedValue === 5) {
-        opinionTextarea.classList.add('hidden');
-        opinionTextarea.required = false;
-        formButton.textContent = 'Dejar reseña en Google';
-      } else {
-        opinionTextarea.classList.remove('hidden');
-        opinionTextarea.required = true;
-        formButton.textContent = 'Enviar / Send';
-      }
-      document.getElementById('formulario').classList.remove('hidden');
+        // Configure form based on rating
+        if (selectedValue === 5) {
+          hideElement(textareaGroup);
+          opinionTextarea.required = false;
+          submitText.textContent = 'Dejar reseña en Google';
+        } else {
+          showElement(textareaGroup);
+          opinionTextarea.required = true;
+          submitText.textContent = 'Enviar / Send';
+        }
+        
+        showElement(formulario);
+      }, 1000);
     });
     
+    // Google review redirect
     function goToReview() {
-      // Reemplaza con tu URL real de reseñas
       window.location.href = "https://search.google.com/local/writereview?placeid=ChIJbTuh2nOiagwR7wVm8-DJOZg";
     }
     
+    // Form submission handler
     feedbackForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      const nombre = this.querySelector('input[type="text"]').value;
-      const email = this.querySelector('input[type="email"]').value;
       
-      if (selectedValue === 5) {
-        // Aquí puedes capturar el nombre y el email
-        console.log('Nombre (5 estrellas):', nombre);
-        console.log('Email (5 estrellas):', email);
-        goToReview();
-      } else {
-        const opinion = opinionTextarea.value;
-        // Aquí puedes capturar nombre, email y opinión
-        console.log('Nombre (1-4 estrellas):', nombre);
-        console.log('Email (1-4 estrellas):', email);
-        console.log('Opinión:', opinion);
-        alert("Gracias por tu comentario. Lo tendremos en cuenta.");
-        this.reset();
+      // Add loading state
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const originalText = submitText.textContent;
+      submitText.innerHTML = 'Enviando... <span class="loading"></span>';
+      submitBtn.disabled = true;
+      
+      setTimeout(() => {
+        const nombre = this.querySelector('input[type="text"]').value;
+        const email = this.querySelector('input[type="email"]').value;
+        
+        if (selectedValue === 5) {
+          // Handle 5-star rating
+          console.log('Nombre (5 estrellas):', nombre);
+          console.log('Email (5 estrellas):', email);
+          goToReview();
+        } else {
+          // Handle 1-4 star rating
+          const opinion = opinionTextarea.value;
+          console.log('Nombre (1-4 estrellas):', nombre);
+          console.log('Email (1-4 estrellas):', email);
+          console.log('Opinión:', opinion);
+          
+          // Show success message
+          hideElement(formulario);
+          showElement(resenaBtn);
+          
+          // Reset form
+          this.reset();
+        }
+        
+        submitBtn.disabled = false;
+        submitText.textContent = originalText;
+      }, 1500);
+    });
+
+    // Add keyboard navigation for accessibility
+    document.addEventListener('keydown', (e) => {
+      if (ratingLocked) return;
+      
+      if (e.key >= '1' && e.key <= '5') {
+        const value = parseInt(e.key);
+        selectedValue = value;
+        updateStars(value);
+        btnText.textContent = `${value} ${value === 1 ? 'Estrella' : 'Estrellas'} / ${value} ${value === 1 ? 'Star' : 'Stars'}`;
+        showElement(valorarBtnContainer);
       }
     });
   </script>
