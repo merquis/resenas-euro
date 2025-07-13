@@ -101,6 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const codigoRecompensa  = document.getElementById('codigoRecompensa');
   const formulario        = document.getElementById('formulario');
   const feedbackForm      = document.getElementById('feedbackForm');
+  const feedbackGroup     = document.getElementById('feedback-group');
+  const feedbackTextarea  = feedbackGroup.querySelector('textarea');
   const resenaBtn         = document.getElementById('resenaBtn');
 
   const languageDropdown  = document.getElementById('languageDropdown');
@@ -201,10 +203,13 @@ document.addEventListener('DOMContentLoaded', () => {
     codigoRecompensa.textContent = code;
     show(codigoContainer);
 
+    show(formulario);
     if (selectedValue < 5) {
-      show(formulario);
+      show(feedbackGroup);
+      feedbackTextarea.required = true;
     } else {
-      show(resenaBtn);
+      hide(feedbackGroup);
+      feedbackTextarea.required = false;
     }
   });
 
@@ -213,6 +218,9 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     alert(translations[currentLanguage].thankYou);
     hide(formulario);
+    if (selectedValue === 5) {
+      show(resenaBtn);
+    }
   });
 
   /* -------------------- Google review -------------------- */
