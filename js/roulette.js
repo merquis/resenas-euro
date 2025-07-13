@@ -51,14 +51,18 @@ export class RouletteManager {
     });
 
     // Redimensionar la ruleta cuando cambie el tamaño de la ventana
-    window.addEventListener('resize', () => this.createWheelTexts());
+    window.addEventListener('resize', () => {
+      if (!this.rouletteScreen.classList.contains('hidden')) {
+        this.createWheelTexts();
+      }
+    });
   }
 
   /**
    * Crea la ruleta completa
    */
   createWheel() {
-    this.createWheelTexts();
+    // No crear textos aquí, se crearán cuando se muestre la ruleta
     this.updateSpinButtonText();
   }
 
@@ -66,7 +70,11 @@ export class RouletteManager {
    * Crea los textos de la ruleta
    */
   createWheelTexts() {
+    console.log('Creating wheel texts...');
+    
     this.prizes = languageManager.getTranslatedPrizes();
+    console.log('Prizes:', this.prizes);
+    
     const N = this.prizes.length;
     this.sliceAngle = 360 / N;
 
@@ -75,10 +83,13 @@ export class RouletteManager {
 
     // Asegurarse de que la ruleta tenga dimensiones antes de calcular
     if (this.wheel.offsetWidth === 0) {
+      console.log('Wheel has no dimensions, retrying...');
       // Si la ruleta no tiene dimensiones, esperar un poco y reintentar
       setTimeout(() => this.createWheelTexts(), 100);
       return;
     }
+
+    console.log('Wheel dimensions:', this.wheel.offsetWidth, 'x', this.wheel.offsetHeight);
 
     // Calcular posiciones
     const R = this.wheel.offsetWidth / 2;
@@ -106,8 +117,12 @@ export class RouletteManager {
       textDiv.style.top = `${y}px`;
       textDiv.style.transform = `translate(-50%, -50%)`;
 
+      console.log(`Text ${i} (${label}): x=${x}, y=${y}`);
+
       this.textLayer.appendChild(textDiv);
     });
+
+    console.log('Text layer children:', this.textLayer.children.length);
   }
 
   /**
@@ -132,8 +147,13 @@ export class RouletteManager {
    */
   show(rating) {
     this.currentRating = rating;
-    this.createWheelTexts();
     showElement(this.rouletteScreen);
+    
+    // Crear los textos después de que la ruleta sea visible
+    // para asegurar que tenga dimensiones correctas
+    setTimeout(() => {
+      this.createWheelTexts();
+    }, 50);
   }
 
   /**
