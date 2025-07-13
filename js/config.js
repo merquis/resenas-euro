@@ -15,7 +15,7 @@ export const CONFIG = {
   },
   
   // URL de Google Reviews
-  googleReviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJbTuh2nOiagwR7wVm8-DJOZg',
+  googleReviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJ5ctEMDCYagwR9QBWYQaQdes',
   
   // Idioma por defecto
   defaultLanguage: 'es'
