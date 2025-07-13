@@ -22,6 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const text = document.createElement('span');
       text.classList.add('roulette-section-text');
       text.textContent = prize;
+      
+      const textRotation = (sliceAngle / 2) - 90;
+      text.style.setProperty('--text-rotation', `${textRotation}deg`);
       section.appendChild(text);
 
       const rotation = sliceAngle * i;
