@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     es: {
       title: '¡Tu opinión tiene premio!',
       subtitle: 'Antes de tu sorpresa, ¿qué tal fue tu experiencia? Ayúdanos a mejorar valorando con las estrellas.',
-      rouletteTitle: '¡A por tu premio!',
-      rouletteSubtitle: 'Gira la ruleta para descubrir tu recompensa.',
       confirm: 'Confirmar',
       confirmRating: 'Confirmar valoración',
       rewardCode: 'Código de recompensa',
@@ -27,8 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
     en: {
       title: 'Your opinion has a prize!',
       subtitle: 'Before your reward, how was your experience? Help us improve by rating with the stars.',
-      rouletteTitle: 'Go for your prize!',
-      rouletteSubtitle: 'Spin the wheel to discover your reward.',
       confirm: 'Confirm',
       confirmRating: 'Confirm rating',
       rewardCode: 'Reward code',
@@ -50,8 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
     de: {
       title: 'Deine Meinung hat einen Preis!',
       subtitle: 'Wie war deine Erfahrung, bevor du deine Belohnung erhältst? Hilf uns, uns zu verbessern, indem du mit den Sternen bewertest.',
-      rouletteTitle: 'Hol dir deinen Preis!',
-      rouletteSubtitle: 'Drehe das Rad, um deine Belohnung zu entdecken.',
       confirm: 'Bestätigen',
       confirmRating: 'Bewertung bestätigen',
       rewardCode: 'Belohnungscode',
@@ -73,8 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
     fr: {
       title: 'Votre avis a un prix!',
       subtitle: 'Avant votre récompense, comment s\'est passée votre expérience ? Aidez-nous à nous améliorer en notant avec les étoiles.',
-      rouletteTitle: 'Allez chercher votre prix!',
-      rouletteSubtitle: 'Tournez la roue pour découvrir votre récompense.',
       confirm: 'Confirmer',
       confirmRating: 'Confirmer la note',
       rewardCode: 'Code de récompense',
