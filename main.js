@@ -91,6 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* -------------------- DOM -------------------- */
   const container         = document.querySelector('.container');
+  const header            = container.querySelector('.header');
+  const ratingSection     = container.querySelector('.rating-section');
   const stars             = document.querySelectorAll('.star');
   const ratingContainer   = document.getElementById('rating');
   const valorarBtnContainer = document.getElementById('valorarBtnContainer');
@@ -119,8 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let ratingLocked    = false;
 
   /* -------------------- Helpers -------------------- */
-  const show  = el => { el.classList.remove('hidden'); el.classList.add('fade-in'); };
-  const hide  = el => { el.classList.add('hidden');   el.classList.remove('fade-in'); };
+  const show  = el => { if(el) { el.classList.remove('hidden'); el.classList.add('fade-in'); } };
+  const hide  = el => { if(el) { el.classList.add('hidden');   el.classList.remove('fade-in'); } };
 
   function updateStars(val) {
     stars.forEach(s => {
@@ -226,7 +228,8 @@ document.addEventListener('DOMContentLoaded', () => {
   /* -------------------- Feedback form -------------------- */
   feedbackForm.addEventListener('submit', e => {
     e.preventDefault();
-    hide(container);
+    hide(ratingSection);
+    hide(formulario);
     show(rouletteContainer);
     window.showRoulette(selectedValue);
   });
