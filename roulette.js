@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(() => {
       isSpinning = false;
+      hide(rouletteContainer);
 
       /* Código premio */
       const randomDigits = Math.random().toString().slice(2,5); // 3 dígitos
