@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const spinBtn          = document.getElementById('spinBtn');
   const rouletteContainer= document.getElementById('rouletteContainer');
   const container        = document.querySelector('.container');
-  const header           = container.querySelector('.header');
+  const rouletteScreen   = document.querySelector('.roulette-screen');
   const codigoContainer  = document.getElementById('codigoContainer');
   const codigoRecompensa = document.getElementById('codigoRecompensa');
   const resenaBtn        = document.getElementById('resenaBtn');
@@ -65,8 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(() => {
       isSpinning = false;
-      hide(rouletteContainer);
+      hide(rouletteScreen);
       
+      const header = container.querySelector('.header');
+      const ratingSection = container.querySelector('.rating-section');
+      hide(ratingSection);
+      hide(document.getElementById('formulario'));
+
       const title = header.querySelector('h1');
       const subtitle = header.querySelector('p');
       title.innerHTML = `<span class="emoji">🎉</span> <span>¡Enhorabuena!</span>`;
@@ -78,6 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
       show(codigoContainer);
       if (currentRating === 5) show(resenaBtn);
       
+      show(container);
     }, 4500);
   }
 
@@ -87,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   document.getElementById('languageOptions').addEventListener('click', () => {
-    if (!rouletteContainer.classList.contains('hidden')) {
+    if (!rouletteScreen.classList.contains('hidden')) {
       createWheelTexts();
     }
   });
