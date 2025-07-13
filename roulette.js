@@ -17,7 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentRating = 0;
 
   function createWheel() {
-    const wheelRadius = wheel.offsetWidth / 2;
+    const R = wheel.offsetWidth / 2;
+    const cx = R;
+    const cy = R;
+    const theta = 2 * Math.PI / numPrizes; // sliceAngle in radians
+
+    // Calculate radial distance of the centroid
+    const rc = (4 * R * Math.sin(theta / 2)) / (3 * theta);
 
     prizes.forEach((prize, i) => {
       // Create color slice
@@ -28,20 +34,21 @@ document.addEventListener('DOMContentLoaded', () => {
       colorSlice.style.setProperty('--rotation', `${rotation}deg`);
       colorLayer.appendChild(colorSlice);
 
-      // Create text element
+      // Create text element using the provided formula
       const textDiv = document.createElement('div');
       textDiv.classList.add('roulette-text');
       textDiv.textContent = prize;
       
-      const textAngle = rotation + (sliceAngle / 2);
-      const textRadius = wheelRadius * 0.6; // 60% from center
+      const phi = -Math.PI / 2 + (i + 0.5) * theta; // Angle of the bisector
       
-      const x = Math.cos(textAngle * Math.PI / 180) * textRadius;
-      const y = Math.sin(textAngle * Math.PI / 180) * textRadius;
+      const x = cx + rc * Math.cos(phi);
+      const y = cy + rc * Math.sin(phi);
 
-      textDiv.style.left = `${wheelRadius + x}px`;
-      textDiv.style.top = `${wheelRadius + y}px`;
-      textDiv.style.transform = `translate(-50%, -50%) rotate(${textAngle - 90}deg)`;
+      const textAngleDeg = (phi + Math.PI / 2) * (180 / Math.PI); // Convert orientation to degrees
+
+      textDiv.style.left = `${x}px`;
+      textDiv.style.top = `${y}px`;
+      textDiv.style.transform = `translate(-50%, -50%) rotate(${textAngleDeg}deg)`;
 
       textLayer.appendChild(textDiv);
     });
