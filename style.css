@@ -80,7 +80,8 @@ body::before {
 .language-dropdown.open .language-options{opacity:1;transform:translateY(0);pointer-events:all}
 .language-option{padding:.7rem 1rem;cursor:pointer;display:flex;align-items:center;gap:.5rem;transition:var(--transition);font-size:.9rem}
 .language-option:hover{background:var(--background-gradient)}
-.language-option.active{background:var(--primary-color);color:#fff}
+.language-option.active{background:var(--primary-color);color:#fff !important}
+.language-option.active span{color:#fff !important}
 
 /* Header */
 .header{text-align:center;margin-bottom:2rem;margin-top:1rem}
