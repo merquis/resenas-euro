@@ -46,7 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const randomSpins   = Math.floor(Math.random()*5)+5;   // 5-9 giros
     const prizeIndex    = Math.floor(Math.random()*N);
     const targetAngle = 270; // El puntero está en la parte superior (270 grados)
-    const prizeMiddleAngle = prizeIndex * sliceAngle + sliceAngle / 2;
+    // El ángulo del texto φ se calcula como `(i * sliceAngle + sliceAngle / 2) - 90`.
+    // Necesitamos usar el mismo cálculo aquí para que coincida con la posición del texto.
+    const prizeMiddleAngle = (prizeIndex * sliceAngle + sliceAngle / 2) - 90;
     const rotation = targetAngle - prizeMiddleAngle;
     const totalRotation = randomSpins * 360 + rotation;
 
