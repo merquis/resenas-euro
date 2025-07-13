@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const codigoRecompensa  = document.getElementById('codigoRecompensa');
   const resenaBtn         = document.getElementById('resenaBtn');
 
-  const prizes = ['Chupito', 'Cono Helado', 'Mojito', 'Café', 'Postre', 'Refresco'];
-  const colors = ['#e67e22', '#e74c3c', '#2980b9', '#8e44ad', '#27ae60', '#f1c40f'];
+  const prizes = ['Postre', 'Café', 'Mojito', 'Cono Helado', 'Chupito', 'Refresco', 'Cerveza', 'Tapa'];
+  const colors = ['#e67e22', '#e74c3c', '#2980b9', '#8e44ad', '#27ae60', '#f1c40f', '#3498db', '#9b59b6'];
   const numPrizes = prizes.length;
   const sliceAngle = 360 / numPrizes;
 
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       textDiv.style.left = `${wheelRadius + x}px`;
       textDiv.style.top = `${wheelRadius + y}px`;
-      textDiv.style.transform = `translate(-50%, -50%) rotate(${textAngle + 90}deg)`;
+      textDiv.style.transform = `translate(-50%, -50%) rotate(${textAngle}deg)`;
 
       textLayer.appendChild(textDiv);
     });
