@@ -73,31 +73,38 @@ export class RouletteManager {
     // Limpiar textos anteriores
     this.textLayer.innerHTML = '';
 
+    // Asegurarse de que la ruleta tenga dimensiones antes de calcular
+    if (this.wheel.offsetWidth === 0) {
+      // Si la ruleta no tiene dimensiones, esperar un poco y reintentar
+      setTimeout(() => this.createWheelTexts(), 100);
+      return;
+    }
+
     // Calcular posiciones
     const R = this.wheel.offsetWidth / 2;
     const cx = R;
     const cy = R;
-    const angleStep = (2 * Math.PI) / N;
 
     this.prizes.forEach((label, i) => {
       const textDiv = document.createElement('div');
       textDiv.classList.add('roulette-text');
       textDiv.textContent = label;
 
-      // Calcular ángulo para el centro de cada segmento
-      const angle = -Math.PI / 2 + (i + 0.5) * angleStep;
-      const textRadius = 0.65 * R;
-      const x = cx + textRadius * Math.cos(angle);
-      const y = cy + textRadius * Math.sin(angle);
+      // Calcular el ángulo para cada segmento (en grados)
+      // Empezamos desde arriba (-90 grados) y vamos en sentido horario
+      const angleDeg = -90 + (i * this.sliceAngle) + (this.sliceAngle / 2);
+      const angleRad = angleDeg * Math.PI / 180;
 
-      // Calcular la rotación del texto en grados
-      // Añadir 90 grados para que el texto esté horizontal
-      const rotationDeg = (angle * 180 / Math.PI) + 90;
+      // Posicionar el texto al 70% del radio
+      const textRadius = 0.7 * R;
+      const x = cx + textRadius * Math.cos(angleRad);
+      const y = cy + textRadius * Math.sin(angleRad);
 
-      // Posicionar y rotar el texto
+      // Aplicar estilos de posición
+      textDiv.style.position = 'absolute';
       textDiv.style.left = `${x}px`;
       textDiv.style.top = `${y}px`;
-      textDiv.style.transform = `translate(-50%, -50%) rotate(${rotationDeg}deg)`;
+      textDiv.style.transform = `translate(-50%, -50%)`;
 
       this.textLayer.appendChild(textDiv);
     });
