@@ -118,7 +118,8 @@ body::before {
 .reward-code{background:var(--success-bg);color:var(--success-text);padding:1.5rem;border-radius:var(--border-radius);text-align:center;margin:1.5rem 0;box-shadow:var(--shadow-light);animation:slideIn .5s ease-out}
 @keyframes slideIn{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
 .reward-code .code{font-size:1.5rem;font-weight:700;letter-spacing:2px;margin-bottom:.5rem}
-.reward-code .description{font-size:.9rem;opacity:.9}
+.reward-code .description{font-size:1rem;opacity:.9}
+.reward-code .description small{font-size:inherit}
 
 /* Form */
 .form-section{margin-top:2rem}
