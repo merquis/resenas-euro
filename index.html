@@ -61,6 +61,10 @@
   <div id="valorarBtnContainer" class="hidden" style="margin-top: 1rem;">
     <button id="valorarBtn">Estrellas / Stars</button>
   </div>
+
+  <div id="codigoContainer" class="hidden" style="margin-top: 1rem;">
+    <p>Tu código de recompensa es: <strong id="codigoRecompensa"></strong></p>
+  </div>
   
   <div id="formulario" class="hidden">
     <h3>Gracias, ¿cómo podríamos mejorar? / Thanks, how can we improve?</h3>
@@ -82,6 +86,8 @@
     const ratingContainer = document.getElementById('rating');
     const valorarBtnContainer = document.getElementById('valorarBtnContainer');
     const valorarBtn = document.getElementById('valorarBtn');
+    const codigoContainer = document.getElementById('codigoContainer');
+    const codigoRecompensa = document.getElementById('codigoRecompensa');
     const feedbackForm = document.getElementById('feedbackForm');
     const opinionTextarea = feedbackForm.querySelector('textarea');
     const formButton = feedbackForm.querySelector('button');
@@ -131,6 +137,11 @@
       ratingLocked = true;
       valorarBtnContainer.classList.add('hidden');
       
+      const randomPart = Math.floor(1000 + Math.random() * 9000);
+      const codigo = `${randomPart}${selectedValue}`;
+      codigoRecompensa.textContent = codigo;
+      codigoContainer.classList.remove('hidden');
+
       if (selectedValue === 5) {
         opinionTextarea.classList.add('hidden');
         opinionTextarea.required = false;
