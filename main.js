@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
       emailPlaceholder: 'Tu email',
       feedbackPlaceholder: 'Escribe tu opinión',
       submitBtn: 'Enviar',
+      continueBtn: 'Continuar',
       googleReviewTitle: '¡Gracias! Ahora puedes dejarnos tu reseña en Google:',
       googleBtn: 'Ir a Google',
       googleReviewBtn: 'Dejar reseña en Google',
@@ -32,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
       emailPlaceholder: 'Your email',
       feedbackPlaceholder: 'Write your feedback',
       submitBtn: 'Send',
+      continueBtn: 'Continue',
       googleReviewTitle: 'Thanks! Now you can leave us your Google review:',
       googleBtn: 'Go to Google',
       googleReviewBtn: 'Leave Google review',
@@ -52,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
       emailPlaceholder: 'Deine E-Mail',
       feedbackPlaceholder: 'Schreibe dein Feedback',
       submitBtn: 'Senden',
+      continueBtn: 'Weiter',
       googleReviewTitle: 'Danke! Jetzt kannst du uns eine Google-Bewertung hinterlassen:',
       googleBtn: 'Zu Google',
       googleReviewBtn: 'Google-Bewertung hinterlassen',
@@ -72,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
       emailPlaceholder: 'Votre email',
       feedbackPlaceholder: 'Écrivez votre avis',
       submitBtn: 'Envoyer',
+      continueBtn: 'Continuer',
       googleReviewTitle: 'Merci! Maintenant vous pouvez nous laisser votre avis Google:',
       googleBtn: 'Aller à Google',
       googleReviewBtn: 'Laisser un avis Google',
@@ -103,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const feedbackForm      = document.getElementById('feedbackForm');
   const feedbackGroup     = document.getElementById('feedback-group');
   const feedbackTextarea  = feedbackGroup.querySelector('textarea');
+  const submitBtn         = document.getElementById('submitText');
   const resenaBtn         = document.getElementById('resenaBtn');
 
   const languageDropdown  = document.getElementById('languageDropdown');
@@ -207,19 +212,23 @@ document.addEventListener('DOMContentLoaded', () => {
     if (selectedValue < 5) {
       show(feedbackGroup);
       feedbackTextarea.required = true;
+      submitBtn.textContent = translations[currentLanguage].submitBtn;
     } else {
       hide(feedbackGroup);
       feedbackTextarea.required = false;
+      submitBtn.textContent = translations[currentLanguage].continueBtn;
     }
   });
 
   /* -------------------- Feedback form -------------------- */
   feedbackForm.addEventListener('submit', e => {
     e.preventDefault();
-    alert(translations[currentLanguage].thankYou);
-    hide(formulario);
     if (selectedValue === 5) {
-      show(resenaBtn);
+      hide(formulario);
+      goToReview();
+    } else {
+      alert(translations[currentLanguage].thankYou);
+      hide(formulario);
     }
   });
 
