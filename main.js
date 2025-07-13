@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     es: {
       title: '¡Elige tu sorpresa!',
       subtitle: 'Antes, por favor valora tu experiencia con nosotros',
+      confirm: 'Confirmar',
       confirmRating: 'Confirmar valoración',
       rewardCode: 'Código de recompensa',
       finishReview: 'Finaliza tu reseña para poder canjearlo',
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     en: {
       title: 'Pick your reward!',
       subtitle: 'Before that, please rate your experience',
+      confirm: 'Confirm',
       confirmRating: 'Confirm rating',
       rewardCode: 'Reward code',
       finishReview: 'Finish your review to redeem it',
@@ -46,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     de: {
       title: 'Wähle deine Belohnung!',
       subtitle: 'Bitte bewerte zuerst deine Erfahrung',
+      confirm: 'Bestätigen',
       confirmRating: 'Bewertung bestätigen',
       rewardCode: 'Belohnungscode',
       finishReview: 'Schließe deine Bewertung ab, um ihn einzulösen',
@@ -67,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fr: {
       title: 'Choisissez votre récompense!',
       subtitle: 'Avant cela, veuillez évaluer votre expérience',
+      confirm: 'Confirmer',
       confirmRating: 'Confirmer la note',
       rewardCode: 'Code de récompense',
       finishReview: 'Terminez votre avis pour pouvoir l\'échanger',
@@ -148,8 +152,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (selectedValue) {
-      btnText.textContent = `${selectedValue} ${
-        selectedValue === 1 ? translations[lang].star : translations[lang].stars}`;
+      btnText.textContent = `${translations[lang].confirm} ${selectedValue} ${
+        selectedValue === 1
+          ? translations[lang].star
+          : translations[lang].stars
+      }`;
     }
     document.documentElement.lang = lang;
   }
@@ -189,8 +196,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target.classList.contains('star')) {
       selectedValue = parseInt(e.target.dataset.value);
       updateStars(selectedValue);
-      btnText.textContent = `${selectedValue} ${
-        selectedValue === 1 ? translations[currentLanguage].star : translations[currentLanguage].stars}`;
+      btnText.textContent = `${translations[currentLanguage].confirm} ${selectedValue} ${
+        selectedValue === 1
+          ? translations[currentLanguage].star
+          : translations[currentLanguage].stars
+      }`;
       show(valorarBtnContainer);
     }
   });
