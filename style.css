@@ -278,48 +278,22 @@ body::before{
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ===================================================================== */
-/*  RUEDA (colores + flecha + textos)                                    */
+/*  MENSAJES DE ERROR DEL FORMULARIO                                     */
 /* ===================================================================== */
-#rouletteWheel{
-  position:relative;                      /* ← necesario para el pseudo   */
-  width:320px;
-  height:320px;
-  border-radius:50%;
-  overflow:hidden;
-  background:conic-gradient(
-    #e67e22 0   45deg, #e74c3c 45   90deg,
-    #2980b9 90 135deg, #8e44ad 135 180deg,
-    #27ae60 180 225deg,#f1c40f 225 270deg,
-    #3498db 270 315deg,#9b59b6 315 360deg
-  );
-}
-/* Puntero único, pegado, orientado hacia dentro */
-#rouletteWheel::before{
-  content:'';
-  position:absolute;
-  top:-18px;                 /* sobresale 18 px; no se corta */
-  left:50%;
-  transform:translateX(-50%);
-  width:0;height:0;
-  border-left :15px solid transparent;
-  border-right:15px solid transparent;
-  border-top  :22px solid var(--secondary-color);   /* punta hacia abajo */
-  z-index:5;
+.field-error {
+  color: var(--error-color);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  display: block;
 }
 
-
-/* Textos sobre la ruleta */
-#rouletteTextLayer{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
+.form-input.error {
+  border-color: var(--error-color);
 }
-.roulette-text{
-  position:absolute;
-  font-weight:700;
-  color:#fff;
-  white-space:nowrap;
-  user-select:none;
+
+.form-input.error:focus {
+  border-color: var(--error-color);
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
 }
 
 /* ===================================================================== */

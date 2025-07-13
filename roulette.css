@@ -1,58 +1,130 @@
-/* contenedor principal que luego rotamos con JS */
+/* Contenedor principal de la ruleta */
+#rouletteContainer {
+  position: relative;
+  display: inline-block;
+  margin: 2rem auto;
+}
+
+/* Ruleta principal */
 #rouletteWheel {
   position: relative;
-  width: 320px;          /* mismo ancho y alto */
+  width: 320px;
   height: 320px;
   border-radius: 50%;
   overflow: hidden;
-  /* la rueda ya coloreada: */
+  /* Gradiente cónico para los colores de los segmentos */
   background: conic-gradient(
-    #e67e22 0deg          45deg,   /* Postre   */
-    #e74c3c 45deg         90deg,   /* Café     */
-    #2980b9 90deg        135deg,   /* Mojito   */
-    #8e44ad 135deg       180deg,   /* Cono...  */
-    #27ae60 180deg       225deg,   /* Chupito  */
-    #f1c40f 225deg       270deg,   /* Refresco */
-    #3498db 270deg       315deg,   /* Cerveza  */
-    #9b59b6 315deg       360deg    /* Tapa     */
+    #e67e22 0deg    45deg,   /* Postre   */
+    #e74c3c 45deg   90deg,   /* Café     */
+    #2980b9 90deg   135deg,  /* Mojito   */
+    #8e44ad 135deg  180deg,  /* Cono Helado */
+    #27ae60 180deg  225deg,  /* Chupito  */
+    #f1c40f 225deg  270deg,  /* Refresco */
+    #3498db 270deg  315deg,  /* Cerveza  */
+    #9b59b6 315deg  360deg   /* Tapa     */
   );
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  border: 3px solid #fff;
 }
 
-/* capa de textos */
+/* Capa de textos */
 #rouletteTextLayer {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
 
+/* Textos individuales en la ruleta */
 .roulette-text {
   position: absolute;
   font-weight: 700;
   color: #fff;
   white-space: nowrap;
   user-select: none;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  font-size: 0.9rem;
 }
 
-/* Contenedor de la ruleta */
-.roulette-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: -50px;
-}
-
-/* Puntero de la ruleta */
+/* Flecha indicadora - única y bien posicionada */
 .roulette-pointer {
   position: absolute;
-  top: -10px;
+  top: -25px;
   left: 50%;
   transform: translateX(-50%);
   width: 0;
   height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 30px solid #ffc107; /* Un color dorado que resalte */
-  z-index: 100;
-  filter: drop-shadow(0 -2px 2px rgba(0,0,0,0.3));
+  /* Triángulo más grande y visible */
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-top: 40px solid #ffc107;
+  z-index: 10;
+  /* Sombra para mejor visibilidad */
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* Añadir un pequeño círculo en la base de la flecha para mejor apariencia */
+.roulette-pointer::after {
+  content: '';
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background: #ffc107;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Pantalla de la ruleta */
+.roulette-screen {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+/* Animación de entrada para la ruleta */
+.roulette-screen:not(.hidden) #rouletteContainer {
+  animation: zoomIn 0.5s ease-out;
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  #rouletteWheel {
+    width: 280px;
+    height: 280px;
+  }
+  
+  .roulette-text {
+    font-size: 0.8rem;
+  }
+  
+  .roulette-pointer {
+    border-left-width: 20px;
+    border-right-width: 20px;
+    border-top-width: 35px;
+    top: -20px;
+  }
+  
+  .roulette-pointer::after {
+    width: 16px;
+    height: 16px;
+    top: -40px;
+  }
 }

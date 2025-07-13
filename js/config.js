@@ -1,0 +1,34 @@
+// Configuración global de la aplicación
+export const CONFIG = {
+  // Configuración de la ruleta
+  roulette: {
+    spinDuration: 4300, // ms
+    minSpins: 5,
+    maxSpins: 10,
+    easing: 'cubic-bezier(.17,.67,.17,1)'
+  },
+  
+  // Configuración de animaciones
+  animations: {
+    fadeInDuration: 500,
+    transitionDuration: 300
+  },
+  
+  // URL de Google Reviews
+  googleReviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJbTuh2nOiagwR7wVm8-DJOZg',
+  
+  // Idioma por defecto
+  defaultLanguage: 'es'
+};
+
+// Colores de la ruleta (en orden)
+export const ROULETTE_COLORS = [
+  { color: '#e67e22', start: 0,   end: 45 },   // Postre
+  { color: '#e74c3c', start: 45,  end: 90 },   // Café
+  { color: '#2980b9', start: 90,  end: 135 },  // Mojito
+  { color: '#8e44ad', start: 135, end: 180 },  // Cono Helado
+  { color: '#27ae60', start: 180, end: 225 },  // Chupito
+  { color: '#f1c40f', start: 225, end: 270 },  // Refresco
+  { color: '#3498db', start: 270, end: 315 },  // Cerveza
+  { color: '#9b59b6', start: 315, end: 360 }   // Tapa
+];
