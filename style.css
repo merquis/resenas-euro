@@ -7,7 +7,7 @@
   --text-color: #2c3e50;
   --text-secondary: #7f8c8d;
   --star-color: #f39c12;
-  --star-inactive-color: #ecf0f1;
+  --star-inactive-color: #bdc3c7;
   --success-bg: linear-gradient(135deg, #00b894, #00cec9);
   --success-text: #ffffff;
   --error-color: #e74c3c;
@@ -166,7 +166,7 @@ body::before {
     --card-background:rgba(44,62,80,.95);
     --text-color:#ecf0f1;
     --text-secondary:#bdc3c7;
-    --star-inactive-color:#34495e;
+    --star-inactive-color:#7f8c8d;
   }
   .form-input{background:rgba(52,73,94,.8);color:var(--text-color)}
   .form-input:focus{background:rgba(52,73,94,1)}
