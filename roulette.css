@@ -29,22 +29,24 @@
   overflow: hidden;
   border: 4px solid #fff;
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
-  background: conic-gradient(
-    #e67e22 0deg          45deg,
-    #e74c3c 45deg         90deg,
-    #2980b9 90deg        135deg,
-    #8e44ad 135deg       180deg,
-    #27ae60 180deg       225deg,
-    #f1c40f 225deg       270deg,
-    #3498db 270deg       315deg,
-    #9b59b6 315deg       360deg
-  );
-  transition: transform 4.3s cubic-bezier(.17,.67,.17,1);
+}
+
+.roulette-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.roulette-section {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  background: var(--slice-color);
+  transform-origin: 100% 100%;
+  transform: rotate(var(--rotation)) skewY(var(--skew));
+  pointer-events: none;
 }
 
 #rouletteTextLayer {
-  position: absolute;
-  inset: 0;
   pointer-events: none;
 }
 
