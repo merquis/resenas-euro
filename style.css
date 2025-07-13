@@ -45,6 +45,13 @@ body {
   gap: 2rem;
 }
 
+.roulette-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
 body::before {
   content: '';
   position: absolute;
