@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const translations = {
     es: {
       title: '¡Elige tu sorpresa!',
-      subtitle: 'Haz clic en las estrellas para valorar tu experiencia',
+      subtitle: 'Para conseguir tu sorpresa, primero valora tu experiencia haciendo clic en las estrellas.',
       confirm: 'Confirmar',
       confirmRating: 'Confirmar valoración',
       rewardCode: 'Código de recompensa',
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     en: {
       title: 'Pick your reward!',
-      subtitle: 'Click on the stars to rate your experience',
+      subtitle: 'To get your reward, first rate your experience by clicking on the stars.',
       confirm: 'Confirm',
       confirmRating: 'Confirm rating',
       rewardCode: 'Reward code',
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     de: {
       title: 'Wähle deine Belohnung!',
-      subtitle: 'Klicke auf die Sterne, um deine Erfahrung zu bewerten',
+      subtitle: 'Um deine Belohnung zu erhalten, bewerte bitte zuerst deine Erfahrung, indem du auf die Sterne klickst.',
       confirm: 'Bestätigen',
       confirmRating: 'Bewertung bestätigen',
       rewardCode: 'Belohnungscode',
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     fr: {
       title: 'Choisissez votre récompense!',
-      subtitle: 'Cliquez sur les étoiles pour évaluer votre expérience',
+      subtitle: 'Pour obtenir votre récompense, évaluez d\'abord votre expérience en cliquant sur les étoiles.',
       confirm: 'Confirmer',
       confirmRating: 'Confirmer la note',
       rewardCode: 'Code de récompense',
