@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
       googleBtn: 'Ir a Google',
       googleReviewBtn: 'Dejar reseña en Google',
       spinBtn: 'Girar la ruleta',
+      star: 'Estrella',
+      stars: 'Estrellas',
       prizes: ['Postre','Café','Mojito','Cono Helado','Chupito','Refresco','Cerveza','Tapa']
     },
     en: {
@@ -37,6 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
       googleBtn: 'Go to Google',
       googleReviewBtn: 'Leave Google review',
       spinBtn: 'Spin the wheel',
+      star: 'Star',
+      stars: 'Stars',
       prizes: ['Dessert','Coffee','Mojito','Ice Cream Cone','Shot','Soft Drink','Beer','Tapa']
     },
     de: {
@@ -56,6 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
       googleBtn: 'Zu Google',
       googleReviewBtn: 'Google-Bewertung hinterlassen',
       spinBtn: 'Dreh das Rad',
+      star: 'Stern',
+      stars: 'Sterne',
       prizes: ['Dessert','Kaffee','Mojito','Eistüte','Kurzer','Erfrischungsgetränk','Bier','Tapa']
     },
     fr: {
@@ -75,6 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
       googleBtn: 'Aller à Google',
       googleReviewBtn: 'Laisser un avis Google',
       spinBtn: 'Tourner la roue',
+      star: 'Étoile',
+      stars: 'Étoiles',
       prizes: ['Dessert','Café','Mojito','Cornet de glace','Shot','Boisson gazeuse','Bière','Tapa']
     }
   };
