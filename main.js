@@ -212,12 +212,6 @@ document.addEventListener('DOMContentLoaded', () => {
     stars.forEach(s => s.classList.add('locked'));
     valorarBtn.disabled = true;
 
-    // Generate reward code
-    const randomDigits = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-    const code = `EURO-${randomDigits}${selectedValue}`;
-    codigoRecompensa.textContent = code;
-    show(codigoContainer);
-
     show(formulario);
     if (selectedValue < 5) {
       show(feedbackGroup);
@@ -234,13 +228,8 @@ document.addEventListener('DOMContentLoaded', () => {
   /* -------------------- Feedback form -------------------- */
   feedbackForm.addEventListener('submit', e => {
     e.preventDefault();
-    if (selectedValue === 5) {
-      hide(formulario);
-      goToReview();
-    } else {
-      alert(translations[currentLanguage].thankYou);
-      hide(formulario);
-    }
+    hide(formulario);
+    window.showRoulette(selectedValue);
   });
 
   /* -------------------- Google review -------------------- */
