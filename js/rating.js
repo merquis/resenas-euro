@@ -8,6 +8,9 @@ export class RatingManager {
     this.isLocked = false;
     this.stars = null;
     this.container = null;
+    this.confirmButton = null;
+    this.confirmButtonContainer = null;
+    this.buttonText = null;
   }
 
   /**
@@ -24,6 +27,9 @@ export class RatingManager {
   cacheElements() {
     this.stars = document.querySelectorAll('.star');
     this.container = document.getElementById('rating');
+    this.confirmButton = document.getElementById('valorarBtn');
+    this.confirmButtonContainer = document.getElementById('valorarBtnContainer');
+    this.buttonText = document.getElementById('btnText');
   }
 
   /**
@@ -53,6 +59,16 @@ export class RatingManager {
         const value = parseInt(e.target.dataset.value);
         this.selectRating(value);
       }
+    });
+
+    // Confirmar valoración
+    this.confirmButton.addEventListener('click', () => {
+      this.confirmRating();
+    });
+
+    // Escuchar cambios de idioma
+    window.addEventListener('languageChanged', () => {
+      this.updateButtonText();
     });
   }
 
@@ -122,9 +138,42 @@ export class RatingManager {
   selectRating(value) {
     this.selectedValue = value;
     this.updateStars(value);
+    this.updateButtonText();
     
-    // Confirmar automáticamente la valoración
-    this.confirmRating();
+    // Mostrar el botón cuando se seleccionen estrellas
+    showElement(this.confirmButtonContainer);
+  }
+
+  /**
+   * Actualiza el texto del botón de confirmación
+   */
+  updateButtonText() {
+    if (this.selectedValue > 0) {
+      let face = '';
+      
+      // Progresión de caras según las estrellas
+      switch (this.selectedValue) {
+        case 1:
+          face = '😞'; // Cara triste/decepcionada
+          break;
+        case 2:
+          face = '😕'; // Cara preocupada/insatisfecha
+          break;
+        case 3:
+          face = '😐'; // Cara neutra/indiferente
+          break;
+        case 4:
+          face = '🙂'; // Cara ligeramente contenta
+          break;
+        case 5:
+          face = '😊'; // Cara feliz
+          break;
+        default:
+          face = '😐';
+      }
+      
+      this.buttonText.textContent = `VALORAR CON ${this.selectedValue} ESTRELLAS ${face}`;
+    }
   }
 
   /**
@@ -135,11 +184,14 @@ export class RatingManager {
 
     this.isLocked = true;
     this.stars.forEach(star => star.classList.add('locked'));
+    this.confirmButton.disabled = true;
 
     // Disparar evento de valoración confirmada
     window.dispatchEvent(new CustomEvent('ratingConfirmed', { 
       detail: { rating: this.selectedValue } 
     }));
+
+    hideElement(this.confirmButtonContainer);
   }
 
   /**
@@ -158,6 +210,8 @@ export class RatingManager {
     this.isLocked = false;
     this.updateStars(0);
     this.stars.forEach(star => star.classList.remove('locked'));
+    this.confirmButton.disabled = false;
+    hideElement(this.confirmButtonContainer);
   }
 }
 
