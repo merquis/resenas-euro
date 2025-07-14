@@ -7,6 +7,11 @@ export const translations = {
     vipBadge: '👑 ZONA VIP - PREMIOS EXCLUSIVOS 👑',
     ratingInstruction: '¿Qué tal ha sido tu experiencia?',
     
+    // Preview de premios
+    dinnerForTwo: 'CENA GRATIS PARA 2',
+    discount50: '50€ DESCUENTO',
+    wineBottle: 'BOTELLA VINO',
+    
     // Confirmación - ASSUMIR LA VENTA
     confirm: 'RECLAMAR MI PREMIO',
     confirmRating: 'SÍ, QUIERO MI REGALO',
@@ -71,6 +76,12 @@ export const translations = {
     subtitle: '⚡ You can still get one of these EXCLUSIVE PRIZES ⚡',
     vipBadge: '👑 VIP ZONE - EXCLUSIVE PRIZES 👑',
     ratingInstruction: 'How was your experience?',
+    
+    // Preview de premios
+    dinnerForTwo: 'FREE DINNER FOR 2',
+    discount50: '50€ DISCOUNT',
+    wineBottle: 'WINE BOTTLE',
+    
     confirm: 'CLAIM MY PRIZE',
     confirmRating: 'YES, I WANT MY GIFT',
     rewardCode: '🎁 YOUR VIP PRIZE',
@@ -110,6 +121,12 @@ export const translations = {
     subtitle: '⚡ Sie können noch einen dieser EXKLUSIVEN PREISE erhalten ⚡',
     vipBadge: '👑 VIP ZONE - EXKLUSIVE PREISE 👑',
     ratingInstruction: 'Wie war Ihre Erfahrung?',
+    
+    // Preview de premios
+    dinnerForTwo: 'GRATIS ABENDESSEN FÜR 2',
+    discount50: '50€ RABATT',
+    wineBottle: 'WEINFLASCHE',
+    
     confirm: 'MEINEN PREIS BEANSPRUCHEN',
     confirmRating: 'JA, ICH WILL MEIN GESCHENK',
     rewardCode: '🎁 IHR VIP-PREIS',
@@ -149,6 +166,12 @@ export const translations = {
     subtitle: '⚡ Vous pouvez encore obtenir un de ces PRIX EXCLUSIFS ⚡',
     vipBadge: '👑 ZONE VIP - PRIX EXCLUSIFS 👑',
     ratingInstruction: 'Comment était votre expérience?',
+    
+    // Preview de premios
+    dinnerForTwo: 'DÎNER GRATUIT POUR 2',
+    discount50: '50€ RÉDUCTION',
+    wineBottle: 'BOUTEILLE DE VIN',
+    
     confirm: 'RÉCLAMER MON PRIX',
     confirmRating: 'OUI, JE VEUX MON CADEAU',
     rewardCode: '🎁 VOTRE PRIX VIP',

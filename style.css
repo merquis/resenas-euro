@@ -236,13 +236,6 @@ body {
   transform: scale(1.1);
 }
 
-.stars.preselected .star:nth-child(5) {
-  animation: starPulse 1s infinite;
-}
-
-.pulse-star {
-  animation: starPulse 1s infinite !important;
-}
 
 /* BOTONES */
 .confirmation-btn, .submit-btn, .google-btn {
