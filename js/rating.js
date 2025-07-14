@@ -8,9 +8,6 @@ export class RatingManager {
     this.isLocked = false;
     this.stars = null;
     this.container = null;
-    this.confirmButton = null;
-    this.confirmButtonContainer = null;
-    this.buttonText = null;
   }
 
   /**
