@@ -677,8 +677,8 @@ body {
   }
   
   .stars {
-    font-size: 35px;
-    gap: 0px;
+    font-size: 40px;
+    gap: 5px;
   }
 
   .rating-face {
