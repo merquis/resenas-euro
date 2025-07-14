@@ -66,7 +66,6 @@ export const translations = {
     
     // Fake scarcity
     prizesLeft: '¡QUEDAN 3 PREMIOS GRANDES HOY!',
-    peopleWatching: 'personas viendo esta oferta',
     hurryUp: '¡DATE PRISA!',
     almostGone: '¡CASI AGOTADO!',
     
@@ -77,16 +76,12 @@ export const translations = {
     guaranteedPrize: '✅ PREMIO GARANTIZADO'
   },
   en: {
-    title: '🎁 GUARANTEED PRIZE: Rate and Win 🎁',
-    subtitle: '⚡ 100% GUARANTEED - Just leave your rating and spin the wheel ⚡',
+    title: '🎁 Leave us your review and win a guaranteed prize with our wheel of fortune',
     vipBadge: '👑 VIP ZONE - EXCLUSIVE PRIZES 👑',
     ratingInstruction: 'How was your experience?',
-    
-    // Preview de premios
     dinnerForTwo: 'FREE DINNER FOR 2',
     discount50: '50€ DISCOUNT',
     wineBottle: 'WINE BOTTLE',
-    
     confirm: 'CLAIM MY PRIZE',
     confirmRating: 'YES, I WANT MY GIFT',
     rewardCode: '🎁 YOUR VIP PRIZE',
@@ -116,27 +111,19 @@ export const translations = {
     justWon: 'just won',
     peopleWatching: 'people viewing this offer',
     prizesGivenToday: 'prizes given TODAY',
-    prizesLeft: '¡3 BIG PRIZES LEFT TODAY!',
+    prizesLeft: '3 BIG PRIZES LEFT TODAY!',
     hurryUp: 'HURRY UP!',
     almostGone: 'ALMOST GONE!',
-    
-    // More prizes
     morePrizes: '🎁 + 5 more prizes in the roulette',
-    
-    // Guaranteed prize
     guaranteedPrize: '✅ GUARANTEED PRIZE'
   },
   de: {
-    title: '🎁 GARANTIERTER PREIS: Bewerten und Gewinnen 🎁',
-    subtitle: '⚡ 100% GARANTIERT - Bewerten Sie uns und drehen Sie das Rad ⚡',
+    title: '🎁 Hinterlassen Sie Ihre Bewertung und gewinnen Sie einen garantierten Preis mit unserem Glücksrad',
     vipBadge: '👑 VIP ZONE - EXKLUSIVE PREISE 👑',
     ratingInstruction: 'Wie war Ihre Erfahrung?',
-    
-    // Preview de premios
     dinnerForTwo: 'GRATIS ABENDESSEN FÜR 2',
     discount50: '50€ RABATT',
     wineBottle: 'WEINFLASCHE',
-    
     confirm: 'MEINEN PREIS BEANSPRUCHEN',
     confirmRating: 'JA, ICH WILL MEIN GESCHENK',
     rewardCode: '🎁 IHR VIP-PREIS',
@@ -166,27 +153,19 @@ export const translations = {
     justWon: 'hat gerade gewonnen',
     peopleWatching: 'Personen sehen sich dieses Angebot an',
     prizesGivenToday: 'Preise HEUTE vergeben',
-    prizesLeft: '¡3 GROSSE PREISE HEUTE ÜBRIG!',
+    prizesLeft: '3 GROSSE PREISE HEUTE ÜBRIG!',
     hurryUp: 'BEEILEN SIE SICH!',
     almostGone: 'FAST WEG!',
-    
-    // Mehr Preise
     morePrizes: '🎁 + 5 weitere Preise im Roulette',
-    
-    // Garantierter Preis
     guaranteedPrize: '✅ GARANTIERTER PREIS'
   },
   fr: {
-    title: '🎁 PRIX GARANTI: Évaluez et Gagnez 🎁',
-    subtitle: '⚡ 100% GARANTI - Laissez votre avis et tournez la roue ⚡',
+    title: '🎁 Laissez-nous votre avis et gagnez un prix garanti avec notre roue de la fortune',
     vipBadge: '👑 ZONE VIP - PRIX EXCLUSIFS 👑',
     ratingInstruction: 'Comment était votre expérience?',
-    
-    // Preview de premios
     dinnerForTwo: 'DÎNER GRATUIT POUR 2',
     discount50: '50€ RÉDUCTION',
     wineBottle: 'BOUTEILLE DE VIN',
-    
     confirm: 'RÉCLAMER MON PRIX',
     confirmRating: 'OUI, JE VEUX MON CADEAU',
     rewardCode: '🎁 VOTRE PRIX VIP',
@@ -216,14 +195,10 @@ export const translations = {
     justWon: 'vient de gagner',
     peopleWatching: 'personnes consultent cette offre',
     prizesGivenToday: 'prix donnés AUJOURD\'HUI',
-    prizesLeft: '¡3 GROS PRIX RESTANTS AUJOURD\'HUI!',
+    prizesLeft: '3 GROS PRIX RESTANTS AUJOURD\'HUI!',
     hurryUp: 'DÉPÊCHEZ-VOUS!',
     almostGone: 'PRESQUE PARTI!',
-    
-    // Plus de prix
     morePrizes: '🎁 + 5 prix de plus dans la roulette',
-    
-    // Prix garanti
     guaranteedPrize: '✅ PRIX GARANTI'
   }
 };
