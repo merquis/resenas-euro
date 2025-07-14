@@ -42,7 +42,7 @@
   white-space: nowrap;
   user-select: none;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-  font-size: 1rem;
+  font-size: 0.7rem;
   transform-origin: center;
   pointer-events: none;
   z-index: 2;
@@ -101,7 +101,7 @@
   }
   
   .roulette-text {
-    font-size: 0.8rem;
+    font-size: 0.6rem;
   }
   
   .roulette-pointer {

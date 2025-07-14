@@ -46,10 +46,9 @@ export const translations = {
     congratulations: '🏆 ¡GANASTE! ¡ERES UN VIP!',
     enjoyPrize: '📱 Captura esta pantalla - Tu premio está ACTIVADO por 24h',
     
-    // Premios mejorados con premios grandes
-    prizes: ['🍰 POSTRE GRATIS', '☕ CAFÉ PREMIUM', '🍹 MOJITO ESPECIAL', '🍦 HELADO ARTESANO', 
-             '🥃 CHUPITO PREMIUM', '🥤 BEBIDA GRATIS', '🍺 CERVEZA ARTESANA', '🍕 TAPA GRATIS',
-             '🍽️ CENA GRATIS PARA 2', '💰 BONO 40 EUROS'],
+    // Premios optimizados - 8 premios exactos
+    prizes: ['🍽️ CENA GRATIS PARA 2', '💰 50€ DESCUENTO', '🍾 BOTELLA VINO', '🍦 HELADO', 
+             '🥃 CHUPITO', '🥤 REFRESCO', '🍹 MOJITO', '🍷 COPA VINO'],
     
     // Nuevos mensajes de urgencia
     urgentMessage: '⚠️ 2 personas están reclamando premios AHORA',
@@ -100,9 +99,8 @@ export const translations = {
     stars: 'Stars',
     congratulations: '🏆 YOU WON! YOU\'RE A VIP!',
     enjoyPrize: '📱 Screenshot this - Your prize is ACTIVE for 24h',
-    prizes: ['🍰 FREE DESSERT', '☕ PREMIUM COFFEE', '🍹 SPECIAL MOJITO', '🍦 ARTISAN ICE CREAM', 
-             '🥃 PREMIUM SHOT', '🥤 FREE DRINK', '🍺 CRAFT BEER', '🍕 FREE TAPA',
-             '🍽️ FREE DINNER FOR 2', '💰 40 EURO BONUS'],
+    prizes: ['🍽️ FREE DINNER FOR 2', '💰 50€ DISCOUNT', '🍾 WINE BOTTLE', '🍦 ICE CREAM', 
+             '🥃 SHOT', '🥤 SOFT DRINK', '� MOJITO', '� WINE GLASS'],
     urgentMessage: '⚠️ 2 people are claiming prizes NOW',
     lastChance: '🔥 LAST BIG PRIZE available',
     vipClient: '👑 VIP Client #',
