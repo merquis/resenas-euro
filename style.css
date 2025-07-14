@@ -674,11 +674,12 @@ body {
   
   .stars {
     font-size: 30px;
-    gap: 5px;
+    gap: 0px;
   }
 
   .rating-face {
     font-size: 36px;
+    margin-left: 10px;
   }
   
   .big-prizes-preview {
