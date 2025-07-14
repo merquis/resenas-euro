@@ -575,7 +575,7 @@ body {
   }
   
   .restaurant-title h2 {
-    font-size: 28px;
+    font-size: 24px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
