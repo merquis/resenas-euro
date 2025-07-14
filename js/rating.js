@@ -90,10 +90,9 @@ export class RatingManager {
   selectRating(value) {
     this.selectedValue = value;
     this.updateStars(value);
-    this.updateButtonText();
     
-    // Mostrar el botón cuando se seleccionen estrellas
-    showElement(this.confirmButtonContainer);
+    // Confirmar automáticamente la valoración
+    this.confirmRating();
   }
 
   /**
