@@ -98,7 +98,6 @@ export class RatingManager {
    */
   updateButtonText() {
     if (this.selectedValue > 0) {
-      const stars = '⭐'.repeat(this.selectedValue);
       let face = '';
       
       // Caras sutiles según las estrellas
@@ -109,7 +108,7 @@ export class RatingManager {
       }
       
       const baseText = languageManager.getTranslation('confirmRating');
-      this.buttonText.textContent = `${stars} ${baseText} ${face}`;
+      this.buttonText.textContent = `VALORAR CON ${this.selectedValue} ESTRELLAS ${face}`;
     }
   }
 
