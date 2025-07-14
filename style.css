@@ -693,6 +693,8 @@ body {
   .prize-preview-item {
     padding: 8px 15px;
     font-size: 12px;
+    flex-grow: 1;
+    flex-basis: auto;
   }
   
   .winner-notifications {
