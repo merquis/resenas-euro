@@ -7,7 +7,7 @@ export const translations = {
     ratingInstruction: '¿Qué tal ha sido tu experiencia?',
     
     // Preview de premios
-    dinnerForTwo: 'CENA GRATIS PARA 2',
+    dinnerForTwo: 'CENA PARA 2',
     discount50: '50€ DESCUENTO',
     wineBottle: 'BOTELLA VINO',
     
@@ -73,13 +73,14 @@ export const translations = {
     morePrizes: '🎁 + 5 premios más en la ruleta',
     
     // Premio garantizado
-    guaranteedPrize: '✅ PREMIO GARANTIZADO'
+    guaranteedPrize: '✅ PREMIO GARANTIZADO',
+    rateWithStars: 'VALORAR CON {{count}} ESTRELLAS'
   },
   en: {
     title: '🎁 Leave us your review and win a guaranteed prize with our wheel of fortune',
     vipBadge: '👑 VIP ZONE - EXCLUSIVE PRIZES 👑',
     ratingInstruction: 'How was your experience?',
-    dinnerForTwo: 'FREE DINNER FOR 2',
+    dinnerForTwo: 'DINNER FOR 2',
     discount50: '50€ DISCOUNT',
     wineBottle: 'WINE BOTTLE',
     confirm: 'CLAIM MY PRIZE',
@@ -115,13 +116,14 @@ export const translations = {
     hurryUp: 'HURRY UP!',
     almostGone: 'ALMOST GONE!',
     morePrizes: '🎁 + 5 more prizes in the roulette',
-    guaranteedPrize: '✅ GUARANTEED PRIZE'
+    guaranteedPrize: '✅ GUARANTEED PRIZE',
+    rateWithStars: 'RATE WITH {{count}} STARS'
   },
   de: {
     title: '🎁 Hinterlassen Sie Ihre Bewertung und gewinnen Sie einen garantierten Preis mit unserem Glücksrad',
     vipBadge: '👑 VIP ZONE - EXKLUSIVE PREISE 👑',
     ratingInstruction: 'Wie war Ihre Erfahrung?',
-    dinnerForTwo: 'GRATIS ABENDESSEN FÜR 2',
+    dinnerForTwo: 'ABENDESSEN FÜR 2',
     discount50: '50€ RABATT',
     wineBottle: 'WEINFLASCHE',
     confirm: 'MEINEN PREIS BEANSPRUCHEN',
@@ -157,13 +159,14 @@ export const translations = {
     hurryUp: 'BEEILEN SIE SICH!',
     almostGone: 'FAST WEG!',
     morePrizes: '🎁 + 5 weitere Preise im Roulette',
-    guaranteedPrize: '✅ GARANTIERTER PREIS'
+    guaranteedPrize: '✅ GARANTIERTER PREIS',
+    rateWithStars: 'BEWERTEN MIT {{count}} STERNEN'
   },
   fr: {
     title: '🎁 Laissez-nous votre avis et gagnez un prix garanti avec notre roue de la fortune',
     vipBadge: '👑 ZONE VIP - PRIX EXCLUSIFS 👑',
     ratingInstruction: 'Comment était votre expérience?',
-    dinnerForTwo: 'DÎNER GRATUIT POUR 2',
+    dinnerForTwo: 'DÎNER POUR 2',
     discount50: '50€ RÉDUCTION',
     wineBottle: 'BOUTEILLE DE VIN',
     confirm: 'RÉCLAMER MON PRIX',
@@ -199,7 +202,8 @@ export const translations = {
     hurryUp: 'DÉPÊCHEZ-VOUS!',
     almostGone: 'PRESQUE PARTI!',
     morePrizes: '🎁 + 5 prix de plus dans la roulette',
-    guaranteedPrize: '✅ PRIX GARANTI'
+    guaranteedPrize: '✅ PRIX GARANTI',
+    rateWithStars: 'ÉVALUER AVEC {{count}} ÉTOILES'
   }
 };
 
@@ -213,8 +217,8 @@ export const languageFlags = {
 
 // Códigos de idioma
 export const languageCodes = {
-  es: 'ES',
-  en: 'EN',
-  de: 'DE',
-  fr: 'FR'
+  es: 'Español',
+  en: 'English',
+  de: 'Deutsch',
+  fr: 'Français'
 };

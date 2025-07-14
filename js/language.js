@@ -122,10 +122,15 @@ export class LanguageManager {
   /**
    * Obtiene la traducción actual
    * @param {string} key - Clave de traducción
+   * @param {Object} vars - Variables para interpolación
    * @returns {string} Texto traducido
    */
-  getTranslation(key) {
-    return translations[this.currentLanguage][key] || key;
+  getTranslation(key, vars = {}) {
+    let text = translations[this.currentLanguage][key] || key;
+    for (const v in vars) {
+      text = text.replace(new RegExp(`{{${v}}}`, 'g'), vars[v]);
+    }
+    return text;
   }
 
   /**

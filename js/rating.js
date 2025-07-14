@@ -168,7 +168,8 @@ export class RatingManager {
    */
   updateButtonText() {
     if (this.selectedValue > 0) {
-      this.buttonText.textContent = `VALORAR CON ${this.selectedValue} ESTRELLAS`;
+      const text = languageManager.getTranslation('rateWithStars', { count: this.selectedValue });
+      this.buttonText.textContent = text;
     }
   }
 
