@@ -3,7 +3,7 @@ export const translations = {
   es: {
     // Título principal - URGENCIA + EXCLUSIVIDAD
     title: '🎉 ¡FELICIDADES! Estás a un paso de obtener tu premio',
-    subtitle: '⚡ Aún puedes obtener uno de estos PREMIOS EXCLUSIVOS ⚡',
+    subtitle: '⚡ Valora tu experiencia y participa en nuestro SORTEO de premios ⚡',
     vipBadge: '👑 ZONA VIP - PREMIOS EXCLUSIVOS 👑',
     ratingInstruction: '¿Qué tal ha sido tu experiencia?',
     
@@ -73,7 +73,7 @@ export const translations = {
   },
   en: {
     title: '🎉 CONGRATULATIONS! You\'re one step away from getting your prize',
-    subtitle: '⚡ You can still get one of these EXCLUSIVE PRIZES ⚡',
+    subtitle: '⚡ Rate your experience and join our PRIZE RAFFLE ⚡',
     vipBadge: '👑 VIP ZONE - EXCLUSIVE PRIZES 👑',
     ratingInstruction: 'How was your experience?',
     
@@ -118,7 +118,7 @@ export const translations = {
   },
   de: {
     title: '🎉 GLÜCKWUNSCH! Sie sind einen Schritt davon entfernt, Ihren Preis zu erhalten',
-    subtitle: '⚡ Sie können noch einen dieser EXKLUSIVEN PREISE erhalten ⚡',
+    subtitle: '⚡ Bewerten Sie Ihre Erfahrung und nehmen Sie an unserer PREIS-VERLOSUNG teil ⚡',
     vipBadge: '👑 VIP ZONE - EXKLUSIVE PREISE 👑',
     ratingInstruction: 'Wie war Ihre Erfahrung?',
     
@@ -163,7 +163,7 @@ export const translations = {
   },
   fr: {
     title: '🎉 FÉLICITATIONS! Vous êtes à un pas d\'obtenir votre prix',
-    subtitle: '⚡ Vous pouvez encore obtenir un de ces PRIX EXCLUSIFS ⚡',
+    subtitle: '⚡ Évaluez votre expérience et participez à notre TIRAGE AU SORT de prix ⚡',
     vipBadge: '👑 ZONE VIP - PRIX EXCLUSIFS 👑',
     ratingInstruction: 'Comment était votre expérience?',
     
