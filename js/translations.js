@@ -112,7 +112,7 @@ export const translations = {
     justWon: 'just won',
     peopleWatching: 'people viewing this offer',
     prizesGivenToday: 'prizes given TODAY',
-    prizesLeft: '¡3 BIG PRIZES LEFT TODAY!',
+    prizesLeft: '¡1 BIG PRIZE LEFT TODAY!',
     hurryUp: 'HURRY UP!',
     almostGone: 'ALMOST GONE!'
   },
@@ -157,7 +157,7 @@ export const translations = {
     justWon: 'hat gerade gewonnen',
     peopleWatching: 'Personen sehen sich dieses Angebot an',
     prizesGivenToday: 'Preise HEUTE vergeben',
-    prizesLeft: '¡3 GROSSE PREISE HEUTE ÜBRIG!',
+    prizesLeft: '¡1 GROSSER PREIS HEUTE ÜBRIG!',
     hurryUp: 'BEEILEN SIE SICH!',
     almostGone: 'FAST WEG!'
   },
@@ -202,7 +202,7 @@ export const translations = {
     justWon: 'vient de gagner',
     peopleWatching: 'personnes consultent cette offre',
     prizesGivenToday: 'prix donnés AUJOURD\'HUI',
-    prizesLeft: '¡3 GROS PRIX RESTANTS AUJOURD\'HUI!',
+    prizesLeft: '¡1 GROS PRIX RESTANT AUJOURD\'HUI!',
     hurryUp: 'DÉPÊCHEZ-VOUS!',
     almostGone: 'PRESQUE PARTI!'
   }
