@@ -19,6 +19,7 @@ export class RatingManager {
   init() {
     this.cacheElements();
     this.setupEventListeners();
+    this.initializeFaceElement();
   }
 
   /**
@@ -41,12 +42,12 @@ export class RatingManager {
       if (this.isLocked) return;
       if (e.target.classList.contains('star')) {
         const value = parseInt(e.target.dataset.value);
-        this.updateStars(value);
+        this.updateStars(value, true); // true indica que es hover
       }
     });
 
-    // Mouse out del contenedor
-    this.container.addEventListener('mouseout', () => {
+    // Mouse leave del contenedor (mejor que mouseout)
+    this.container.addEventListener('mouseleave', () => {
       if (!this.isLocked) {
         this.updateStars(this.selectedValue);
       }
@@ -75,18 +76,24 @@ export class RatingManager {
   /**
    * Actualiza el estado visual de las estrellas
    * @param {number} value - Valor de la valoración
+   * @param {boolean} isHover - Si es un hover temporal
    */
-  updateStars(value) {
-    console.log('updateStars called with value:', value);
+  updateStars(value, isHover = false) {
     this.stars.forEach(star => {
       const starValue = parseInt(star.dataset.value);
       const shouldBeActive = starValue <= value;
-      star.classList.toggle('active', shouldBeActive);
-      console.log(`Star ${starValue}: ${shouldBeActive ? 'active' : 'inactive'}`);
+      
+      if (shouldBeActive) {
+        star.classList.add('active');
+      } else {
+        star.classList.remove('active');
+      }
     });
     
-    // Mostrar cara correspondiente
-    this.showFaceForRating(value);
+    // Mostrar cara correspondiente solo si no es hover o si no hay selección
+    if (!isHover || this.selectedValue === 0) {
+      this.showFaceForRating(value);
+    }
   }
 
   /**
@@ -94,10 +101,11 @@ export class RatingManager {
    * @param {number} value - Valor de la valoración
    */
   showFaceForRating(value) {
-    if (value === 0) return;
-    
     let face = '';
     switch (value) {
+      case 0:
+        face = '🤔'; // Cara pensativa/interrogación para estado inicial
+        break;
       case 1:
         face = '😞'; // Cara triste/decepcionada
         break;
@@ -114,24 +122,14 @@ export class RatingManager {
         face = '😊'; // Cara feliz
         break;
       default:
-        face = '😐';
+        face = '🤔';
     }
     
-    // Crear o actualizar el elemento de la cara
+    // Actualizar el elemento de la cara
     let faceElement = document.getElementById('rating-face');
-    if (!faceElement) {
-      faceElement = document.createElement('div');
-      faceElement.id = 'rating-face';
-      faceElement.style.cssText = `
-        font-size: 48px;
-        text-align: center;
-        margin-top: 15px;
-        transition: all 0.3s ease;
-      `;
-      this.container.appendChild(faceElement);
+    if (faceElement) {
+      faceElement.textContent = face;
     }
-    
-    faceElement.textContent = face;
   }
 
   /**
@@ -145,6 +143,24 @@ export class RatingManager {
     
     // Mostrar el botón cuando se seleccionen estrellas
     showElement(this.confirmButtonContainer);
+  }
+  
+  /**
+   * Inicializa el elemento de la cara
+   */
+  initializeFaceElement() {
+    // Crear el elemento de la cara si no existe
+    let faceElement = document.getElementById('rating-face');
+    if (!faceElement) {
+      faceElement = document.createElement('span');
+      faceElement.id = 'rating-face';
+      faceElement.className = 'rating-face';
+      // Insertar después de las estrellas
+      const starsContainer = document.getElementById('rating');
+      starsContainer.appendChild(faceElement);
+    }
+    // Mostrar cara inicial
+    this.showFaceForRating(0);
   }
 
   /**
