@@ -165,17 +165,19 @@ export class RouletteManager {
     let prizeIndex;
     const random = Math.random();
     
-    // El primer premio es el grande (CENA GRATIS PARA 2)
-    // Tiene 0.1% de probabilidad (0.001)
+    // Probabilidades ajustadas
     if (random < 0.001) {
       // 0.1% para CENA GRATIS PARA 2 (índice 0)
       prizeIndex = 0;
-    } else if (random < 0.01) {
-      // 0.9% para 50€ DESCUENTO (índice 1)
+    } else if (random < 0.002) {
+      // 0.1% para 50€ DESCUENTO (índice 1)
       prizeIndex = 1;
+    } else if (random < 0.012) {
+      // 1% para BOTELLA VINO (índice 2)
+      prizeIndex = 2;
     } else {
-      // 99% para los otros 6 premios
-      prizeIndex = Math.floor(Math.random() * 6) + 2;
+      // 98.8% para los otros 5 premios
+      prizeIndex = Math.floor(Math.random() * 5) + 3;
     }
     
     // Ajustar el índice para que la flecha apunte al premio correcto
