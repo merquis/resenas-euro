@@ -2,7 +2,7 @@
 export const translations = {
   es: {
     // Título principal - URGENCIA + EXCLUSIVIDAD
-    title: '🎉 ¡FELICIDADES! Estás a un paso de obtener tu premio',
+    title: '¡FELICIDADES! Estás a un paso de obtener tu premio',
     subtitle: '⚡ Aún puedes obtener uno de estos PREMIOS EXCLUSIVOS ⚡',
     
     // Confirmación - ASSUMIR LA VENTA
@@ -65,7 +65,7 @@ export const translations = {
     almostGone: '¡CASI AGOTADO!'
   },
   en: {
-    title: '🎉 CONGRATULATIONS! You\'re one step away from getting your prize',
+    title: 'CONGRATULATIONS! You\'re one step away from getting your prize',
     subtitle: '⚡ You can still get one of these EXCLUSIVE PRIZES ⚡',
     confirm: 'CLAIM MY PRIZE',
     confirmRating: 'YES, I WANT MY GIFT',
@@ -102,7 +102,7 @@ export const translations = {
     almostGone: 'ALMOST GONE!'
   },
   de: {
-    title: '🎉 GLÜCKWUNSCH! Sie sind einen Schritt davon entfernt, Ihren Preis zu erhalten',
+    title: 'GLÜCKWUNSCH! Sie sind einen Schritt davon entfernt, Ihren Preis zu erhalten',
     subtitle: '⚡ Sie können noch einen dieser EXKLUSIVEN PREISE erhalten ⚡',
     confirm: 'MEINEN PREIS BEANSPRUCHEN',
     confirmRating: 'JA, ICH WILL MEIN GESCHENK',
@@ -139,7 +139,7 @@ export const translations = {
     almostGone: 'FAST WEG!'
   },
   fr: {
-    title: '🎉 FÉLICITATIONS! Vous êtes à un pas d\'obtenir votre prix',
+    title: 'FÉLICITATIONS! Vous êtes à un pas d\'obtenir votre prix',
     subtitle: '⚡ Vous pouvez encore obtenir un de ces PRIX EXCLUSIFS ⚡',
     confirm: 'RÉCLAMER MON PRIX',
     confirmRating: 'OUI, JE VEUX MON CADEAU',
