@@ -1,8 +1,11 @@
 /* Contenedor principal de la ruleta */
 #rouletteContainer {
   position: relative;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 2rem auto;
+  width: 100%;
 }
 
 /* Ruleta principal */
@@ -12,16 +15,16 @@
   height: 320px;
   border-radius: 50%;
   overflow: hidden;
-  /* Gradiente cónico para los colores de los segmentos */
+  /* Gradiente cónico para los 8 premios */
   background: conic-gradient(
-    #e67e22 0deg    45deg,   /* Postre   */
-    #e74c3c 45deg   90deg,   /* Café     */
-    #2980b9 90deg   135deg,  /* Mojito   */
-    #8e44ad 135deg  180deg,  /* Cono Helado */
-    #27ae60 180deg  225deg,  /* Chupito  */
+    #e67e22 0deg    45deg,   /* Cena Gratis para 2 */
+    #e74c3c 45deg   90deg,   /* 50€ Descuento */
+    #2980b9 90deg   135deg,  /* Botella Vino */
+    #8e44ad 135deg  180deg,  /* Helado */
+    #27ae60 180deg  225deg,  /* Chupito */
     #f1c40f 225deg  270deg,  /* Refresco */
-    #3498db 270deg  315deg,  /* Cerveza  */
-    #9b59b6 315deg  360deg   /* Tapa     */
+    #3498db 270deg  315deg,  /* Mojito */
+    #9b59b6 315deg  360deg   /* Copa Vino */
   );
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
   border: 3px solid #fff;
@@ -75,6 +78,7 @@
   justify-content: center;
   z-index: 1000;
   backdrop-filter: blur(5px);
+  padding: 1rem;
 }
 
 /* Animación de entrada para la ruleta */
