@@ -98,7 +98,18 @@ export class RatingManager {
    */
   updateButtonText() {
     if (this.selectedValue > 0) {
-      this.buttonText.textContent = languageManager.getTranslation('confirmRating');
+      const stars = '⭐'.repeat(this.selectedValue);
+      let face = '';
+      
+      // Caras sutiles según las estrellas
+      if (this.selectedValue === 5) {
+        face = '😊'; // Cara feliz para 5 estrellas
+      } else {
+        face = '😐'; // Cara neutra para 1-4 estrellas
+      }
+      
+      const baseText = languageManager.getTranslation('confirmRating');
+      this.buttonText.textContent = `${stars} ${baseText} ${face}`;
     }
   }
 
