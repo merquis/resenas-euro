@@ -2,8 +2,8 @@
 export const translations = {
   es: {
     // Título principal - URGENCIA + EXCLUSIVIDAD
-    title: '🎉 ¡FELICIDADES! Has sido SELECCIONADO',
-    subtitle: '⚡ Tienes 3 MINUTOS para reclamar tu PREMIO EXCLUSIVO ⚡',
+    title: '🎉 ¡FELICIDADES! Estás a un paso de obtener tu premio',
+    subtitle: '⚡ Aún puedes obtener uno de estos PREMIOS EXCLUSIVOS ⚡',
     
     // Confirmación - ASSUMIR LA VENTA
     confirm: 'RECLAMAR MI PREMIO',
@@ -60,13 +60,13 @@ export const translations = {
     prizesGivenToday: 'premios entregados HOY',
     
     // Fake scarcity
-    prizesLeft: 'QUEDAN 3 PREMIOS GRANDES',
+    prizesLeft: '¡QUEDAN 3 PREMIOS GRANDES HOY!',
     hurryUp: '¡DATE PRISA!',
     almostGone: '¡CASI AGOTADO!'
   },
   en: {
-    title: '🎉 CONGRATULATIONS! You\'ve been SELECTED',
-    subtitle: '⚡ You have 3 MINUTES to claim your EXCLUSIVE PRIZE ⚡',
+    title: '🎉 CONGRATULATIONS! You\'re one step away from getting your prize',
+    subtitle: '⚡ You can still get one of these EXCLUSIVE PRIZES ⚡',
     confirm: 'CLAIM MY PRIZE',
     confirmRating: 'YES, I WANT MY GIFT',
     rewardCode: '🎁 YOUR VIP PRIZE',
@@ -97,13 +97,13 @@ export const translations = {
     justWon: 'just won',
     peopleWatching: 'people viewing this offer',
     prizesGivenToday: 'prizes given TODAY',
-    prizesLeft: '3 BIG PRIZES LEFT',
+    prizesLeft: '¡3 BIG PRIZES LEFT TODAY!',
     hurryUp: 'HURRY UP!',
     almostGone: 'ALMOST GONE!'
   },
   de: {
-    title: '🎉 GLÜCKWUNSCH! Sie wurden AUSGEWÄHLT',
-    subtitle: '⚡ Sie haben 3 MINUTEN um Ihren EXKLUSIVEN PREIS zu beanspruchen ⚡',
+    title: '🎉 GLÜCKWUNSCH! Sie sind einen Schritt davon entfernt, Ihren Preis zu erhalten',
+    subtitle: '⚡ Sie können noch einen dieser EXKLUSIVEN PREISE erhalten ⚡',
     confirm: 'MEINEN PREIS BEANSPRUCHEN',
     confirmRating: 'JA, ICH WILL MEIN GESCHENK',
     rewardCode: '🎁 IHR VIP-PREIS',
@@ -134,13 +134,13 @@ export const translations = {
     justWon: 'hat gerade gewonnen',
     peopleWatching: 'Personen sehen sich dieses Angebot an',
     prizesGivenToday: 'Preise HEUTE vergeben',
-    prizesLeft: '3 GROSSE PREISE ÜBRIG',
+    prizesLeft: '¡3 GROSSE PREISE HEUTE ÜBRIG!',
     hurryUp: 'BEEILEN SIE SICH!',
     almostGone: 'FAST WEG!'
   },
   fr: {
-    title: '🎉 FÉLICITATIONS! Vous avez été SÉLECTIONNÉ',
-    subtitle: '⚡ Vous avez 3 MINUTES pour réclamer votre PRIX EXCLUSIF ⚡',
+    title: '🎉 FÉLICITATIONS! Vous êtes à un pas d\'obtenir votre prix',
+    subtitle: '⚡ Vous pouvez encore obtenir un de ces PRIX EXCLUSIFS ⚡',
     confirm: 'RÉCLAMER MON PRIX',
     confirmRating: 'OUI, JE VEUX MON CADEAU',
     rewardCode: '🎁 VOTRE PRIX VIP',
@@ -171,7 +171,7 @@ export const translations = {
     justWon: 'vient de gagner',
     peopleWatching: 'personnes consultent cette offre',
     prizesGivenToday: 'prix donnés AUJOURD\'HUI',
-    prizesLeft: '3 GROS PRIX RESTANTS',
+    prizesLeft: '¡3 GROS PRIX RESTANTS AUJOURD\'HUI!',
     hurryUp: 'DÉPÊCHEZ-VOUS!',
     almostGone: 'PRESQUE PARTI!'
   }

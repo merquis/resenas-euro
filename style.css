@@ -111,6 +111,7 @@ body {
   display: flex;
   justify-content: space-around;
   margin-bottom: 20px;
+  margin-top: 40px;
   gap: 15px;
 }
 
@@ -591,7 +592,7 @@ body {
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
 }
 
-.language-dropdown.active .language-options {
+.language-dropdown.open .language-options {
   display: block;
 }
 

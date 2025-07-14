@@ -197,7 +197,7 @@ class App {
   }
 
   /**
-   * Inicia las notificaciones falsas
+   * Inicia las notificaciones falsas con horarios realistas
    */
   startFakeNotifications() {
     const names = ['María G.', 'Carlos R.', 'Ana M.', 'Pedro S.', 'Laura F.', 'Diego T.', 'Sofia L.', 'Juan P.'];
@@ -205,17 +205,58 @@ class App {
     const cities = ['Valencia', 'Madrid', 'Barcelona', 'Sevilla', 'Málaga', 'Bilbao'];
 
     const showNotification = () => {
+      // Calcular tiempo realista basado en horario del restaurante
+      const now = new Date();
+      const currentHour = now.getHours();
+      const currentMinutes = now.getMinutes();
+      
+      // Restaurante abre a las 10:00 AM
+      const openingHour = 10;
+      
+      // Calcular minutos desde la apertura
+      let minutesSinceOpening;
+      if (currentHour >= openingHour) {
+        minutesSinceOpening = (currentHour - openingHour) * 60 + currentMinutes;
+      } else {
+        // Si es antes de las 10 AM, no mostrar notificaciones
+        return;
+      }
+      
+      // Si lleva menos de 30 minutos abierto, no mostrar notificaciones
+      if (minutesSinceOpening < 30) {
+        return;
+      }
+      
+      // Calcular tiempo aleatorio entre 30 minutos y 2 horas, pero no más del tiempo abierto
+      const minTime = 30; // 30 minutos mínimo
+      const maxTime = Math.min(120, minutesSinceOpening); // máximo 2 horas o tiempo abierto
+      
+      const timeAgo = Math.floor(Math.random() * (maxTime - minTime + 1)) + minTime;
+      
+      // Formatear el tiempo
+      let timeText;
+      if (timeAgo < 60) {
+        timeText = `${timeAgo} minutos`;
+      } else {
+        const hours = Math.floor(timeAgo / 60);
+        const minutes = timeAgo % 60;
+        if (minutes === 0) {
+          timeText = hours === 1 ? '1 hora' : `${hours} horas`;
+        } else {
+          timeText = hours === 1 ? `1 hora y ${minutes} minutos` : `${hours} horas y ${minutes} minutos`;
+        }
+      }
+
       const name = names[Math.floor(Math.random() * names.length)];
       const prize = prizes[Math.floor(Math.random() * prizes.length)];
       const city = cities[Math.floor(Math.random() * cities.length)];
-      const time = Math.floor(Math.random() * 5) + 1;
 
       const notification = document.createElement('div');
       notification.className = 'winner-notification';
       notification.innerHTML = `
         <strong>${name}</strong> de ${city}<br>
         ${languageManager.getTranslation('justWon')} <strong>${prize}</strong><br>
-        hace ${time} minutos
+        hace ${timeText}
       `;
 
       const container = document.getElementById('winnerNotifications');
@@ -227,7 +268,7 @@ class App {
       }, 5000);
     };
 
-    // Mostrar primera notificación rápido
+    // Mostrar primera notificación después de verificar horarios
     setTimeout(showNotification, 2000);
 
     // Luego cada 8-15 segundos
