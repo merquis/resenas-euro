@@ -167,7 +167,7 @@ export class RouletteManager {
     
     // Probabilidades ajustadas
     if (random < 0.001) {
-      // 0.1% para CENA GRATIS PARA 2 (índice 0)
+      // 0.1% para CENA PARA 2 (índice 0)
       prizeIndex = 0;
     } else if (random < 0.002) {
       // 0.1% para 50€ DESCUENTO (índice 1)
