@@ -27,9 +27,6 @@ export class RatingManager {
   cacheElements() {
     this.stars = document.querySelectorAll('.star');
     this.container = document.getElementById('rating');
-    this.confirmButton = document.getElementById('valorarBtn');
-    this.confirmButtonContainer = document.getElementById('valorarBtnContainer');
-    this.buttonText = document.getElementById('btnText');
   }
 
   /**
