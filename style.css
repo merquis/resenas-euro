@@ -17,50 +17,6 @@ body {
   position: relative;
 }
 
-/* TIMER DE URGENCIA FIJO */
-.urgency-timer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(90deg, #ff0000, #ff4444);
-  color: white;
-  padding: 12px;
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
-  z-index: 9999;
-  box-shadow: 0 4px 20px rgba(255, 0, 0, 0.5);
-  animation: urgentPulse 1s infinite;
-}
-
-.timer-countdown {
-  font-size: 24px;
-  font-family: 'Courier New', monospace;
-  color: #ffff00;
-  text-shadow: 0 0 10px rgba(255, 255, 0, 0.8);
-}
-
-/* NOTIFICACIONES DE GANADORES */
-.winner-notifications {
-  position: fixed;
-  top: 60px;
-  right: 20px;
-  z-index: 9998;
-  max-width: 300px;
-}
-
-.winner-notification {
-  background: linear-gradient(135deg, #f39c12, #e74c3c);
-  color: white;
-  padding: 15px 20px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-  animation: slideInRight 0.5s ease-out, fadeOut 0.5s ease-out 4.5s forwards;
-  font-weight: bold;
-  font-size: 14px;
-}
 
 /* CONTENEDOR PRINCIPAL */
 .main-wrapper {
@@ -68,7 +24,6 @@ body {
   max-width: 500px;
   margin: 0 auto;
   padding: 20px;
-  padding-top: 80px;
 }
 
 .restaurant-title {
@@ -179,14 +134,13 @@ body {
 }
 
 .prize-preview-item {
-  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  background: linear-gradient(135deg, #5a6c7d, #6c7b8a);
   padding: 10px 20px;
   border-radius: 25px;
   display: flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
-  animation: bounce 2s infinite;
+  box-shadow: 0 4px 15px rgba(90, 108, 125, 0.3);
 }
 
 .prize-icon {

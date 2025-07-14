@@ -30,8 +30,6 @@ class App {
     this.cacheElements();
     this.initializeModules();
     this.setupEventListeners();
-    this.startUrgencyTimer();
-    this.startFakeNotifications();
     this.startWatchingCounter();
     this.setupPrizesToday();
     this.preventEasyExit();
@@ -150,132 +148,6 @@ class App {
     }
   }
 
-  /**
-   * Inicia el timer de urgencia hasta medianoche del día siguiente
-   */
-  startUrgencyTimer() {
-    const countdownEl = document.getElementById('countdown');
-
-    this.countdownInterval = setInterval(() => {
-      // Calcular tiempo hasta las 12:00 AM del día siguiente
-      const now = new Date();
-      const tomorrow = new Date(now);
-      tomorrow.setDate(tomorrow.getDate() + 1);
-      tomorrow.setHours(0, 0, 0, 0);
-      
-      const timeLeft = Math.floor((tomorrow - now) / 1000);
-
-      if (timeLeft <= 0) {
-        clearInterval(this.countdownInterval);
-        this.showTimeoutMessage();
-        return;
-      }
-
-      // Convertir a horas, minutos y segundos
-      const hours = Math.floor(timeLeft / 3600);
-      const minutes = Math.floor((timeLeft % 3600) / 60);
-      const seconds = timeLeft % 60;
-
-      // Mostrar formato apropiado
-      if (hours > 0) {
-        countdownEl.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-      } else {
-        countdownEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-      }
-
-      // Cambiar color cuando queda poco tiempo (menos de 1 hora)
-      if (timeLeft <= 3600) {
-        countdownEl.style.color = '#ff0000';
-        countdownEl.style.fontSize = '28px';
-        
-        // Parpadeo en los últimos 10 minutos
-        if (timeLeft <= 600) {
-          countdownEl.style.animation = 'urgentFlash 0.5s infinite';
-        }
-      }
-    }, 1000);
-  }
-
-  /**
-   * Inicia las notificaciones falsas con horarios realistas
-   */
-  startFakeNotifications() {
-    const names = ['María G.', 'Carlos R.', 'Ana M.', 'Pedro S.', 'Laura F.', 'Diego T.', 'Sofia L.', 'Juan P.'];
-    const prizes = ['POSTRE GRATIS', 'CAFÉ PREMIUM', 'MOJITO ESPECIAL', 'CERVEZA ARTESANA', 'TAPA GRATIS'];
-    const cities = ['Valencia', 'Madrid', 'Barcelona', 'Sevilla', 'Málaga', 'Bilbao'];
-
-    const showNotification = () => {
-      // Calcular tiempo realista basado en horario del restaurante
-      const now = new Date();
-      const currentHour = now.getHours();
-      const currentMinutes = now.getMinutes();
-      
-      // Restaurante abre a las 10:00 AM
-      const openingHour = 10;
-      
-      // Calcular minutos desde la apertura
-      let minutesSinceOpening;
-      if (currentHour >= openingHour) {
-        minutesSinceOpening = (currentHour - openingHour) * 60 + currentMinutes;
-      } else {
-        // Si es antes de las 10 AM, no mostrar notificaciones
-        return;
-      }
-      
-      // Si lleva menos de 30 minutos abierto, no mostrar notificaciones
-      if (minutesSinceOpening < 30) {
-        return;
-      }
-      
-      // Calcular tiempo aleatorio entre 30 minutos y 2 horas, pero no más del tiempo abierto
-      const minTime = 30; // 30 minutos mínimo
-      const maxTime = Math.min(120, minutesSinceOpening); // máximo 2 horas o tiempo abierto
-      
-      const timeAgo = Math.floor(Math.random() * (maxTime - minTime + 1)) + minTime;
-      
-      // Formatear el tiempo
-      let timeText;
-      if (timeAgo < 60) {
-        timeText = `${timeAgo} minutos`;
-      } else {
-        const hours = Math.floor(timeAgo / 60);
-        const minutes = timeAgo % 60;
-        if (minutes === 0) {
-          timeText = hours === 1 ? '1 hora' : `${hours} horas`;
-        } else {
-          timeText = hours === 1 ? `1 hora y ${minutes} minutos` : `${hours} horas y ${minutes} minutos`;
-        }
-      }
-
-      const name = names[Math.floor(Math.random() * names.length)];
-      const prize = prizes[Math.floor(Math.random() * prizes.length)];
-      const city = cities[Math.floor(Math.random() * cities.length)];
-
-      const notification = document.createElement('div');
-      notification.className = 'winner-notification';
-      notification.innerHTML = `
-        <strong>${name}</strong> de ${city}<br>
-        ${languageManager.getTranslation('justWon')} <strong>${prize}</strong><br>
-        hace ${timeText}
-      `;
-
-      const container = document.getElementById('winnerNotifications');
-      container.appendChild(notification);
-
-      // Eliminar después de 5 segundos
-      setTimeout(() => {
-        notification.remove();
-      }, 5000);
-    };
-
-    // Mostrar primera notificación después de verificar horarios
-    setTimeout(showNotification, 2000);
-
-    // Luego cada 8-15 segundos
-    this.notificationInterval = setInterval(() => {
-      showNotification();
-    }, Math.random() * 7000 + 8000);
-  }
 
   /**
    * Contador de personas viendo
@@ -406,20 +278,6 @@ class App {
     }, 1000);
   }
 
-  /**
-   * Muestra mensaje de timeout
-   */
-  showTimeoutMessage() {
-    alert(
-      '⏰ ¡SE ACABÓ EL TIEMPO!\n\n' +
-      'Tu premio exclusivo ha EXPIRADO 😢\n\n' +
-      'Pero espera... ¡Tenemos una ÚLTIMA OPORTUNIDAD para ti!\n' +
-      'Haz clic en OK para reclamar tu premio ahora mismo.'
-    );
-    
-    // Reiniciar timer con 1 minuto extra
-    this.startUrgencyTimer();
-  }
 
   /**
    * Muestra mensaje de éxito
@@ -428,15 +286,8 @@ class App {
     this.isCompleted = true;
     
     // Limpiar intervalos
-    clearInterval(this.countdownInterval);
     clearInterval(this.googleTimerInterval);
-    clearInterval(this.notificationInterval);
     clearInterval(this.watchingInterval);
-
-    // Actualizar UI
-    const urgencyTimer = document.getElementById('urgencyTimer');
-    urgencyTimer.style.background = 'linear-gradient(90deg, #27ae60, #2ecc71)';
-    urgencyTimer.innerHTML = '✅ ¡PREMIO ACTIVADO CON ÉXITO! - Válido 24 horas';
   }
 
   /**
@@ -461,10 +312,9 @@ class App {
     hideElement(this.resenaBtn);
     hideElement(formManager.formSection);
 
-    // Reiniciar timers
-    clearInterval(this.countdownInterval);
+    // Limpiar intervalos
     clearInterval(this.googleTimerInterval);
-    this.startUrgencyTimer();
+    clearInterval(this.watchingInterval);
   }
 }
 
