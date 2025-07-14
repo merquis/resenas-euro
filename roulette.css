@@ -1,10 +1,19 @@
+/* Contenedor de todo el contenido de la ruleta */
+.roulette-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 500px;
+}
+
 /* Contenedor principal de la ruleta */
 #rouletteContainer {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 2rem auto;
   width: 100%;
 }
 

@@ -47,7 +47,7 @@ export const translations = {
     enjoyPrize: '📱 Captura esta pantalla - Tu premio está ACTIVADO por 24h',
     
     // Premios optimizados - 8 premios exactos
-    prizes: ['🍽️ CENA GRATIS PARA 2', '💰 50€ DESCUENTO', '🍾 BOTELLA VINO', '🍦 HELADO', 
+    prizes: ['🍽️ CENA PARA 2', '💰 50€ DESCUENTO', '🍾 BOTELLA VINO', '🍦 HELADO', 
              '🥃 CHUPITO', '🥤 REFRESCO', '🍹 MOJITO', '🍷 COPA VINO'],
     
     // Nuevos mensajes de urgencia
@@ -99,7 +99,7 @@ export const translations = {
     stars: 'Stars',
     congratulations: '🏆 YOU WON! YOU\'RE A VIP!',
     enjoyPrize: '📱 Screenshot this - Your prize is ACTIVE for 24h',
-    prizes: ['🍽️ FREE DINNER FOR 2', '💰 50€ DISCOUNT', '🍾 WINE BOTTLE', '🍦 ICE CREAM', 
+    prizes: ['🍽️ DINNER FOR 2', '💰 50€ DISCOUNT', '🍾 WINE BOTTLE', '🍦 ICE CREAM', 
              '🥃 SHOT', '🥤 SOFT DRINK', '🍹 MOJITO', '🍷 WINE GLASS'],
     urgentMessage: '⚠️ 2 people are claiming prizes NOW',
     lastChance: '🔥 LAST BIG PRIZE available',
@@ -143,7 +143,7 @@ export const translations = {
     stars: 'Sterne',
     congratulations: '🏆 GEWONNEN! SIE SIND EIN VIP!',
     enjoyPrize: '📱 Screenshot machen - Ihr Preis ist 24h AKTIV',
-    prizes: ['🍽️ GRATIS ABENDESSEN FÜR 2', '💰 50€ RABATT', '🍾 WEINFLASCHE', '🍦 EIS', 
+    prizes: ['🍽️ ABENDESSEN FÜR 2', '💰 50€ RABATT', '🍾 WEINFLASCHE', '🍦 EIS', 
              '🥃 SHOT', '🥤 GETRÄNK', '🍹 MOJITO', '🍷 WEINGLAS'],
     urgentMessage: '⚠️ 2 Personen beanspruchen JETZT Preise',
     lastChance: '🔥 LETZTER GROSSER PREIS verfügbar',
@@ -187,7 +187,7 @@ export const translations = {
     stars: 'Étoiles',
     congratulations: '🏆 GAGNÉ! VOUS ÊTES UN VIP!',
     enjoyPrize: '📱 Capturez cet écran - Votre prix est ACTIF pendant 24h',
-    prizes: ['🍽️ DÎNER GRATUIT POUR 2', '💰 50€ RÉDUCTION', '🍾 BOUTEILLE DE VIN', '🍦 GLACE', 
+    prizes: ['🍽️ DÎNER POUR 2', '💰 50€ RÉDUCTION', '🍾 BOUTEILLE DE VIN', '🍦 GLACE', 
              '🥃 SHOT', '🥤 BOISSON', '🍹 MOJITO', '🍷 VERRE DE VIN'],
     urgentMessage: '⚠️ 2 personnes réclament des prix MAINTENANT',
     lastChance: '🔥 DERNIER GROS PRIX disponible',
