@@ -2,8 +2,7 @@
 export const translations = {
   es: {
     // Título principal - URGENCIA + EXCLUSIVIDAD
-    title: '🎁 Valora y Gana un Premio Seguro 🎁',
-    subtitle: 'Deja tu reseña y gira la ruleta para ganar.',
+    title: '🎁 Déjanos tu reseña y gana un premio seguro con nuestra ruleta de la suerte',
     vipBadge: '👑 ZONA VIP - PREMIOS EXCLUSIVOS 👑',
     ratingInstruction: '¿Qué tal ha sido tu experiencia?',
     
