@@ -32,9 +32,11 @@ body {
 }
 
 .restaurant-title h2 {
-  font-size: 24px;
+  font-size: 36px;
   margin-bottom: 10px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  text-align: center;
 }
 
 .vip-badge {
@@ -193,7 +195,7 @@ body {
 
 /* BOTONES */
 .confirmation-btn, .submit-btn, .google-btn {
-  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  background: linear-gradient(135deg, #5a6c7d, #6c7b8a);
   color: white;
   border: none;
   padding: 18px 40px;
@@ -202,7 +204,7 @@ body {
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 5px 20px rgba(46, 204, 113, 0.4);
+  box-shadow: 0 5px 20px rgba(90, 108, 125, 0.3);
   text-transform: uppercase;
   letter-spacing: 1px;
   position: relative;
@@ -218,7 +220,7 @@ body {
 
 .confirmation-btn:hover, .submit-btn:hover, .google-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(46, 204, 113, 0.6);
+  box-shadow: 0 8px 30px rgba(90, 108, 125, 0.6);
 }
 
 .confirmation-btn:active {
