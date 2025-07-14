@@ -67,7 +67,7 @@ export const translations = {
     prizesGivenToday: 'premios entregados HOY',
     
     // Fake scarcity
-    prizesLeft: '¡QUEDA 1 PREMIO GRANDE HOY!',
+    prizesLeft: '¡QUEDAN 3 PREMIOS GRANDES HOY!',
     hurryUp: '¡DATE PRISA!',
     almostGone: '¡CASI AGOTADO!'
   },
@@ -112,7 +112,7 @@ export const translations = {
     justWon: 'just won',
     peopleWatching: 'people viewing this offer',
     prizesGivenToday: 'prizes given TODAY',
-    prizesLeft: '¡1 BIG PRIZE LEFT TODAY!',
+    prizesLeft: '¡3 BIG PRIZES LEFT TODAY!',
     hurryUp: 'HURRY UP!',
     almostGone: 'ALMOST GONE!'
   },
