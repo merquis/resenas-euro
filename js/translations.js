@@ -2,8 +2,8 @@
 export const translations = {
   es: {
     // Título principal - URGENCIA + EXCLUSIVIDAD
-    title: '🎉 ¡FELICIDADES! Estás a un paso de obtener tu premio',
-    subtitle: '⚡ Valora tu experiencia y participa en nuestro SORTEO de premios ⚡',
+    title: '🎁 Valora y Gana un Premio Seguro 🎁',
+    subtitle: 'Deja tu reseña y gira la ruleta para ganar.',
     vipBadge: '👑 ZONA VIP - PREMIOS EXCLUSIVOS 👑',
     ratingInstruction: '¿Qué tal ha sido tu experiencia?',
     
@@ -67,12 +67,19 @@ export const translations = {
     
     // Fake scarcity
     prizesLeft: '¡QUEDAN 3 PREMIOS GRANDES HOY!',
+    peopleWatching: 'personas viendo esta oferta',
     hurryUp: '¡DATE PRISA!',
-    almostGone: '¡CASI AGOTADO!'
+    almostGone: '¡CASI AGOTADO!',
+    
+    // Más premios
+    morePrizes: '🎁 + 5 premios más en la ruleta',
+    
+    // Premio garantizado
+    guaranteedPrize: '✅ PREMIO GARANTIZADO'
   },
   en: {
-    title: '🎉 CONGRATULATIONS! You\'re one step away from getting your prize',
-    subtitle: '⚡ Rate your experience and join our PRIZE RAFFLE ⚡',
+    title: '🎁 GUARANTEED PRIZE: Rate and Win 🎁',
+    subtitle: '⚡ 100% GUARANTEED - Just leave your rating and spin the wheel ⚡',
     vipBadge: '👑 VIP ZONE - EXCLUSIVE PRIZES 👑',
     ratingInstruction: 'How was your experience?',
     
@@ -112,11 +119,17 @@ export const translations = {
     prizesGivenToday: 'prizes given TODAY',
     prizesLeft: '¡3 BIG PRIZES LEFT TODAY!',
     hurryUp: 'HURRY UP!',
-    almostGone: 'ALMOST GONE!'
+    almostGone: 'ALMOST GONE!',
+    
+    // More prizes
+    morePrizes: '🎁 + 5 more prizes in the roulette',
+    
+    // Guaranteed prize
+    guaranteedPrize: '✅ GUARANTEED PRIZE'
   },
   de: {
-    title: '🎉 GLÜCKWUNSCH! Sie sind einen Schritt davon entfernt, Ihren Preis zu erhalten',
-    subtitle: '⚡ Bewerten Sie Ihre Erfahrung und nehmen Sie an unserer PREIS-VERLOSUNG teil ⚡',
+    title: '🎁 GARANTIERTER PREIS: Bewerten und Gewinnen 🎁',
+    subtitle: '⚡ 100% GARANTIERT - Bewerten Sie uns und drehen Sie das Rad ⚡',
     vipBadge: '👑 VIP ZONE - EXKLUSIVE PREISE 👑',
     ratingInstruction: 'Wie war Ihre Erfahrung?',
     
@@ -156,11 +169,17 @@ export const translations = {
     prizesGivenToday: 'Preise HEUTE vergeben',
     prizesLeft: '¡3 GROSSE PREISE HEUTE ÜBRIG!',
     hurryUp: 'BEEILEN SIE SICH!',
-    almostGone: 'FAST WEG!'
+    almostGone: 'FAST WEG!',
+    
+    // Mehr Preise
+    morePrizes: '🎁 + 5 weitere Preise im Roulette',
+    
+    // Garantierter Preis
+    guaranteedPrize: '✅ GARANTIERTER PREIS'
   },
   fr: {
-    title: '🎉 FÉLICITATIONS! Vous êtes à un pas d\'obtenir votre prix',
-    subtitle: '⚡ Évaluez votre expérience et participez à notre TIRAGE AU SORT de prix ⚡',
+    title: '🎁 PRIX GARANTI: Évaluez et Gagnez 🎁',
+    subtitle: '⚡ 100% GARANTI - Laissez votre avis et tournez la roue ⚡',
     vipBadge: '👑 ZONE VIP - PRIX EXCLUSIFS 👑',
     ratingInstruction: 'Comment était votre expérience?',
     
@@ -200,7 +219,13 @@ export const translations = {
     prizesGivenToday: 'prix donnés AUJOURD\'HUI',
     prizesLeft: '¡3 GROS PRIX RESTANTS AUJOURD\'HUI!',
     hurryUp: 'DÉPÊCHEZ-VOUS!',
-    almostGone: 'PRESQUE PARTI!'
+    almostGone: 'PRESQUE PARTI!',
+    
+    // Plus de prix
+    morePrizes: '🎁 + 5 prix de plus dans la roulette',
+    
+    // Prix garanti
+    guaranteedPrize: '✅ PRIX GARANTI'
   }
 };
 
