@@ -2,8 +2,10 @@
 export const translations = {
   es: {
     // Título principal - URGENCIA + EXCLUSIVIDAD
-    title: '¡FELICIDADES! Estás a un paso de obtener tu premio',
+    title: '🎉 ¡FELICIDADES! Estás a un paso de obtener tu premio',
     subtitle: '⚡ Aún puedes obtener uno de estos PREMIOS EXCLUSIVOS ⚡',
+    vipBadge: '👑 ZONA VIP - PREMIOS EXCLUSIVOS 👑',
+    ratingInstruction: '¿Qué tal ha sido tu experiencia?',
     
     // Confirmación - ASSUMIR LA VENTA
     confirm: 'RECLAMAR MI PREMIO',
@@ -65,8 +67,10 @@ export const translations = {
     almostGone: '¡CASI AGOTADO!'
   },
   en: {
-    title: 'CONGRATULATIONS! You\'re one step away from getting your prize',
+    title: '🎉 CONGRATULATIONS! You\'re one step away from getting your prize',
     subtitle: '⚡ You can still get one of these EXCLUSIVE PRIZES ⚡',
+    vipBadge: '👑 VIP ZONE - EXCLUSIVE PRIZES 👑',
+    ratingInstruction: 'How was your experience?',
     confirm: 'CLAIM MY PRIZE',
     confirmRating: 'YES, I WANT MY GIFT',
     rewardCode: '🎁 YOUR VIP PRIZE',
@@ -102,8 +106,10 @@ export const translations = {
     almostGone: 'ALMOST GONE!'
   },
   de: {
-    title: 'GLÜCKWUNSCH! Sie sind einen Schritt davon entfernt, Ihren Preis zu erhalten',
+    title: '🎉 GLÜCKWUNSCH! Sie sind einen Schritt davon entfernt, Ihren Preis zu erhalten',
     subtitle: '⚡ Sie können noch einen dieser EXKLUSIVEN PREISE erhalten ⚡',
+    vipBadge: '👑 VIP ZONE - EXKLUSIVE PREISE 👑',
+    ratingInstruction: 'Wie war Ihre Erfahrung?',
     confirm: 'MEINEN PREIS BEANSPRUCHEN',
     confirmRating: 'JA, ICH WILL MEIN GESCHENK',
     rewardCode: '🎁 IHR VIP-PREIS',
@@ -139,8 +145,10 @@ export const translations = {
     almostGone: 'FAST WEG!'
   },
   fr: {
-    title: 'FÉLICITATIONS! Vous êtes à un pas d\'obtenir votre prix',
+    title: '🎉 FÉLICITATIONS! Vous êtes à un pas d\'obtenir votre prix',
     subtitle: '⚡ Vous pouvez encore obtenir un de ces PRIX EXCLUSIFS ⚡',
+    vipBadge: '👑 ZONE VIP - PRIX EXCLUSIFS 👑',
+    ratingInstruction: 'Comment était votre expérience?',
     confirm: 'RÉCLAMER MON PRIX',
     confirmRating: 'OUI, JE VEUX MON CADEAU',
     rewardCode: '🎁 VOTRE PRIX VIP',
