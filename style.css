@@ -673,8 +673,12 @@ body {
   }
   
   .stars {
-    font-size: 40px;
-    gap: 10px;
+    font-size: 30px;
+    gap: 5px;
+  }
+
+  .rating-face {
+    font-size: 36px;
   }
   
   .big-prizes-preview {
