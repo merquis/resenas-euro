@@ -100,11 +100,25 @@ export class RatingManager {
     if (this.selectedValue > 0) {
       let face = '';
       
-      // Caras sutiles según las estrellas
-      if (this.selectedValue === 5) {
-        face = '😊'; // Cara feliz para 5 estrellas
-      } else {
-        face = '😐'; // Cara neutra para 1-4 estrellas
+      // Progresión de caras según las estrellas
+      switch (this.selectedValue) {
+        case 1:
+          face = '😞'; // Cara triste/decepcionada
+          break;
+        case 2:
+          face = '😕'; // Cara preocupada/insatisfecha
+          break;
+        case 3:
+          face = '😐'; // Cara neutra/indiferente
+          break;
+        case 4:
+          face = '🙂'; // Cara ligeramente contenta
+          break;
+        case 5:
+          face = '😊'; // Cara feliz
+          break;
+        default:
+          face = '😐';
       }
       
       const baseText = languageManager.getTranslation('confirmRating');
