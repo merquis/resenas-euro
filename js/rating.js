@@ -4,7 +4,7 @@ import { languageManager } from './language.js';
 
 export class RatingManager {
   constructor() {
-    this.selectedValue = 5; // PRESELECCIONADO EN 5 ESTRELLAS
+    this.selectedValue = 0; // SIN PRESELECCIÓN
     this.isLocked = false;
     this.stars = null;
     this.container = null;
@@ -20,7 +20,6 @@ export class RatingManager {
   init() {
     this.cacheElements();
     this.setupEventListeners();
-    this.preSelectFiveStars();
   }
 
   /**
@@ -34,14 +33,6 @@ export class RatingManager {
     this.buttonText = document.getElementById('btnText');
   }
 
-  /**
-   * Pre-selecciona 5 estrellas
-   */
-  preSelectFiveStars() {
-    this.updateStars(5);
-    this.selectedValue = 5;
-    // El botón ya está visible por CSS
-  }
 
   /**
    * Configura los event listeners
@@ -270,13 +261,12 @@ export class RatingManager {
    * Resetea el estado del rating
    */
   reset() {
-    this.selectedValue = 5; // Volver a 5 estrellas
+    this.selectedValue = 0; // Sin preselección
     this.isLocked = false;
     this.clickCount = 0;
-    this.updateStars(5);
+    this.updateStars(0);
     this.stars.forEach(star => star.classList.remove('locked'));
     this.confirmButton.disabled = false;
-    this.preSelectFiveStars();
   }
 }
 

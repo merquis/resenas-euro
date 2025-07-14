@@ -20,7 +20,7 @@ class App {
     this.watchingInterval = null;
     this.vipNumber = Math.floor(Math.random() * 500) + 1000;
     this.prizesToday = Math.floor(Math.random() * 50) + 100;
-    this.watchingCount = Math.floor(Math.random() * 30) + 70;
+    this.watchingCount = Math.floor(Math.random() * 5) + 5;
   }
 
   /**
@@ -33,9 +33,7 @@ class App {
     this.startUrgencyTimer();
     this.startFakeNotifications();
     this.startWatchingCounter();
-    this.setupVIPNumber();
     this.setupPrizesToday();
-    this.preSelectFiveStars();
     this.preventEasyExit();
   }
 
@@ -112,74 +110,88 @@ class App {
     });
   }
 
-  /**
-   * Pre-selecciona 5 estrellas
-   */
-  preSelectFiveStars() {
-    // Las 5 estrellas ya están activas por defecto
-    ratingManager.selectedValue = 5;
-    
-    // Mostrar el botón de confirmación inmediatamente
-    const btnContainer = document.getElementById('valorarBtnContainer');
-    const btnText = document.getElementById('btnText');
-    btnText.textContent = languageManager.getTranslation('confirmRating');
-  }
+
 
   /**
-   * Configura el número VIP
-   */
-  setupVIPNumber() {
-    const vipNumberEl = document.getElementById('vipNumber');
-    if (vipNumberEl) {
-      vipNumberEl.textContent = this.vipNumber;
-    }
-  }
-
-  /**
-   * Configura premios de hoy
+   * Configura premios de hoy según la hora actual
    */
   setupPrizesToday() {
     const prizesTodayEl = document.getElementById('prizesToday');
     if (prizesTodayEl) {
+      // Calcular premios según la hora del día
+      const now = new Date();
+      const hour = now.getHours();
+      
+      let basePrizes;
+      if (hour >= 10 && hour < 12) {
+        // 10:00-12:00: Entre 3-5 premios
+        basePrizes = Math.floor(Math.random() * 3) + 3;
+      } else if (hour >= 12 && hour < 16) {
+        // 12:00-16:00: Entre 5-10 premios
+        basePrizes = Math.floor(Math.random() * 6) + 5;
+      } else if (hour >= 16 && hour < 23) {
+        // 16:00-23:00: Entre 16-25 premios
+        basePrizes = Math.floor(Math.random() * 10) + 16;
+      } else {
+        // Horario nocturno/madrugada: pocos premios
+        basePrizes = Math.floor(Math.random() * 3) + 1;
+      }
+      
+      this.prizesToday = basePrizes;
       prizesTodayEl.textContent = this.prizesToday;
-      // Incrementar ocasionalmente
+      
+      // Incrementar ocasionalmente de forma más realista
       setInterval(() => {
-        if (Math.random() > 0.7) {
+        if (Math.random() > 0.8) { // Menos frecuente
           this.prizesToday++;
           prizesTodayEl.textContent = this.prizesToday;
         }
-      }, 15000);
+      }, 20000); // Cada 20 segundos en lugar de 15
     }
   }
 
   /**
-   * Inicia el timer de urgencia
+   * Inicia el timer de urgencia hasta medianoche del día siguiente
    */
   startUrgencyTimer() {
     const countdownEl = document.getElementById('countdown');
-    let timeLeft = 180; // 3 minutos
 
     this.countdownInterval = setInterval(() => {
-      const minutes = Math.floor(timeLeft / 60);
-      const seconds = timeLeft % 60;
-      countdownEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      // Calcular tiempo hasta las 12:00 AM del día siguiente
+      const now = new Date();
+      const tomorrow = new Date(now);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      tomorrow.setHours(0, 0, 0, 0);
+      
+      const timeLeft = Math.floor((tomorrow - now) / 1000);
 
-      // Cambiar color cuando queda poco tiempo
-      if (timeLeft <= 30) {
+      if (timeLeft <= 0) {
+        clearInterval(this.countdownInterval);
+        this.showTimeoutMessage();
+        return;
+      }
+
+      // Convertir a horas, minutos y segundos
+      const hours = Math.floor(timeLeft / 3600);
+      const minutes = Math.floor((timeLeft % 3600) / 60);
+      const seconds = timeLeft % 60;
+
+      // Mostrar formato apropiado
+      if (hours > 0) {
+        countdownEl.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      } else {
+        countdownEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }
+
+      // Cambiar color cuando queda poco tiempo (menos de 1 hora)
+      if (timeLeft <= 3600) {
         countdownEl.style.color = '#ff0000';
         countdownEl.style.fontSize = '28px';
         
-        // Parpadeo en los últimos 10 segundos
-        if (timeLeft <= 10) {
+        // Parpadeo en los últimos 10 minutos
+        if (timeLeft <= 600) {
           countdownEl.style.animation = 'urgentFlash 0.5s infinite';
         }
-      }
-
-      timeLeft--;
-
-      if (timeLeft < 0) {
-        clearInterval(this.countdownInterval);
-        this.showTimeoutMessage();
       }
     }, 1000);
   }
@@ -231,9 +243,9 @@ class App {
     const watchingEl = document.getElementById('watchingCount');
     
     this.watchingInterval = setInterval(() => {
-      // Variar entre 70-120
-      const change = Math.floor(Math.random() * 10) - 5;
-      this.watchingCount = Math.max(70, Math.min(120, this.watchingCount + change));
+      // Variar entre 5-10
+      const change = Math.floor(Math.random() * 3) - 1;
+      this.watchingCount = Math.max(5, Math.min(10, this.watchingCount + change));
       watchingEl.textContent = this.watchingCount;
     }, 3000);
   }

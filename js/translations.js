@@ -24,8 +24,8 @@ export const translations = {
     continueBtn: '¡QUIERO MI PREMIO AHORA!',
     
     // Google Review - URGENCIA EXTREMA
-    googleReviewTitle: '⏰ ¡ÚLTIMO PASO! Activa tu premio en 30 segundos:',
-    googleBtn: '✅ ACTIVAR PREMIO EN GOOGLE',
+    googleReviewTitle: '¡Gracias! Por favor, finaliza tu reseña.',
+    googleBtn: 'Completar reseña',
     googleReviewBtn: 'CONFIRMAR MI PREMIO',
     
     // Ruleta
@@ -39,9 +39,10 @@ export const translations = {
     congratulations: '🏆 ¡GANASTE! ¡ERES UN VIP!',
     enjoyPrize: '📱 Captura esta pantalla - Tu premio está ACTIVADO por 24h',
     
-    // Premios mejorados
+    // Premios mejorados con premios grandes
     prizes: ['🍰 POSTRE GRATIS', '☕ CAFÉ PREMIUM', '🍹 MOJITO ESPECIAL', '🍦 HELADO ARTESANO', 
-             '🥃 CHUPITO PREMIUM', '🥤 BEBIDA GRATIS', '🍺 CERVEZA ARTESANA', '🍕 TAPA GRATIS'],
+             '🥃 CHUPITO PREMIUM', '🥤 BEBIDA GRATIS', '🍺 CERVEZA ARTESANA', '🍕 TAPA GRATIS',
+             '🍽️ CENA GRATIS PARA 2', '💰 BONO 40 EUROS'],
     
     // Nuevos mensajes de urgencia
     urgentMessage: '⚠️ 2 personas están reclamando premios AHORA',
@@ -59,7 +60,7 @@ export const translations = {
     prizesGivenToday: 'premios entregados HOY',
     
     // Fake scarcity
-    prizesLeft: 'PREMIOS GRANDES QUEDAN',
+    prizesLeft: 'QUEDAN 3 PREMIOS GRANDES',
     hurryUp: '¡DATE PRISA!',
     almostGone: '¡CASI AGOTADO!'
   },
@@ -76,8 +77,8 @@ export const translations = {
     feedbackPlaceholder: 'Tell us what you didn\'t like (optional)',
     submitBtn: 'SEND & WIN',
     continueBtn: 'I WANT MY PRIZE NOW!',
-    googleReviewTitle: '⏰ FINAL STEP! Activate your prize in 30 seconds:',
-    googleBtn: '✅ ACTIVATE PRIZE ON GOOGLE',
+    googleReviewTitle: 'Thank you! Please finish your review.',
+    googleBtn: 'Complete review',
     googleReviewBtn: 'CONFIRM MY PRIZE',
     spinBtn: '🎰 SPIN & WIN NOW',
     star: 'Star',
@@ -85,7 +86,8 @@ export const translations = {
     congratulations: '🏆 YOU WON! YOU\'RE A VIP!',
     enjoyPrize: '📱 Screenshot this - Your prize is ACTIVE for 24h',
     prizes: ['🍰 FREE DESSERT', '☕ PREMIUM COFFEE', '🍹 SPECIAL MOJITO', '🍦 ARTISAN ICE CREAM', 
-             '🥃 PREMIUM SHOT', '🥤 FREE DRINK', '🍺 CRAFT BEER', '🍕 FREE TAPA'],
+             '🥃 PREMIUM SHOT', '🥤 FREE DRINK', '🍺 CRAFT BEER', '🍕 FREE TAPA',
+             '🍽️ FREE DINNER FOR 2', '💰 40 EURO BONUS'],
     urgentMessage: '⚠️ 2 people are claiming prizes NOW',
     lastChance: '🔥 LAST BIG PRIZE available',
     vipClient: '👑 VIP Client #',
@@ -95,7 +97,7 @@ export const translations = {
     justWon: 'just won',
     peopleWatching: 'people viewing this offer',
     prizesGivenToday: 'prizes given TODAY',
-    prizesLeft: 'BIG PRIZES LEFT',
+    prizesLeft: '3 BIG PRIZES LEFT',
     hurryUp: 'HURRY UP!',
     almostGone: 'ALMOST GONE!'
   },
@@ -112,8 +114,8 @@ export const translations = {
     feedbackPlaceholder: 'Sagen Sie uns, was Ihnen nicht gefallen hat (optional)',
     submitBtn: 'SENDEN & GEWINNEN',
     continueBtn: 'ICH WILL MEINEN PREIS JETZT!',
-    googleReviewTitle: '⏰ LETZTER SCHRITT! Aktivieren Sie Ihren Preis in 30 Sekunden:',
-    googleBtn: '✅ PREIS BEI GOOGLE AKTIVIEREN',
+    googleReviewTitle: 'Danke! Bitte beenden Sie Ihre Bewertung.',
+    googleBtn: 'Bewertung abschließen',
     googleReviewBtn: 'MEINEN PREIS BESTÄTIGEN',
     spinBtn: '🎰 DREHEN & JETZT GEWINNEN',
     star: 'Stern',
@@ -121,7 +123,8 @@ export const translations = {
     congratulations: '🏆 GEWONNEN! SIE SIND EIN VIP!',
     enjoyPrize: '📱 Screenshot machen - Ihr Preis ist 24h AKTIV',
     prizes: ['🍰 GRATIS DESSERT', '☕ PREMIUM KAFFEE', '🍹 SPECIAL MOJITO', '🍦 ARTISAN EIS', 
-             '🥃 PREMIUM SHOT', '🥤 GRATIS GETRÄNK', '🍺 CRAFT BIER', '🍕 GRATIS TAPA'],
+             '🥃 PREMIUM SHOT', '🥤 GRATIS GETRÄNK', '🍺 CRAFT BIER', '🍕 GRATIS TAPA',
+             '🍽️ GRATIS ABENDESSEN FÜR 2', '💰 40 EURO BONUS'],
     urgentMessage: '⚠️ 2 Personen beanspruchen JETZT Preise',
     lastChance: '🔥 LETZTER GROSSER PREIS verfügbar',
     vipClient: '👑 VIP-Kunde #',
@@ -131,7 +134,7 @@ export const translations = {
     justWon: 'hat gerade gewonnen',
     peopleWatching: 'Personen sehen sich dieses Angebot an',
     prizesGivenToday: 'Preise HEUTE vergeben',
-    prizesLeft: 'GROSSE PREISE ÜBRIG',
+    prizesLeft: '3 GROSSE PREISE ÜBRIG',
     hurryUp: 'BEEILEN SIE SICH!',
     almostGone: 'FAST WEG!'
   },
@@ -148,8 +151,8 @@ export const translations = {
     feedbackPlaceholder: 'Dites-nous ce qui ne vous a pas plu (optionnel)',
     submitBtn: 'ENVOYER & GAGNER',
     continueBtn: 'JE VEUX MON PRIX MAINTENANT!',
-    googleReviewTitle: '⏰ DERNIÈRE ÉTAPE! Activez votre prix en 30 secondes:',
-    googleBtn: '✅ ACTIVER LE PRIX SUR GOOGLE',
+    googleReviewTitle: 'Merci! Veuillez terminer votre avis.',
+    googleBtn: 'Terminer l\'avis',
     googleReviewBtn: 'CONFIRMER MON PRIX',
     spinBtn: '🎰 TOURNER & GAGNER MAINTENANT',
     star: 'Étoile',
@@ -157,7 +160,8 @@ export const translations = {
     congratulations: '🏆 GAGNÉ! VOUS ÊTES UN VIP!',
     enjoyPrize: '📱 Capturez cet écran - Votre prix est ACTIF pendant 24h',
     prizes: ['🍰 DESSERT GRATUIT', '☕ CAFÉ PREMIUM', '🍹 MOJITO SPÉCIAL', '🍦 GLACE ARTISANALE', 
-             '🥃 SHOT PREMIUM', '🥤 BOISSON GRATUITE', '🍺 BIÈRE ARTISANALE', '🍕 TAPA GRATUITE'],
+             '🥃 SHOT PREMIUM', '🥤 BOISSON GRATUITE', '🍺 BIÈRE ARTISANALE', '🍕 TAPA GRATUITE',
+             '🍽️ DÎNER GRATUIT POUR 2', '💰 BONUS 40 EUROS'],
     urgentMessage: '⚠️ 2 personnes réclament des prix MAINTENANT',
     lastChance: '🔥 DERNIER GROS PRIX disponible',
     vipClient: '👑 Client VIP #',
@@ -167,7 +171,7 @@ export const translations = {
     justWon: 'vient de gagner',
     peopleWatching: 'personnes consultent cette offre',
     prizesGivenToday: 'prix donnés AUJOURD\'HUI',
-    prizesLeft: 'GROS PRIX RESTANTS',
+    prizesLeft: '3 GROS PRIX RESTANTS',
     hurryUp: 'DÉPÊCHEZ-VOUS!',
     almostGone: 'PRESQUE PARTI!'
   }

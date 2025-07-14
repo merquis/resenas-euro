@@ -149,7 +149,7 @@ export class RouletteManager {
   }
 
   /**
-   * Gira la ruleta
+   * Gira la ruleta con probabilidades controladas
    */
   spin() {
     if (this.isSpinning) return;
@@ -157,10 +157,26 @@ export class RouletteManager {
     this.isSpinning = true;
     this.spinButton.disabled = true;
 
-    // Calcular resultado aleatorio
+    // Calcular resultado con probabilidades controladas
     const N = this.prizes.length;
     const randomSpins = getRandomNumber(CONFIG.roulette.minSpins, CONFIG.roulette.maxSpins);
-    const prizeIndex = Math.floor(Math.random() * N);
+    
+    // Determinar el premio basado en probabilidades
+    let prizeIndex;
+    const random = Math.random();
+    
+    // Los últimos 2 premios son los grandes (CENA GRATIS PARA 2 y BONO 40 EUROS)
+    // Cada uno tiene 0.1% de probabilidad (0.001)
+    if (random < 0.001) {
+      // 0.1% para CENA GRATIS PARA 2
+      prizeIndex = N - 2;
+    } else if (random < 0.002) {
+      // 0.1% para BONO 40 EUROS
+      prizeIndex = N - 1;
+    } else {
+      // 99.8% para los otros premios
+      prizeIndex = Math.floor(Math.random() * (N - 2));
+    }
     
     // Ajustar el índice para que la flecha apunte al premio correcto
     // La flecha está en la parte superior (270°), así que ajustamos

@@ -57,8 +57,8 @@
     <!-- Indicadores de escasez -->
     <div class="scarcity-indicators">
       <div class="scarcity-item pulse">
-        <span class="scarcity-number">2</span>
-        <span data-text="prizesLeft">PREMIOS GRANDES QUEDAN</span>
+        <span class="scarcity-number">3</span>
+        <span data-text="prizesLeft">QUEDAN 3 PREMIOS GRANDES</span>
       </div>
       <div class="scarcity-item">
         <span class="watching-number" id="watchingCount">87</span>
@@ -67,9 +67,6 @@
     </div>
 
     <div class="header">
-      <div class="vip-number">
-        <span data-text="vipClient">👑 Cliente VIP #</span><span id="vipNumber">1247</span>
-      </div>
       <h1 class="pulse-title"><span class="emoji">🎉</span> <span data-text="title">¡FELICIDADES! Has sido SELECCIONADO</span></h1>
       <p class="subtitle urgent-flash"><span data-text="subtitle">⚡ Tienes 3 MINUTOS para reclamar tu PREMIO EXCLUSIVO ⚡</span></p>
       
@@ -92,12 +89,12 @@
 
     <div class="rating-section">
       <p class="rating-instruction">¿Qué tal ha sido tu experiencia VIP?</p>
-      <div class="stars preselected" id="rating">
+      <div class="stars" id="rating">
         <span class="star" data-value="1">★</span>
         <span class="star" data-value="2">★</span>
         <span class="star" data-value="3">★</span>
         <span class="star" data-value="4">★</span>
-        <span class="star active pulse-star" data-value="5">★</span>
+        <span class="star" data-value="5">★</span>
       </div>
 
       <div id="valorarBtnContainer" class="show-immediately">
@@ -178,8 +175,6 @@
     </div>
   </div>
 
-  <!-- Botón de salida casi invisible -->
-  <button class="exit-btn" id="exitBtn" onclick="handleExit()">×</button>
 </div>
 
   <script type="module" src="js/app.js"></script>
