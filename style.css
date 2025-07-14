@@ -300,9 +300,13 @@ body {
 .premium-btn {
   background: linear-gradient(135deg, #f39c12, #e67e22);
   box-shadow: 0 5px 20px rgba(243, 156, 18, 0.5);
-  font-size: 20px;
-  padding: 20px 30px;
-  min-width: 300px;
+  font-size: 18px;
+  padding: 15px 25px;
+  min-width: auto;
+  width: 100%;
+  max-width: 300px;
+  display: block;
+  margin: 0 auto;
 }
 
 .confirmation-btn:hover, .submit-btn:hover, .google-btn:hover {
@@ -673,7 +677,7 @@ body {
   }
   
   .stars {
-    font-size: 30px;
+    font-size: 35px;
     gap: 0px;
   }
 
