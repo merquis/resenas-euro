@@ -3,18 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tu Sorpresa | Restaurante Pizzería Euro</title>
+  <title>🎁 PREMIO EXCLUSIVO | Restaurante Pizzería Euro</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="roulette.css">
 </head>
 <body>
 <div class="main-wrapper">
+  <!-- Contador de urgencia SIEMPRE VISIBLE -->
+  <div class="urgency-timer" id="urgencyTimer">
+    <span class="timer-icon">⏰</span>
+    <span class="timer-text">Oferta expira en: </span>
+    <span class="timer-countdown" id="countdown">03:00</span>
+  </div>
+
+  <!-- Notificaciones de ganadores (fake social proof) -->
+  <div class="winner-notifications" id="winnerNotifications"></div>
+
   <div class="restaurant-title">
     <h2>Restaurante Pizzería Euro</h2>
+    <div class="vip-badge">👑 ZONA VIP - PREMIOS EXCLUSIVOS 👑</div>
   </div>
   
   <div class="container">
-    <!-- Language Selector -->
+    <!-- Language Selector (más pequeño) -->
     <div class="language-selector">
       <div class="language-dropdown" id="languageDropdown">
         <button class="language-btn" id="languageBtn">
@@ -43,41 +54,84 @@
       </div>
     </div>
 
+    <!-- Indicadores de escasez -->
+    <div class="scarcity-indicators">
+      <div class="scarcity-item pulse">
+        <span class="scarcity-number">2</span>
+        <span data-text="prizesLeft">PREMIOS GRANDES QUEDAN</span>
+      </div>
+      <div class="scarcity-item">
+        <span class="watching-number" id="watchingCount">87</span>
+        <span data-text="peopleWatching">personas viendo esta oferta</span>
+      </div>
+    </div>
+
     <div class="header">
-      <h1><span class="emoji">🎁</span> <span data-text="title">¡Tu opinión tiene premio!</span></h1>
-      <p class="subtitle"><span data-text="subtitle">Antes de tu sorpresa, ¿qué tal fue tu experiencia? Ayúdanos a mejorar valorando con las estrellas.</span></p>
+      <div class="vip-number">
+        <span data-text="vipClient">👑 Cliente VIP #</span><span id="vipNumber">1247</span>
+      </div>
+      <h1 class="pulse-title"><span class="emoji">🎉</span> <span data-text="title">¡FELICIDADES! Has sido SELECCIONADO</span></h1>
+      <p class="subtitle urgent-flash"><span data-text="subtitle">⚡ Tienes 3 MINUTOS para reclamar tu PREMIO EXCLUSIVO ⚡</span></p>
+      
+      <!-- Preview de premios grandes -->
+      <div class="big-prizes-preview">
+        <div class="prize-preview-item">
+          <span class="prize-icon">🍽️</span>
+          <span class="prize-text">CENA GRATIS</span>
+        </div>
+        <div class="prize-preview-item">
+          <span class="prize-icon">💰</span>
+          <span class="prize-text">50€ DESCUENTO</span>
+        </div>
+        <div class="prize-preview-item">
+          <span class="prize-icon">🍾</span>
+          <span class="prize-text">BOTELLA VINO</span>
+        </div>
+      </div>
     </div>
 
     <div class="rating-section">
-      <div class="stars" id="rating">
+      <p class="rating-instruction">¿Qué tal ha sido tu experiencia VIP?</p>
+      <div class="stars preselected" id="rating">
         <span class="star" data-value="1">★</span>
         <span class="star" data-value="2">★</span>
         <span class="star" data-value="3">★</span>
         <span class="star" data-value="4">★</span>
-        <span class="star" data-value="5">★</span>
+        <span class="star active pulse-star" data-value="5">★</span>
       </div>
 
-      <div id="valorarBtnContainer" class="hidden">
-        <button class="confirmation-btn" id="valorarBtn">
-          <span id="btnText"></span>
+      <div id="valorarBtnContainer" class="show-immediately">
+        <button class="confirmation-btn premium-btn" id="valorarBtn">
+          <span id="btnText">SÍ, QUIERO MI REGALO</span>
+        </button>
+        <!-- Confirmshaming para ratings bajos -->
+        <button class="shame-btn hidden" id="shameBtn">
+          <span data-text="shameLowRating">No, prefiero pagar precio completo</span>
         </button>
       </div>
     </div>
 
     <div id="formulario" class="hidden">
-      <div class="form-section">
-        <h3><span data-text="improveQuestion">Gracias, ¿cómo podríamos mejorar?</span></h3>
+      <div class="form-section premium-form">
+        <h3 class="form-title-premium"><span data-text="improveQuestion">¿Dónde enviamos tu PREMIO? 🎁</span></h3>
+        
+        <!-- Indicador de premios reclamados hoy -->
+        <div class="prizes-today">
+          <span class="prizes-number" id="prizesToday">137</span>
+          <span data-text="prizesGivenToday">premios entregados HOY</span>
+        </div>
+
         <form id="feedbackForm">
           <div class="form-group">
-            <input type="text" class="form-input" data-placeholder="namePlaceholder" required>
+            <input type="text" class="form-input premium-input" data-placeholder="namePlaceholder" required>
           </div>
           <div class="form-group">
-            <input type="email" class="form-input" data-placeholder="emailPlaceholder" required>
+            <input type="email" class="form-input premium-input" data-placeholder="emailPlaceholder" required>
           </div>
           <div class="form-group" id="feedback-group">
             <textarea class="form-input form-textarea" data-placeholder="feedbackPlaceholder" required></textarea>
           </div>
-          <button type="submit" class="submit-btn">
+          <button type="submit" class="submit-btn premium-submit pulse">
             <span id="submitText"></span>
           </button>
         </form>
@@ -85,36 +139,47 @@
     </div>
 
     <div id="codigoContainer" class="hidden">
-      <div class="reward-code">
-        <div class="code" id="codigoRecompensa"></div>
+      <div class="reward-code premium-reward">
+        <div class="code premium-code" id="codigoRecompensa"></div>
         <div class="description">
-          <span data-text="rewardCode">Código de recompensa</span><br>
-          <small><span data-text="finishReview">Finaliza tu reseña para poder canjearlo</span></small>
+          <span data-text="rewardCode">🎁 TU PREMIO VIP</span><br>
+          <small class="urgent-text"><span data-text="finishReview">⚠️ ACTÍVALO AHORA en Google o se PERDERÁ</span></small>
+        </div>
+        <div class="expiry-warning">
+          <span data-text="todayOnly">⏰ VÁLIDO SOLO HOY</span>
         </div>
       </div>
     </div>
 
     <div id="resenaBtn" class="hidden">
-      <div class="form-section">
-        <h3><span data-text="googleReviewTitle">¡Gracias! Ahora puedes dejarnos tu reseña en Google:</span></h3>
-        <button class="google-btn" onclick="goToReview()">
-          <span class="google-icon">🔍</span>
-          <span data-text="googleBtn">Ir a Google</span>
+      <div class="form-section final-step">
+        <h3 class="urgent-final"><span data-text="googleReviewTitle">⏰ ¡ÚLTIMO PASO! Activa tu premio en 30 segundos:</span></h3>
+        <div class="google-timer" id="googleTimer">00:30</div>
+        <button class="google-btn premium-google pulse-strong" onclick="goToReview()">
+          <span class="google-icon">✅</span>
+          <span data-text="googleBtn">ACTIVAR PREMIO EN GOOGLE</span>
         </button>
       </div>
     </div>
   </div>
 
   <div class="roulette-screen hidden">
+    <div class="roulette-header">
+      <h2 class="roulette-title">🎰 ¡GIRA Y GANA! 🎰</h2>
+      <p class="roulette-subtitle" data-text="lastChance">🔥 ÚLTIMO PREMIO GRANDE disponible</p>
+    </div>
     <div id="rouletteContainer">
       <div class="roulette-pointer"></div>
       <div id="rouletteWheel" class="roulette-wheel">
         <div id="rouletteColorLayer" class="roulette-layer"></div>
         <div id="rouletteTextLayer" class="roulette-layer"></div>
       </div>
-      <button id="spinBtn" class="confirmation-btn"></button>
+      <button id="spinBtn" class="confirmation-btn spin-premium pulse-strong"></button>
     </div>
   </div>
+
+  <!-- Botón de salida casi invisible -->
+  <button class="exit-btn" id="exitBtn" onclick="handleExit()">×</button>
 </div>
 
   <script type="module" src="js/app.js"></script>
