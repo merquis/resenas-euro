@@ -26,7 +26,7 @@
   overflow: hidden;
   /* Gradiente cónico para los 8 premios */
   background: conic-gradient(
-    #e67e22 0deg    45deg,   /* Cena Gratis para 2 */
+    #e67e22 0deg    45deg,   /* Cena para 2 */
     #e74c3c 45deg   90deg,   /* 50€ Descuento */
     #2980b9 90deg   135deg,  /* Botella Vino */
     #8e44ad 135deg  180deg,  /* Helado */
