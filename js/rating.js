@@ -77,9 +77,12 @@ export class RatingManager {
    * @param {number} value - Valor de la valoración
    */
   updateStars(value) {
+    console.log('updateStars called with value:', value);
     this.stars.forEach(star => {
       const starValue = parseInt(star.dataset.value);
-      star.classList.toggle('active', starValue <= value);
+      const shouldBeActive = starValue <= value;
+      star.classList.toggle('active', shouldBeActive);
+      console.log(`Star ${starValue}: ${shouldBeActive ? 'active' : 'inactive'}`);
     });
     
     // Mostrar cara correspondiente
