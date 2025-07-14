@@ -65,6 +65,54 @@ export class RatingManager {
       const starValue = parseInt(star.dataset.value);
       star.classList.toggle('active', starValue <= value);
     });
+    
+    // Mostrar cara correspondiente
+    this.showFaceForRating(value);
+  }
+
+  /**
+   * Muestra la cara correspondiente a la valoración
+   * @param {number} value - Valor de la valoración
+   */
+  showFaceForRating(value) {
+    if (value === 0) return;
+    
+    let face = '';
+    switch (value) {
+      case 1:
+        face = '😞'; // Cara triste/decepcionada
+        break;
+      case 2:
+        face = '😕'; // Cara preocupada/insatisfecha
+        break;
+      case 3:
+        face = '😐'; // Cara neutra/indiferente
+        break;
+      case 4:
+        face = '🙂'; // Cara ligeramente contenta
+        break;
+      case 5:
+        face = '😊'; // Cara feliz
+        break;
+      default:
+        face = '😐';
+    }
+    
+    // Crear o actualizar el elemento de la cara
+    let faceElement = document.getElementById('rating-face');
+    if (!faceElement) {
+      faceElement = document.createElement('div');
+      faceElement.id = 'rating-face';
+      faceElement.style.cssText = `
+        font-size: 48px;
+        text-align: center;
+        margin-top: 15px;
+        transition: all 0.3s ease;
+      `;
+      this.container.appendChild(faceElement);
+    }
+    
+    faceElement.textContent = face;
   }
 
   /**
