@@ -54,16 +54,6 @@ export class RatingManager {
         this.selectRating(value);
       }
     });
-
-    // Confirmar valoración
-    this.confirmButton.addEventListener('click', () => {
-      this.confirmRating();
-    });
-
-    // Escuchar cambios de idioma
-    window.addEventListener('languageChanged', () => {
-      this.updateButtonText();
-    });
   }
 
   /**
@@ -90,39 +80,6 @@ export class RatingManager {
   }
 
   /**
-   * Actualiza el texto del botón de confirmación
-   */
-  updateButtonText() {
-    if (this.selectedValue > 0) {
-      let face = '';
-      
-      // Progresión de caras según las estrellas
-      switch (this.selectedValue) {
-        case 1:
-          face = '😞'; // Cara triste/decepcionada
-          break;
-        case 2:
-          face = '😕'; // Cara preocupada/insatisfecha
-          break;
-        case 3:
-          face = '😐'; // Cara neutra/indiferente
-          break;
-        case 4:
-          face = '🙂'; // Cara ligeramente contenta
-          break;
-        case 5:
-          face = '😊'; // Cara feliz
-          break;
-        default:
-          face = '😐';
-      }
-      
-      const baseText = languageManager.getTranslation('confirmRating');
-      this.buttonText.textContent = `VALORAR CON ${this.selectedValue} ESTRELLAS ${face}`;
-    }
-  }
-
-  /**
    * Confirma la valoración
    */
   confirmRating() {
@@ -130,14 +87,11 @@ export class RatingManager {
 
     this.isLocked = true;
     this.stars.forEach(star => star.classList.add('locked'));
-    this.confirmButton.disabled = true;
 
     // Disparar evento de valoración confirmada
     window.dispatchEvent(new CustomEvent('ratingConfirmed', { 
       detail: { rating: this.selectedValue } 
     }));
-
-    hideElement(this.confirmButtonContainer);
   }
 
   /**
@@ -156,7 +110,6 @@ export class RatingManager {
     this.isLocked = false;
     this.updateStars(0);
     this.stars.forEach(star => star.classList.remove('locked'));
-    this.confirmButton.disabled = false;
   }
 }
 
