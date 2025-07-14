@@ -149,30 +149,7 @@ export class RatingManager {
    */
   updateButtonText() {
     if (this.selectedValue > 0) {
-      let face = '';
-      
-      // Progresión de caras según las estrellas
-      switch (this.selectedValue) {
-        case 1:
-          face = '😞'; // Cara triste/decepcionada
-          break;
-        case 2:
-          face = '😕'; // Cara preocupada/insatisfecha
-          break;
-        case 3:
-          face = '😐'; // Cara neutra/indiferente
-          break;
-        case 4:
-          face = '🙂'; // Cara ligeramente contenta
-          break;
-        case 5:
-          face = '😊'; // Cara feliz
-          break;
-        default:
-          face = '😐';
-      }
-      
-      this.buttonText.textContent = `VALORAR CON ${this.selectedValue} ESTRELLAS ${face}`;
+      this.buttonText.textContent = `VALORAR CON ${this.selectedValue} ESTRELLAS`;
     }
   }
 
