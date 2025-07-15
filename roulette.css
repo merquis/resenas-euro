@@ -54,7 +54,7 @@
   white-space: nowrap;
   user-select: none;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   transform-origin: center;
   pointer-events: none;
   z-index: 2;
@@ -81,12 +81,11 @@
 .roulette-screen {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: #000;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  backdrop-filter: blur(5px);
   padding: 1rem;
 }
 
@@ -109,12 +108,12 @@
 /* Responsive */
 @media (max-width: 480px) {
   #rouletteWheel {
-    width: 280px;
-    height: 280px;
+    width: 90vw;
+    height: 90vw;
   }
   
   .roulette-text {
-    font-size: 0.6rem;
+    font-size: 0.75rem;
   }
   
   .roulette-pointer {
