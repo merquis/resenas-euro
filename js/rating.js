@@ -11,6 +11,7 @@ export class RatingManager {
     this.confirmButton = null;
     this.confirmButtonContainer = null;
     this.buttonText = null;
+    this.errorElement = null;
   }
 
   /**
@@ -21,7 +22,6 @@ export class RatingManager {
     this.setupEventListeners();
     this.initializeFaceElement();
     this.updateButtonText(); // Poner el texto inicial del botón
-    this.stars.forEach(s => s.classList.add('pulse')); // Iniciar animación
   }
 
   /**
@@ -33,6 +33,7 @@ export class RatingManager {
     this.confirmButton = document.getElementById('valorarBtn');
     this.confirmButtonContainer = document.getElementById('valorarBtnContainer');
     this.buttonText = document.getElementById('btnText');
+    this.errorElement = document.getElementById('rating-error');
   }
 
   /**
@@ -45,7 +46,6 @@ export class RatingManager {
       if (e.target.classList.contains('star')) {
         const value = parseInt(e.target.dataset.value);
         this.updateStars(value, true); // true indica que es hover
-        this.stars.forEach(s => s.classList.remove('pulse')); // Parar animación en hover
       }
     });
 
@@ -143,7 +143,8 @@ export class RatingManager {
     this.selectedValue = value;
     this.updateStars(value);
     this.updateButtonText();
-    this.stars.forEach(s => s.classList.remove('pulse')); // Parar animación al seleccionar
+    this.errorElement.classList.add('hidden'); // Ocultar error al seleccionar
+    this.stars.forEach(s => s.classList.remove('pulse-error')); // Detener animación de error
   }
   
   /**
@@ -185,7 +186,9 @@ export class RatingManager {
 
     if (this.selectedValue === 0) {
       const message = languageManager.getTranslation('selectAtLeastOneStar');
-      alert(message);
+      this.errorElement.textContent = message;
+      this.errorElement.classList.remove('hidden');
+      this.stars.forEach(s => s.classList.add('pulse-error')); // Iniciar animación de error
       return;
     }
 
@@ -218,10 +221,10 @@ export class RatingManager {
     this.updateStars(0);
     this.stars.forEach(star => {
         star.classList.remove('locked');
-        star.classList.add('pulse'); // Reactivar animación
     });
     this.confirmButton.disabled = false;
     this.updateButtonText();
+    this.errorElement.classList.add('hidden');
     showElement(this.confirmButtonContainer); // Asegurarse de que el botón sea visible
   }
 }
