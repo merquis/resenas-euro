@@ -2,7 +2,9 @@
 export const translations = {
   es: {
     // Título principal - URGENCIA + EXCLUSIVIDAD
-    title: '¿Te animas a compartir tu opinión? , tu reseña nos ayuda a mejorar cada día. 🎉 Además como agradecimiento por tu visita, tienes un regalo garantizado en nuestra ruleta de la suerte.',
+    title_part1: '🤔 ¿Te animas a compartir tu opinión?, tu reseña nos ayuda a mejorar cada día.',
+    title_part2: '🎉 Además como agradecimiento por tu visita, tienes un regalo garantizado en nuestra ruleta de la suerte.',
+    prizes_subtitle: 'Alguno de nuestros premios...',
     vipBadge: '👑 ZONA VIP - PREMIOS EXCLUSIVOS 👑',
     ratingInstruction: '¿Qué tal ha sido tu experiencia?',
     
