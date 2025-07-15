@@ -1,6 +1,7 @@
 // Módulo de gestión del formulario
 import { showElement, hideElement, isValidEmail } from './utils.js';
 import { languageManager } from './language.js';
+import { CONFIG } from './config.js';
 
 export class FormManager {
   constructor() {
@@ -142,7 +143,7 @@ export class FormManager {
   /**
    * Maneja el envío del formulario
    */
-  handleSubmit() {
+  async handleSubmit() {
     // Validar campos
     if (!this.validateForm()) {
       return;
@@ -152,12 +153,27 @@ export class FormManager {
     const formData = {
       name: this.nameInput.value.trim(),
       email: this.emailInput.value.trim(),
-      feedback: this.feedbackTextarea.value.trim()
+      review: this.feedbackTextarea.value.trim(),
+      lang: languageManager.getCurrentLanguage()
     };
+
+    // Enviar datos a n8n
+    try {
+      await fetch(CONFIG.n8nWebhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+    } catch (error) {
+      console.error('Error al enviar los datos a n8n:', error);
+      // Opcional: manejar el error, por ejemplo, mostrando un mensaje al usuario
+    }
 
     // Ejecutar callback si existe
     if (this.onSubmitCallback) {
-      this.onSubmitCallback(formData);
+      this.onSubmitCallback(this.getFormData()); // Pasamos los datos originales sin lang
     }
   }
 

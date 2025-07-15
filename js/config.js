@@ -16,6 +16,9 @@ export const CONFIG = {
   
   // URL de Google Reviews
   googleReviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJ5ctEMDCYagwR9QBWYQaQdes',
+
+  // URL del webhook de n8n para guardar leads
+  n8nWebhookUrl: 'https://n8n-n8n.hpv7eo.easypanel.host/webhook-test/guardar-lead',
   
   // Idioma por defecto
   defaultLanguage: 'es'

@@ -294,7 +294,8 @@ body {
   letter-spacing: 1px;
   position: relative;
   overflow: hidden;
-  white-space: nowrap;
+  white-space: normal; /* Permitir que el texto del botón se divida en varias líneas */
+  line-height: 1.2; /* Mejorar el espaciado cuando el texto se divide */
 }
 
 .premium-btn {
