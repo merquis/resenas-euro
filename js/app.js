@@ -135,15 +135,19 @@ class App {
   handleSpinComplete(prize, rating) {
     viewManager.hideOverlay('roulette');
 
-    const prizeCode = formatPrizeCode(prize, rating);
-    this.codigoRecompensa.innerHTML = prizeCode;
+    // Generamos el código y lo que se mostrará en la UI por separado
+    const randomPart = Math.random().toString().slice(2, 5); // Generamos 3 dígitos aleatorios
+    const justTheCode = `EURO-${randomPart}${rating}`;
+    const displayCode = `${prize}<br>${justTheCode}`;
 
-    // Ahora construimos el payload final y lo enviamos a n8n
+    this.codigoRecompensa.innerHTML = displayCode;
+
+    // Ahora construimos el payload final con las claves correctas
     const payload = {
       ...this.currentFormData,
       review: this.currentFormData.feedback,
-      prize: prize,
-      prizeCode: prizeCode.replace(/<br>/g, ' ') // Limpiamos el código por si tiene HTML
+      premio: prize,
+      codigoPremio: justTheCode
     };
     delete payload.feedback; // Eliminamos la clave original
 
