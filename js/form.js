@@ -152,11 +152,6 @@ export class FormManager {
       return;
     }
 
-    // Obtener la fecha y hora actual
-    const now = new Date();
-    const date = now.toISOString().split('T')[0]; // Formato YYYY-MM-DD
-    const time = now.toTimeString().split(' ')[0]; // Formato HH:MM:SS
-
     // Obtener datos del formulario
     const formData = {
       name: this.nameInput.value.trim(),
@@ -164,8 +159,7 @@ export class FormManager {
       review: this.feedbackTextarea.value.trim(),
       rating: ratingManager.getRating(), // Obtener la valoración directamente del gestor de ratings
       lang: languageManager.getCurrentLanguage(),
-      date: date,
-      time: time
+      timestamp: new Date().toISOString() // Enviar timestamp en formato ISO 8601 (UTC)
     };
 
     // Enviar datos a n8n
