@@ -31,7 +31,7 @@ export const translations = {
     
     // Google Review - URGENCIA EXTREMA
     googleReviewTitle: '¡Último paso! Completa tu reseña. Recibirás el código de tu premio por email automáticamente',
-    googleBtn: 'Completar reseña',
+    googleBtn: 'COMPLETAR RESEÑA',
     googleReviewBtn: 'CONFIRMAR MI PREMIO',
     
     // Ruleta

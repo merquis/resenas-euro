@@ -471,7 +471,6 @@ body {
   margin-bottom: 20px;
   font-family: 'Courier New', monospace;
   text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
-  animation: timerPulse 1s infinite;
 }
 
 .premium-google {
