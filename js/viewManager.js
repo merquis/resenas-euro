@@ -13,7 +13,7 @@ class ViewManager {
   init() {
     // Vistas que se intercambian en el contenedor principal
     this.mainViews = {
-      rating: document.querySelector('#rating-view'),
+      rating: document.querySelector('.rating-section'),
       form: document.querySelector('#formulario'),
       prize: document.querySelector('#codigoContainer')
     };
@@ -39,8 +39,10 @@ class ViewManager {
     }
 
     // Ocultar todas las vistas principales
-    for (const view of Object.values(this.mainViews)) {
-      if (view) hideElement(view);
+    for (const key in this.mainViews) {
+      if (this.mainViews[key]) {
+        hideElement(this.mainViews[key]);
+      }
     }
 
     // Mostrar la vista solicitada
