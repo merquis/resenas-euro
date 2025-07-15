@@ -37,7 +37,7 @@ improveQuestion: 'Tu opinión es muy importante para nosotros. 😊',
     googleReviewBtn: 'CONFIRMAR MI PREMIO',
     
     // Ruleta
-    spinBtn: '🎰 GIRAR Y GANAR AHORA',
+    spinBtn: 'GIRAR Y GANAR AHORA',
     
     // Estrellas
     star: 'Estrella',
