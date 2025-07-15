@@ -342,6 +342,7 @@ body {
   padding: 30px;
   border-radius: 15px;
   margin-bottom: 20px;
+  margin-top: 40px; /* Añadido para bajar el formulario */
 }
 
 .premium-form {
