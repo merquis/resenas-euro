@@ -48,14 +48,17 @@ class ViewManager {
     // Mostrar la vista solicitada
     showElement(this.mainViews[viewName]);
 
-    // Si es la vista del premio, mostrar la fecha actual
+    // Si es la vista del premio, mostrar la fecha actual para Canarias
     if (viewName === 'prize') {
       const today = new Date();
-      const day = String(today.getDate()).padStart(2, '0');
-      const month = String(today.getMonth() + 1).padStart(2, '0');
-      const year = today.getFullYear();
-      const formattedDate = `${day}/${month}/${year}`;
-      
+      const options = {
+        timeZone: 'Atlantic/Canary',
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      };
+      const formattedDate = new Intl.DateTimeFormat('es-ES', options).format(today);
+
       const dateElement = document.getElementById('currentDate');
       if (dateElement) {
         dateElement.textContent = formattedDate;
