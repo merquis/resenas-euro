@@ -1,6 +1,7 @@
 // Módulo de gestión del formulario
 import { showElement, hideElement, isValidEmail } from './utils.js';
 import { languageManager } from './language.js';
+import { ratingManager } from './rating.js'; // Importar ratingManager
 import { CONFIG } from './config.js';
 
 export class FormManager {
@@ -13,6 +14,7 @@ export class FormManager {
     this.nameInput = null;
     this.emailInput = null;
     this.onSubmitCallback = null;
+    this.currentRating = 0;
   }
 
   /**
@@ -70,6 +72,7 @@ export class FormManager {
    * @param {number} rating - Valoración del usuario
    */
   show(rating) {
+    this.currentRating = rating;
     showElement(this.formSection);
 
     if (rating < 5) {
@@ -159,6 +162,7 @@ export class FormManager {
       name: this.nameInput.value.trim(),
       email: this.emailInput.value.trim(),
       review: this.feedbackTextarea.value.trim(),
+      rating: ratingManager.getRating(), // Obtener la valoración directamente del gestor de ratings
       lang: languageManager.getCurrentLanguage(),
       date: date,
       time: time
