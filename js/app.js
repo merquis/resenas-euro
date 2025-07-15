@@ -205,21 +205,10 @@ class App {
   }
 
   /**
-   * Maneja el envío del formulario
-   * @param {object} formData - Datos básicos del formulario
+   * Envía los datos del formulario a n8n en segundo plano
+   * @param {object} payload - Datos completos a enviar
    */
-  async handleFormSubmit(formData) {
-    const rating = ratingManager.getRating();
-
-    // Construir el payload completo para n8n
-    const payload = {
-      ...formData,
-      rating: rating,
-      lang: languageManager.getCurrentLanguage(),
-      timestamp: new Date().toISOString()
-    };
-
-    // Enviar datos a n8n
+  async sendDataToN8N(payload) {
     try {
       await fetch(CONFIG.n8nWebhookUrl, {
         method: 'POST',
@@ -231,8 +220,29 @@ class App {
     } catch (error) {
       console.error('Error al enviar los datos a n8n:', error);
     }
+  }
+
+  /**
+   * Maneja el envío del formulario
+   * @param {object} formData - Datos básicos del formulario
+   */
+  handleFormSubmit(formData) {
+    const rating = ratingManager.getRating();
+
+    // Construir el payload completo para n8n
+    const payload = {
+      ...formData,
+      review: formData.feedback, // Renombrar feedback a review para consistencia
+      rating: rating,
+      lang: languageManager.getCurrentLanguage(),
+      timestamp: new Date().toISOString()
+    };
+    delete payload.feedback; // Eliminar la clave original
+
+    // Enviar datos a n8n en segundo plano (sin await)
+    this.sendDataToN8N(payload);
     
-    // Ocultar el contenedor principal y mostrar la ruleta
+    // La lógica de la interfaz continúa inmediatamente
     hideElement(this.container);
     rouletteManager.show(rating);
   }
