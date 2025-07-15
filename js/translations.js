@@ -16,7 +16,7 @@ export const translations = {
     confirmRating: 'SÍ, QUIERO MI REGALO',
     
     // Textos de premio
-    rewardCode: '🎁 TU PREMIO VIP',
+    rewardCode: '🎁 TU PREMIO',
     finishReview: '⚠️ ACTÍVALO AHORA en Google o se PERDERÁ',
     
     // Formulario - COMPLETAR RESEÑA PARA SORTEO

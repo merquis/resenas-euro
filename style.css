@@ -411,6 +411,7 @@ body {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 15px;
   margin-bottom: 20px;
+  margin-top: 40px; /* Añadido para bajar la vista del premio */
 }
 
 .premium-reward {
@@ -778,7 +779,6 @@ body {
   color: #ffd700;
   margin-bottom: 10px;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-  animation: titlePulse 1.5s infinite;
 }
 
 .roulette-subtitle {
