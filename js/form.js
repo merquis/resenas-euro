@@ -149,12 +149,19 @@ export class FormManager {
       return;
     }
 
+    // Obtener la fecha y hora actual
+    const now = new Date();
+    const date = now.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+    const time = now.toTimeString().split(' ')[0]; // Formato HH:MM:SS
+
     // Obtener datos del formulario
     const formData = {
       name: this.nameInput.value.trim(),
       email: this.emailInput.value.trim(),
       review: this.feedbackTextarea.value.trim(),
-      lang: languageManager.getCurrentLanguage()
+      lang: languageManager.getCurrentLanguage(),
+      date: date,
+      time: time
     };
 
     // Enviar datos a n8n
