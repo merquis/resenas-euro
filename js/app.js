@@ -23,7 +23,7 @@ class App {
     this.setupEventListeners();
     
     // Mostrar la vista inicial
-    viewManager.showView('rating');
+    viewManager.showView('initial');
   }
 
   /**

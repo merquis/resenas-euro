@@ -13,7 +13,7 @@ class ViewManager {
   init() {
     // Vistas que se intercambian en el contenedor principal
     this.mainViews = {
-      rating: document.querySelector('.rating-section'),
+      initial: document.querySelector('#initial-view'),
       form: document.querySelector('#formulario'),
       prize: document.querySelector('#codigoContainer')
     };
