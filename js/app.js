@@ -21,6 +21,7 @@ class App {
     this.cacheElements();
     this.initializeModules();
     this.setupEventListeners();
+    this.startWatchingCounter();
     
     // Mostrar la vista inicial
     viewManager.showView('initial');
@@ -61,6 +62,24 @@ class App {
       window.open(CONFIG.googleReviewUrl, '_blank');
       this.showSuccessMessage();
     };
+  }
+
+  /**
+   * Contador de personas viendo
+   */
+  startWatchingCounter() {
+    const watchingEl = document.getElementById('watchingCount');
+    if (!watchingEl) return;
+
+    let watchingCount = Math.floor(Math.random() * 5) + 1;
+    watchingEl.textContent = watchingCount;
+
+    this.watchingInterval = setInterval(() => {
+      // Variar entre 1 y 5
+      const change = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
+      watchingCount = Math.max(1, Math.min(5, watchingCount + change));
+      watchingEl.textContent = watchingCount;
+    }, 3000);
   }
 
   /**
@@ -162,6 +181,9 @@ class App {
   showSuccessMessage() {
     if (this.googleTimerInterval) {
       clearInterval(this.googleTimerInterval);
+    }
+    if (this.watchingInterval) {
+      clearInterval(this.watchingInterval);
     }
   }
 }
