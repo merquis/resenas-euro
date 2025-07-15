@@ -20,14 +20,14 @@ export const translations = {
     finishReview: '⚠️ ACTÍVALO AHORA en Google o se PERDERÁ',
     
     // Formulario - COMPLETAR RESEÑA PARA SORTEO
-    improveQuestion: '¡Completa tu reseña y participa en el SORTEO! 🎁',
-    namePlaceholder: 'Tu nombre completo',
+    improveQuestion: 'Finaliza tu reseña para obtener tu premio. 🎁',
+    namePlaceholder: 'Tu nombre',
     emailPlaceholder: 'Tu email',
     feedbackPlaceholder: 'Completa tu reseña del restaurante',
     
     // Botones - ACCIÓN INMEDIATA
-    submitBtn: 'ENVIAR Y GANAR',
-    continueBtn: '¡QUIERO MI PREMIO AHORA!',
+    submitBtn: 'Continuar',
+    continueBtn: 'Continuar',
     
     // Google Review - URGENCIA EXTREMA
     googleReviewTitle: '¡Gracias! Por favor, finaliza tu reseña.',
