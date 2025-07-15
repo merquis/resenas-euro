@@ -134,18 +134,13 @@ export class RouletteManager {
   }
 
   /**
-   * Muestra la ruleta
+   * Prepara la ruleta para ser mostrada
    * @param {number} rating - Valoración del usuario
    */
-  show(rating) {
+  prepare(rating) {
     this.currentRating = rating;
-    showElement(this.rouletteScreen);
-    
-    // Crear los textos después de que la ruleta sea visible
-    // para asegurar que tenga dimensiones correctas
-    setTimeout(() => {
-      this.createWheelTexts();
-    }, 50);
+    // Crear los textos de la ruleta justo antes de mostrarla
+    this.createWheelTexts();
   }
 
   /**
@@ -211,12 +206,6 @@ export class RouletteManager {
     this.onSpinComplete = callback;
   }
 
-  /**
-   * Oculta la ruleta
-   */
-  hide() {
-    hideElement(this.rouletteScreen);
-  }
 
   /**
    * Resetea el estado de la ruleta

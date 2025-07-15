@@ -61,12 +61,10 @@ export class FormManager {
   }
 
   /**
-   * Muestra el formulario según la valoración
+   * Prepara el formulario según la valoración
    * @param {number} rating - Valoración del usuario
    */
-  show(rating) {
-    showElement(this.formSection);
-
+  prepare(rating) {
     if (rating < 5) {
       showElement(this.feedbackGroup);
       this.feedbackTextarea.required = true;
@@ -186,7 +184,6 @@ export class FormManager {
     this.form.reset();
     this.form.querySelectorAll('.field-error').forEach(error => error.remove());
     this.form.querySelectorAll('.error').forEach(field => field.classList.remove('error'));
-    hideElement(this.formSection);
   }
 
   /**
