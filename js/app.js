@@ -242,7 +242,8 @@ class App {
     // Enviar datos a n8n en segundo plano (sin await)
     this.sendDataToN8N(payload);
     
-    // La lógica de la interfaz continúa inmediatamente
+    // Ocultar el contenedor principal y mostrar la ruleta
+    hideElement(this.container);
     rouletteManager.show(rating);
   }
 
