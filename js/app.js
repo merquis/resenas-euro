@@ -214,7 +214,6 @@ class App {
     const formData = formManager.getFormData();
     console.log('Datos capturados:', formData);
     
-    hideElement(this.container);
     rouletteManager.show(rating);
   }
 
