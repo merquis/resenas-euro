@@ -227,6 +227,25 @@ body {
   font-weight: bold;
 }
 
+@keyframes pulse-star {
+  0% {
+    transform: scale(1);
+    text-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
+  }
+  50% {
+    transform: scale(1.1);
+    text-shadow: 0 0 15px rgba(255, 255, 0, 1);
+  }
+  100% {
+    transform: scale(1);
+    text-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
+  }
+}
+
+.star.pulse {
+  animation: pulse-star 1.5s infinite;
+}
+
 .stars {
   display: flex;
   justify-content: center;

@@ -76,7 +76,9 @@ export const translations = {
     
     // Premio garantizado
     guaranteedPrize: '✅ PREMIO GARANTIZADO',
-    rateWithStars: 'VALORAR CON {{count}} ESTRELLAS'
+    rateWithStars: 'VALORAR CON {{count}} ESTRELLAS',
+    rateNow: 'VALORAR AHORA',
+    selectAtLeastOneStar: 'Por favor, selecciona al menos una estrella para valorar.'
   },
   en: {
     title: '🎁 Leave us your review and win a guaranteed prize with our wheel of fortune',
@@ -119,7 +121,9 @@ export const translations = {
     almostGone: 'ALMOST GONE!',
     morePrizes: '🎁 + 5 more prizes in the roulette',
     guaranteedPrize: '✅ GUARANTEED PRIZE',
-    rateWithStars: 'RATE WITH {{count}} STARS'
+    rateWithStars: 'RATE WITH {{count}} STARS',
+    rateNow: 'RATE NOW',
+    selectAtLeastOneStar: 'Please select at least one star to rate.'
   },
   de: {
     title: '🎁 Hinterlassen Sie Ihre Bewertung und gewinnen Sie einen garantierten Preis mit unserem Glücksrad',
@@ -162,7 +166,9 @@ export const translations = {
     almostGone: 'FAST WEG!',
     morePrizes: '🎁 + 5 weitere Preise im Roulette',
     guaranteedPrize: '✅ GARANTIERTER PREIS',
-    rateWithStars: 'BEWERTEN MIT {{count}} STERNEN'
+    rateWithStars: 'BEWERTEN MIT {{count}} STERNEN',
+    rateNow: 'JETZT BEWERTEN',
+    selectAtLeastOneStar: 'Bitte wählen Sie mindestens einen Stern zum Bewerten aus.'
   },
   fr: {
     title: '🎁 Laissez-nous votre avis et gagnez un prix garanti avec notre roue de la fortune',
@@ -205,7 +211,9 @@ export const translations = {
     almostGone: 'PRESQUE PARTI!',
     morePrizes: '🎁 + 5 prix de plus dans la roulette',
     guaranteedPrize: '✅ PRIX GARANTI',
-    rateWithStars: 'ÉVALUER AVEC {{count}} ÉTOILES'
+    rateWithStars: 'ÉVALUER AVEC {{count}} ÉTOILES',
+    rateNow: 'ÉVALUER MAINTENANT',
+    selectAtLeastOneStar: 'Veuillez sélectionner au moins une étoile pour évaluer.'
   }
 };
 
