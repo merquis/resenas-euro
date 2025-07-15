@@ -1,4 +1,4 @@
-// Aplicación principal - REFACTORIZADA
+// Aplicación principal - REFACTORIZADA CON VIEW MANAGER
 import { CONFIG } from './config.js';
 import { languageManager } from './language.js';
 import { ratingManager } from './rating.js';
@@ -12,7 +12,6 @@ class App {
     this.codigoRecompensa = null;
     this.resenaBtn = null;
     this.googleTimerInterval = null;
-    this.watchingInterval = null;
   }
 
   /**
@@ -22,8 +21,6 @@ class App {
     this.cacheElements();
     this.initializeModules();
     this.setupEventListeners();
-    this.startWatchingCounter();
-    this.setupPrizesToday();
     
     // Mostrar la vista inicial
     viewManager.showView('rating');
@@ -67,36 +64,11 @@ class App {
   }
 
   /**
-   * Configura premios de hoy
-   */
-  setupPrizesToday() {
-    const prizesTodayEl = document.getElementById('prizesToday');
-    if (prizesTodayEl) {
-      const basePrizes = Math.floor(Math.random() * 10) + 5;
-      prizesTodayEl.textContent = basePrizes;
-    }
-  }
-
-  /**
-   * Contador de personas viendo
-   */
-  startWatchingCounter() {
-    const watchingEl = document.getElementById('watchingCount');
-    let watchingCount = Math.floor(Math.random() * 5) + 5;
-    
-    this.watchingInterval = setInterval(() => {
-      const change = Math.floor(Math.random() * 3) - 1;
-      watchingCount = Math.max(5, Math.min(10, watchingCount + change));
-      if (watchingEl) watchingEl.textContent = watchingCount;
-    }, 3000);
-  }
-
-  /**
    * Maneja la confirmación de la valoración
    * @param {number} rating - Valoración seleccionada
    */
   handleRatingConfirmed(rating) {
-    formManager.show(rating); // Prepara el formulario (lógica interna)
+    formManager.prepare(rating); // Prepara el formulario (lógica interna)
     viewManager.showView('form'); // Cambia a la vista del formulario
   }
 
@@ -133,8 +105,8 @@ class App {
 
     this.sendDataToN8N(payload);
     
-    rouletteManager.prepare(rating); // Prepara la ruleta
-    viewManager.showView('roulette'); // Muestra la ruleta
+    rouletteManager.prepare(rating);
+    viewManager.showOverlay('roulette');
   }
 
   /**
@@ -143,6 +115,8 @@ class App {
    * @param {number} rating - Valoración del usuario
    */
   handleSpinComplete(prize, rating) {
+    viewManager.hideOverlay('roulette');
+
     const prizeCode = formatPrizeCode(prize, rating);
     this.codigoRecompensa.textContent = prizeCode;
 
@@ -166,12 +140,11 @@ class App {
         googleTimerEl.textContent = `00:${timeLeft.toString().padStart(2, '0')}`;
         if (timeLeft <= 10) {
           googleTimerEl.style.color = '#ff0000';
-          googleTimerEl.style.animation = 'timerPulse 0.5s infinite';
         }
         timeLeft--;
         if (timeLeft < 0) {
           clearInterval(this.googleTimerInterval);
-          googleTimerEl.textContent = '¡EXPIRANDO!';
+          googleTimerEl.textContent = '¡EXPIRADO!';
         }
       }
     }, 1000);
@@ -181,8 +154,9 @@ class App {
    * Muestra mensaje de éxito
    */
   showSuccessMessage() {
-    clearInterval(this.googleTimerInterval);
-    clearInterval(this.watchingInterval);
+    if (this.googleTimerInterval) {
+      clearInterval(this.googleTimerInterval);
+    }
   }
 }
 

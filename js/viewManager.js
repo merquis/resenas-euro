@@ -3,46 +3,68 @@ import { showElement, hideElement } from './utils.js';
 
 class ViewManager {
   constructor() {
-    this.views = {};
-    this.currentView = null;
+    this.mainViews = {};
+    this.overlays = {};
   }
 
   /**
    * Inicializa el gestor de vistas
    */
   init() {
-    // Cachear todas las vistas principales
-    this.views = {
+    // Vistas que se intercambian en el contenedor principal
+    this.mainViews = {
       rating: document.querySelector('.rating-section'),
       form: document.querySelector('#formulario'),
-      roulette: document.querySelector('.roulette-screen'),
       prize: document.querySelector('#codigoContainer')
     };
 
-    // Ocultar todas las vistas al inicio
-    Object.values(this.views).forEach(view => {
-      if (view) hideElement(view);
-    });
+    // Vistas que se superponen a todo
+    this.overlays = {
+      roulette: document.querySelector('.roulette-screen')
+    };
+
+    // Ocultar todas las vistas al inicio para un estado limpio
+    Object.values(this.mainViews).forEach(view => view && hideElement(view));
+    Object.values(this.overlays).forEach(view => view && hideElement(view));
   }
 
   /**
-   * Muestra una vista específica y oculta las demás
-   * @param {string} viewName - Nombre de la vista a mostrar ('rating', 'form', 'roulette', 'prize')
+   * Muestra una vista principal, ocultando las demás
+   * @param {string} viewName - Nombre de la vista a mostrar
    */
   showView(viewName) {
-    if (!this.views[viewName]) {
-      console.error(`La vista "${viewName}" no existe.`);
+    if (!this.mainViews[viewName]) {
+      console.error(`La vista principal "${viewName}" no existe.`);
       return;
     }
 
-    // Ocultar la vista actual si existe
-    if (this.currentView && this.views[this.currentView]) {
-      hideElement(this.views[this.currentView]);
+    // Ocultar todas las vistas principales
+    for (const view of Object.values(this.mainViews)) {
+      if (view) hideElement(view);
     }
 
-    // Mostrar la nueva vista
-    showElement(this.views[viewName]);
-    this.currentView = viewName;
+    // Mostrar la vista solicitada
+    showElement(this.mainViews[viewName]);
+  }
+
+  /**
+   * Muestra un overlay
+   * @param {string} overlayName - Nombre del overlay a mostrar
+   */
+  showOverlay(overlayName) {
+    if (this.overlays[overlayName]) {
+      showElement(this.overlays[overlayName]);
+    }
+  }
+
+  /**
+   * Oculta un overlay
+   * @param {string} overlayName - Nombre del overlay a ocultar
+   */
+  hideOverlay(overlayName) {
+    if (this.overlays[overlayName]) {
+      hideElement(this.overlays[overlayName]);
+    }
   }
 }
 
