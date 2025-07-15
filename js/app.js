@@ -243,7 +243,6 @@ class App {
     this.sendDataToN8N(payload);
     
     // La lógica de la interfaz continúa inmediatamente
-    hideElement(this.container);
     rouletteManager.show(rating);
   }
 
