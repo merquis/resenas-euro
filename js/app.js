@@ -12,6 +12,7 @@ class App {
     this.codigoRecompensa = null;
     this.resenaBtn = null;
     this.googleTimerInterval = null;
+    this.currentFormData = null; // Para guardar temporalmente los datos del formulario
   }
 
   /**
@@ -113,16 +114,14 @@ class App {
    */
   handleFormSubmit(formData) {
     const rating = ratingManager.getRating();
-    const payload = {
+    
+    // Guardamos los datos del formulario y la valoración para usarlos después
+    this.currentFormData = {
       ...formData,
-      review: formData.feedback,
       rating: rating,
       lang: languageManager.getCurrentLanguage(),
       timestamp: new Date().toISOString()
     };
-    delete payload.feedback;
-
-    this.sendDataToN8N(payload);
     
     rouletteManager.prepare(rating);
     viewManager.showOverlay('roulette');
@@ -138,6 +137,18 @@ class App {
 
     const prizeCode = formatPrizeCode(prize, rating);
     this.codigoRecompensa.innerHTML = prizeCode;
+
+    // Ahora construimos el payload final y lo enviamos a n8n
+    const payload = {
+      ...this.currentFormData,
+      review: this.currentFormData.feedback,
+      prize: prize,
+      prizeCode: prizeCode.replace(/<br>/g, ' ') // Limpiamos el código por si tiene HTML
+    };
+    delete payload.feedback; // Eliminamos la clave original
+
+    this.sendDataToN8N(payload);
+    this.currentFormData = null; // Limpiamos los datos guardados
 
     if (rating === 5) {
       showElement(this.resenaBtn);
