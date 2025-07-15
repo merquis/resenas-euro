@@ -57,7 +57,7 @@ class App {
     rouletteManager.init();
 
     // Configurar callbacks
-    formManager.setOnSubmit(() => this.handleFormSubmit());
+    formManager.setOnSubmit((formData) => this.handleFormSubmit(formData));
     rouletteManager.setOnSpinComplete((prize, rating) => this.handleSpinComplete(prize, rating));
   }
 
@@ -206,14 +206,34 @@ class App {
 
   /**
    * Maneja el envío del formulario
+   * @param {object} formData - Datos básicos del formulario
    */
-  handleFormSubmit() {
+  async handleFormSubmit(formData) {
     const rating = ratingManager.getRating();
+
+    // Construir el payload completo para n8n
+    const payload = {
+      ...formData,
+      rating: rating,
+      lang: languageManager.getCurrentLanguage(),
+      timestamp: new Date().toISOString()
+    };
+
+    // Enviar datos a n8n
+    try {
+      await fetch(CONFIG.n8nWebhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+    } catch (error) {
+      console.error('Error al enviar los datos a n8n:', error);
+    }
     
-    // Guardar datos (aquí podrías enviarlos a un servidor)
-    const formData = formManager.getFormData();
-    console.log('Datos capturados:', formData);
-    
+    // Ocultar el contenedor principal y mostrar la ruleta
+    hideElement(this.container);
     rouletteManager.show(rating);
   }
 

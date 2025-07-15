@@ -1,8 +1,6 @@
 // Módulo de gestión del formulario
 import { showElement, hideElement, isValidEmail } from './utils.js';
 import { languageManager } from './language.js';
-import { ratingManager } from './rating.js'; // Importar ratingManager
-import { CONFIG } from './config.js';
 
 export class FormManager {
   constructor() {
@@ -14,7 +12,6 @@ export class FormManager {
     this.nameInput = null;
     this.emailInput = null;
     this.onSubmitCallback = null;
-    this.currentRating = 0;
   }
 
   /**
@@ -35,7 +32,6 @@ export class FormManager {
     this.feedbackTextarea = this.feedbackGroup.querySelector('textarea');
     this.submitButton = document.getElementById('submitText');
     
-    // Obtener inputs por su placeholder
     const inputs = this.form.querySelectorAll('input');
     inputs.forEach(input => {
       if (input.dataset.placeholder === 'namePlaceholder') {
@@ -50,18 +46,15 @@ export class FormManager {
    * Configura los event listeners
    */
   setupEventListeners() {
-    // Submit del formulario
     this.form.addEventListener('submit', (e) => {
       e.preventDefault();
       this.handleSubmit();
     });
 
-    // Validación en tiempo real del email
     this.emailInput.addEventListener('blur', () => {
       this.validateEmail();
     });
 
-    // Actualizar textos cuando cambie el idioma
     window.addEventListener('languageChanged', () => {
       this.updateButtonText();
     });
@@ -72,16 +65,13 @@ export class FormManager {
    * @param {number} rating - Valoración del usuario
    */
   show(rating) {
-    this.currentRating = rating;
     showElement(this.formSection);
 
     if (rating < 5) {
-      // Para valoraciones bajas, mostrar campo de feedback
       showElement(this.feedbackGroup);
       this.feedbackTextarea.required = true;
       this.submitButton.textContent = languageManager.getTranslation('submitBtn');
     } else {
-      // Para 5 estrellas, ocultar campo de feedback
       hideElement(this.feedbackGroup);
       this.feedbackTextarea.required = false;
       this.submitButton.textContent = languageManager.getTranslation('continueBtn');
@@ -123,9 +113,7 @@ export class FormManager {
    * @param {string} message - Mensaje de error
    */
   showError(field, message) {
-    // Remover error previo si existe
     this.hideError(field);
-
     const errorDiv = document.createElement('div');
     errorDiv.className = 'field-error';
     errorDiv.textContent = message;
@@ -146,39 +134,12 @@ export class FormManager {
   /**
    * Maneja el envío del formulario
    */
-  async handleSubmit() {
-    // Validar campos
+  handleSubmit() {
     if (!this.validateForm()) {
       return;
     }
-
-    // Obtener datos del formulario
-    const formData = {
-      name: this.nameInput.value.trim(),
-      email: this.emailInput.value.trim(),
-      review: this.feedbackTextarea.value.trim(),
-      rating: ratingManager.getRating(), // Obtener la valoración directamente del gestor de ratings
-      lang: languageManager.getCurrentLanguage(),
-      timestamp: new Date().toISOString() // Enviar timestamp en formato ISO 8601 (UTC)
-    };
-
-    // Enviar datos a n8n
-    try {
-      await fetch(CONFIG.n8nWebhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-    } catch (error) {
-      console.error('Error al enviar los datos a n8n:', error);
-      // Opcional: manejar el error, por ejemplo, mostrando un mensaje al usuario
-    }
-
-    // Ejecutar callback si existe
     if (this.onSubmitCallback) {
-      this.onSubmitCallback(this.getFormData()); // Pasamos los datos originales sin lang
+      this.onSubmitCallback(this.getFormData());
     }
   }
 
@@ -189,7 +150,6 @@ export class FormManager {
   validateForm() {
     let isValid = true;
 
-    // Validar nombre
     if (this.nameInput.value.trim() === '') {
       this.showError(this.nameInput, 'Este campo es obligatorio');
       isValid = false;
@@ -197,12 +157,10 @@ export class FormManager {
       this.hideError(this.nameInput);
     }
 
-    // Validar email
     if (!this.validateEmail()) {
       isValid = false;
     }
 
-    // Validar feedback si es requerido
     if (this.feedbackTextarea.required && this.feedbackTextarea.value.trim() === '') {
       this.showError(this.feedbackTextarea, 'Este campo es obligatorio');
       isValid = false;
@@ -244,5 +202,4 @@ export class FormManager {
   }
 }
 
-// Exportar instancia singleton
 export const formManager = new FormManager();
