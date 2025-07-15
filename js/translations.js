@@ -30,7 +30,7 @@ export const translations = {
     continueBtn: 'Continuar',
     
     // Google Review - URGENCIA EXTREMA
-    googleReviewTitle: '¡Gracias! Por favor, finaliza tu reseña.',
+    googleReviewTitle: '¡Último paso! Completa tu reseña. Recibirás el código de tu premio por email automáticamente',
     googleBtn: 'Completar reseña',
     googleReviewBtn: 'CONFIRMAR MI PREMIO',
     

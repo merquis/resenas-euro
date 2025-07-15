@@ -118,7 +118,7 @@ class App {
     viewManager.hideOverlay('roulette');
 
     const prizeCode = formatPrizeCode(prize, rating);
-    this.codigoRecompensa.textContent = prizeCode;
+    this.codigoRecompensa.innerHTML = prizeCode;
 
     if (rating === 5) {
       showElement(this.resenaBtn);
@@ -133,15 +133,21 @@ class App {
    */
   startGoogleTimer() {
     const googleTimerEl = document.getElementById('googleTimer');
-    let timeLeft = 30;
+    let timeLeft = 30 * 60; // 30 minutos en segundos
 
     this.googleTimerInterval = setInterval(() => {
       if (googleTimerEl) {
-        googleTimerEl.textContent = `00:${timeLeft.toString().padStart(2, '0')}`;
-        if (timeLeft <= 10) {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        
+        googleTimerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        
+        if (timeLeft <= 60) { // Resaltar en el último minuto
           googleTimerEl.style.color = '#ff0000';
         }
+        
         timeLeft--;
+        
         if (timeLeft < 0) {
           clearInterval(this.googleTimerInterval);
           googleTimerEl.textContent = '¡EXPIRADO!';

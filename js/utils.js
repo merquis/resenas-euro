@@ -75,5 +75,5 @@ export function isValidEmail(email) {
  */
 export function formatPrizeCode(prize, rating) {
   const code = generateRandomCode();
-  return `${prize} | EURO-${code}${rating}`;
+  return `${prize}<br>EURO-${code}${rating}`;
 }
