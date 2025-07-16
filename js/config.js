@@ -21,7 +21,7 @@ export const CONFIG = {
   n8nWebhookUrl: 'https://n8n-n8n.hpv7eo.easypanel.host/webhook/guardar-lead',
 
   // URL del webhook de n8n para verificar si un email ya existe
-  n8nVerifyEmailUrl: 'https://n8n-n8n.hpv7eo.easypanel.host/webhook-test/verificar-email',
+  n8nVerifyEmailUrl: 'https://n8n-n8n.hpv7eo.easypanel.host/webhook/verificar-email',
   
   // Idioma por defecto
   defaultLanguage: 'es'
