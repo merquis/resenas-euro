@@ -5,7 +5,7 @@ import { ratingManager } from './rating.js';
 import { formManager } from './form.js';
 import { rouletteManager } from './roulette.js';
 import { viewManager } from './viewManager.js';
-import { formatPrizeCode, showElement } from './utils.js';
+import { formatPrizeCode, showElement, hideElement } from './utils.js';
 
 class App {
   constructor() {
@@ -133,33 +133,50 @@ class App {
    * @param {number} rating - Valoración del usuario
    */
   handleSpinComplete(prize, rating) {
-    viewManager.hideOverlay('roulette');
+    // Pausa de 1 segundo para que el usuario vea el premio en la ruleta
+    setTimeout(() => {
+      viewManager.hideOverlay('roulette');
 
-    // Generamos el código y lo que se mostrará en la UI por separado
-    const randomPart = Math.random().toString().slice(2, 5); // Generamos 3 dígitos aleatorios
-    const justTheCode = `EURO-${randomPart}${rating}`;
-    const displayCode = `${prize}<br>${justTheCode}`;
+      // Generamos el código internamente
+      const randomPart = Math.random().toString().slice(2, 5); // Generamos 3 dígitos aleatorios
+      const justTheCode = `EURO-${randomPart}${rating}`;
+      
+      // Mostramos el premio y el mensaje del email personalizado
+      let prizeByEmailMessage = languageManager.getTranslation('prizeByEmail');
+      const highlightedEmail = `<span class="highlight-email">${this.currentFormData.email}</span>`;
+      prizeByEmailMessage = prizeByEmailMessage
+        .replace('{{name}}', this.currentFormData.name)
+        .replace('{{email}}', highlightedEmail)
+        .replace(/\n/g, '<br>'); // Reemplazar saltos de línea con <br>
+      
+      const displayCode = `${prize}<br><span class="email-message">${prizeByEmailMessage}</span>`;
+      this.codigoRecompensa.innerHTML = displayCode;
 
-    this.codigoRecompensa.innerHTML = displayCode;
+      // Ocultamos la sección de validez
+      const expiryWarning = document.querySelector('.expiry-warning');
+      if (expiryWarning) {
+        hideElement(expiryWarning);
+      }
 
-    // Ahora construimos el payload final con las claves correctas
-    const payload = {
-      ...this.currentFormData,
-      review: this.currentFormData.feedback,
-      premio: prize,
-      codigoPremio: justTheCode
-    };
-    delete payload.feedback; // Eliminamos la clave original
+      // Construimos y enviamos el payload a N8N
+      const payload = {
+        ...this.currentFormData,
+        review: this.currentFormData.feedback,
+        premio: prize,
+        codigoPremio: justTheCode
+      };
+      delete payload.feedback;
 
-    this.sendDataToN8N(payload);
-    this.currentFormData = null; // Limpiamos los datos guardados
+      this.sendDataToN8N(payload);
+      this.currentFormData = null;
 
-    if (rating === 5) {
-      showElement(this.resenaBtn);
-      this.startGoogleTimer();
-    }
+      if (rating === 5) {
+        showElement(this.resenaBtn);
+        this.startGoogleTimer();
+      }
 
-    viewManager.showView('prize');
+      viewManager.showView('prize');
+    }, 1000);
   }
 
   /**

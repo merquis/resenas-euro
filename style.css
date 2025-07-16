@@ -396,6 +396,17 @@ body {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+.email-warning-text {
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
+  opacity: 0.9;
+  margin-bottom: 20px;
+  padding: 10px;
+  background: rgba(255, 215, 0, 0.1);
+  border-radius: 8px;
+}
+
 .prizes-today {
   text-align: center;
   margin-bottom: 20px;
@@ -855,4 +866,16 @@ body {
   .roulette-subtitle {
     font-size: 16px;
   }
+}
+
+.email-message {
+  display: block;
+  font-size: 1rem;
+  color: #fff;
+  margin-top: 10px;
+}
+
+.highlight-email {
+  color: #ffd700;
+  font-weight: bold;
 }
