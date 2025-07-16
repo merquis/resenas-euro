@@ -173,7 +173,8 @@ export class FormManager {
       console.log('Datos de verificación (JSON parseado):', result);
 
       // n8n devuelve un array, accedemos al primer elemento.
-      if (result && result[0] && result[0].existe) {
+      const data = result[0];
+      if (data && data.existe === true) {
         console.log('El email existe. Mostrando error.');
         this.showError(this.emailInput, 'Este correo electrónico ya ha sido utilizado');
         return; // Detiene el envío del formulario
@@ -181,8 +182,9 @@ export class FormManager {
       console.log('El email no existe o la verificación ha pasado. Continuando...');
     } catch (error) {
       console.error('Error CRÍTICO al verificar el email:', error);
-      // Opcional: decidir si se debe detener el formulario si la verificación falla
-      // Por ahora, permitiremos que continúe si el servicio de verificación no está disponible
+      // Mostramos un error genérico y detenemos el envío si la verificación falla.
+      this.showError(this.emailInput, 'No se pudo verificar el email. Inténtalo de nuevo.');
+      return;
     }
 
 
