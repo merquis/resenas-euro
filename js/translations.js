@@ -121,7 +121,7 @@ export const translations = {
     privacyPolicy: 'Ich habe die Datenschutzbestimmungen <a href="#" id="openPrivacyPopup">gelesen</a> und akzeptiere sie.',
     submitBtn: 'Weiter',
     continueBtn: 'Weiter',
-    googleReviewTitle: 'Letzter Schritt! Vervollständigen Sie Ihre Bewertung. Sie erhalten Ihren Preicode automatisch per E-Mail',
+    googleReviewTitle: 'Letzter Schritt! Vervollständigen Sie Ihre Bewertung. Sie erhalten Ihren Preiscode automatisch per E-Mail',
     googleBtn: 'BEWERTUNG ABSCHLIESSEN',
     googleReviewBtn: 'MEINEN PREIS BESTÄTIGEN',
     spinBtn: 'Drehen Sie das Rad',
