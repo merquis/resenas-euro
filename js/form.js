@@ -11,6 +11,8 @@ export class FormManager {
     this.submitButton = null;
     this.nameInput = null;
     this.emailInput = null;
+    this.privacyPolicyCheckbox = null;
+    this.privacyPolicyLabel = null;
     this.onSubmitCallback = null;
   }
 
@@ -31,6 +33,8 @@ export class FormManager {
     this.feedbackGroup = document.getElementById('feedback-group');
     this.feedbackTextarea = this.feedbackGroup.querySelector('textarea');
     this.submitButton = document.getElementById('submitText');
+    this.privacyPolicyCheckbox = document.getElementById('privacyPolicy');
+    this.privacyPolicyLabel = document.getElementById('privacyPolicyLabel');
     
     const inputs = this.form.querySelectorAll('input');
     inputs.forEach(input => {
@@ -57,6 +61,7 @@ export class FormManager {
 
     window.addEventListener('languageChanged', () => {
       this.updateButtonText();
+      this.updatePrivacyPolicyLabel();
     });
   }
 
@@ -65,6 +70,7 @@ export class FormManager {
    * @param {number} rating - Valoración del usuario
    */
   prepare(rating) {
+    this.updatePrivacyPolicyLabel();
     if (rating < 5) {
       showElement(this.feedbackGroup);
       this.feedbackTextarea.required = true;
@@ -74,6 +80,15 @@ export class FormManager {
       this.feedbackTextarea.required = false;
       this.submitButton.textContent = languageManager.getTranslation('continueBtn');
     }
+  }
+
+  /**
+   * Actualiza el texto del label de la política de privacidad
+   */
+  updatePrivacyPolicyLabel() {
+    const labelText = languageManager.getTranslation('privacyPolicy');
+    console.log('Privacy Policy Label Text:', labelText);
+    this.privacyPolicyLabel.innerHTML = labelText;
   }
 
   /**
@@ -164,6 +179,13 @@ export class FormManager {
       isValid = false;
     } else {
       this.hideError(this.feedbackTextarea);
+    }
+
+    if (!this.privacyPolicyCheckbox.checked) {
+      this.showError(this.privacyPolicyCheckbox, 'Debes aceptar la política de privacidad');
+      isValid = false;
+    } else {
+      this.hideError(this.privacyPolicyCheckbox);
     }
 
     return isValid;

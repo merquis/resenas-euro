@@ -13,6 +13,9 @@ class App {
     this.resenaBtn = null;
     this.googleTimerInterval = null;
     this.currentFormData = null; // Para guardar temporalmente los datos del formulario
+    this.privacyPopup = null;
+    this.closePrivacyPopupBtn = null;
+    this.privacyPopupContent = null;
   }
 
   /**
@@ -34,6 +37,9 @@ class App {
   cacheElements() {
     this.codigoRecompensa = document.getElementById('codigoRecompensa');
     this.resenaBtn = document.getElementById('resenaBtn');
+    this.privacyPopup = document.getElementById('privacyPopup');
+    this.closePrivacyPopupBtn = document.getElementById('closePrivacyPopup');
+    this.privacyPopupContent = document.getElementById('privacyPopupContent');
   }
 
   /**
@@ -63,6 +69,20 @@ class App {
       window.open(CONFIG.googleReviewUrl, '_blank');
       this.showSuccessMessage();
     };
+
+    // Listeners para el popup de privacidad
+    document.body.addEventListener('click', (e) => {
+      if (e.target.id === 'openPrivacyPopup') {
+        e.preventDefault();
+        this.showPrivacyPopup();
+      }
+    });
+    this.closePrivacyPopupBtn.addEventListener('click', () => this.hidePrivacyPopup());
+    this.privacyPopup.addEventListener('click', (e) => {
+      if (e.target === this.privacyPopup) {
+        this.hidePrivacyPopup();
+      }
+    });
   }
 
   /**
@@ -175,8 +195,24 @@ class App {
         this.startGoogleTimer();
       }
 
-      viewManager.showView('prize');
+    viewManager.showView('prize');
     }, 1000);
+  }
+
+  /**
+   * Muestra el popup de política de privacidad
+   */
+  showPrivacyPopup() {
+    const privacyText = languageManager.getTranslation('privacyPolicyFullText');
+    this.privacyPopupContent.innerHTML = privacyText;
+    this.privacyPopup.classList.remove('hidden');
+  }
+
+  /**
+   * Oculta el popup de política de privacidad
+   */
+  hidePrivacyPopup() {
+    this.privacyPopup.classList.add('hidden');
   }
 
   /**

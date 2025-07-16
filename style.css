@@ -447,6 +447,19 @@ body {
   resize: vertical;
 }
 
+.privacy-policy-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.privacy-policy-group label a {
+  color: #ffd700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .premium-submit {
   width: 100%;
   background: linear-gradient(135deg, #e74c3c, #c0392b);
@@ -878,4 +891,61 @@ body {
 .highlight-email {
   color: #ffd700;
   font-weight: bold;
+}
+
+/* POPUP POLÍTICA DE PRIVACIDAD */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20000;
+}
+
+.popup-content {
+  background: #1a1a2e;
+  padding: 30px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  border: 1px solid #ffd700;
+}
+
+.popup-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.popup-content h2 {
+  margin-bottom: 15px;
+  color: #ffd700;
+}
+
+.popup-content h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #ffed4e;
+}
+
+.popup-content p, .popup-content li {
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.popup-content a {
+  color: #ffd700;
 }

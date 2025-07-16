@@ -116,6 +116,10 @@
           <div class="form-group" id="feedback-group">
             <textarea class="form-input form-textarea" data-placeholder="feedbackPlaceholder" required></textarea>
           </div>
+          <div class="form-group privacy-policy-group">
+            <input type="checkbox" id="privacyPolicy" name="privacyPolicy" required>
+            <label for="privacyPolicy" id="privacyPolicyLabel"></label>
+          </div>
           <button type="submit" class="submit-btn premium-submit">
             <span id="submitText"></span>
           </button>
@@ -160,6 +164,14 @@
         </div>
       </div>
       <button id="spinBtn" class="confirmation-btn spin-premium"></button>
+    </div>
+  </div>
+
+  <!-- Popup de Política de Privacidad -->
+  <div id="privacyPopup" class="popup-overlay hidden">
+    <div class="popup-content">
+      <button id="closePrivacyPopup" class="popup-close">&times;</button>
+      <div id="privacyPopupContent"></div>
     </div>
   </div>
 
