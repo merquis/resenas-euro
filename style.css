@@ -717,6 +717,43 @@ body {
   background-size: cover;
 }
 
+/* NUEVO SELECTOR DE IDIOMA CON BANDERAS */
+.language-selector-container {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  gap: 12px; /* Aumentar separación */
+  z-index: 100;
+}
+
+.language-flag-btn {
+  width: 35px; /* Tamaño unificado */
+  height: 26px; /* Tamaño unificado */
+  background-color: rgba(0, 0, 0, 0.2); /* Fondo sutil para consistencia */
+  border: 2px solid transparent;
+  border-radius: 5px; /* Bordes un poco más redondeados */
+  background-size: contain; /* Evita que la imagen se deforme */
+  background-position: center;
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0.7;
+}
+
+.language-flag-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.language-flag-btn.active {
+  border-color: #ffd700;
+  opacity: 1;
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+
 /* RESPONSIVE */
 @media (max-width: 480px) {
   .main-wrapper {

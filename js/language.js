@@ -5,67 +5,35 @@ import { CONFIG } from './config.js';
 export class LanguageManager {
   constructor() {
     this.currentLanguage = CONFIG.defaultLanguage;
-    this.dropdown = null;
-    this.button = null;
-    this.options = null;
-    this.currentFlag = null;
-    this.currentLang = null;
+    this.container = null;
   }
 
   /**
    * Inicializa el gestor de idiomas
    */
   init() {
-    this.cacheElements();
-    this.setupEventListeners();
-    this.initializeFlags();
+    this.container = document.getElementById('language-selector-container');
+    this.createLanguageButtons();
     this.updateLanguage(this.currentLanguage);
   }
 
   /**
-   * Cachea los elementos del DOM
+   * Crea los botones de idioma (banderas)
    */
-  cacheElements() {
-    this.dropdown = document.getElementById('languageDropdown');
-    this.button = document.getElementById('languageBtn');
-    this.options = document.getElementById('languageOptions');
-    this.currentFlag = document.getElementById('currentFlag');
-    this.currentLang = document.getElementById('currentLang');
-  }
-
-  /**
-   * Configura los event listeners
-   */
-  setupEventListeners() {
-    // Toggle dropdown
-    this.button.addEventListener('click', (e) => {
-      e.stopPropagation();
-      this.toggleDropdown();
-    });
-
-    // Selección de idioma
-    this.options.addEventListener('click', (e) => {
-      const option = e.target.closest('.language-option');
-      if (option) {
-        const lang = option.dataset.lang;
+  createLanguageButtons() {
+    const languages = ['es', 'en', 'de', 'fr']; // Orden deseado
+    languages.forEach(lang => {
+      const button = document.createElement('button');
+      button.className = 'language-flag-btn';
+      button.dataset.lang = lang;
+      button.style.backgroundImage = `url('${languageFlags[lang]}')`;
+      button.title = languageCodes[lang]; // Tooltip con el nombre del idioma
+      
+      button.addEventListener('click', () => {
         this.updateLanguage(lang);
-        this.closeDropdown();
-      }
-    });
+      });
 
-    // Cerrar dropdown al hacer clic fuera
-    document.addEventListener('click', () => this.closeDropdown());
-  }
-
-  /**
-   * Inicializa las banderas
-   */
-  initializeFlags() {
-    document.querySelectorAll('.language-option .flag').forEach(flagEl => {
-      const lang = flagEl.parentElement.dataset.lang;
-      if (languageFlags[lang]) {
-        flagEl.style.backgroundImage = `url('${languageFlags[lang]}')`;
-      }
+      this.container.appendChild(button);
     });
   }
 
@@ -76,13 +44,9 @@ export class LanguageManager {
   updateLanguage(lang) {
     this.currentLanguage = lang;
     
-    // Actualizar bandera y código
-    this.currentFlag.style.backgroundImage = `url('${languageFlags[lang]}')`;
-    this.currentLang.textContent = languageCodes[lang];
-
-    // Actualizar opción activa
-    document.querySelectorAll('.language-option').forEach(opt => {
-      opt.classList.toggle('active', opt.dataset.lang === lang);
+    // Actualizar botón activo
+    document.querySelectorAll('.language-flag-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
     });
 
     // Actualizar textos
@@ -106,7 +70,7 @@ export class LanguageManager {
     document.querySelectorAll('[data-text]').forEach(el => {
       const key = el.dataset.text;
       if (trans[key]) {
-        el.textContent = trans[key];
+        el.innerHTML = trans[key]; // Usar innerHTML para soportar etiquetas como <a>
       }
     });
 
@@ -139,20 +103,6 @@ export class LanguageManager {
    */
   getTranslatedPrizes() {
     return translations[this.currentLanguage].prizes;
-  }
-
-  /**
-   * Toggle del dropdown
-   */
-  toggleDropdown() {
-    this.dropdown.classList.toggle('open');
-  }
-
-  /**
-   * Cierra el dropdown
-   */
-  closeDropdown() {
-    this.dropdown.classList.remove('open');
   }
 
   /**
