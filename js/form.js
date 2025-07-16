@@ -1,6 +1,7 @@
 // Módulo de gestión del formulario
 import { showElement, hideElement, isValidEmail } from './utils.js';
 import { languageManager } from './language.js';
+import { CONFIG } from './config.js';
 
 export class FormManager {
   constructor() {
@@ -147,10 +148,44 @@ export class FormManager {
   /**
    * Maneja el envío del formulario
    */
-  handleSubmit() {
+  async handleSubmit() {
     if (!this.validateForm()) {
       return;
     }
+
+    // Verificación de email duplicado
+    try {
+      const email = this.emailInput.value.trim();
+      const response = await fetch(CONFIG.n8nVerifyEmailUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email })
+      });
+
+      console.log('Respuesta de verificación recibida:', response);
+      if (!response.ok) {
+        throw new Error('Error en la respuesta del servidor de verificación');
+      }
+
+      const result = await response.json();
+      console.log('Datos de verificación (JSON parseado):', result);
+
+      // n8n devuelve un array, accedemos al primer elemento.
+      if (result && result[0] && result[0].existe) {
+        console.log('El email existe. Mostrando error.');
+        this.showError(this.emailInput, 'Este correo electrónico ya ha sido utilizado');
+        return; // Detiene el envío del formulario
+      }
+      console.log('El email no existe o la verificación ha pasado. Continuando...');
+    } catch (error) {
+      console.error('Error CRÍTICO al verificar el email:', error);
+      // Opcional: decidir si se debe detener el formulario si la verificación falla
+      // Por ahora, permitiremos que continúe si el servicio de verificación no está disponible
+    }
+
+
     if (this.onSubmitCallback) {
       this.onSubmitCallback(this.getFormData());
     }
