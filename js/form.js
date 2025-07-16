@@ -164,24 +164,19 @@ export class FormManager {
         body: JSON.stringify({ email })
       });
 
-      console.log('Respuesta de verificación recibida:', response);
       if (!response.ok) {
         throw new Error('Error en la respuesta del servidor de verificación');
       }
 
       const result = await response.json();
-      console.log('Datos de verificación (JSON parseado):', result);
 
-      // n8n devuelve un array, accedemos al primer elemento.
-      const data = result[0];
-      if (data && data.existe === true) {
-        console.log('El email existe. Mostrando error.');
+      // La respuesta de n8n es un objeto directo.
+      if (result && result.existe === true) {
         this.showError(this.emailInput, 'Este correo electrónico ya ha sido utilizado');
         return; // Detiene el envío del formulario
       }
-      console.log('El email no existe o la verificación ha pasado. Continuando...');
     } catch (error) {
-      console.error('Error CRÍTICO al verificar el email:', error);
+      console.error('Error al verificar el email:', error);
       // Mostramos un error genérico y detenemos el envío si la verificación falla.
       this.showError(this.emailInput, 'No se pudo verificar el email. Inténtalo de nuevo.');
       return;
