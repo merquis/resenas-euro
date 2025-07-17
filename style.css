@@ -906,9 +906,23 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 15px;
-    background: linear-gradient(180deg, rgba(26, 26, 46, 0) 0%, #1a1a2e 50%);
+    padding: 0; /* Sin padding para que el botón ocupe todo */
+    background: #1a1a2e; /* Fondo sólido */
     z-index: 1000;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Estilo específico para el botón en la barra fija */
+  #fixed-cta-bar .confirmation-btn {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    border-radius: 0; /* Botón rectangular */
+    background: linear-gradient(135deg, #f39c12, #e67e22); /* Color naranja */
+    box-shadow: none;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 22px;
   }
 
   /* Ocultamos visualmente los botones originales en móvil, pero los mantenemos accesibles para scripts */
