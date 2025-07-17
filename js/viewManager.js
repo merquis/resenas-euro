@@ -5,6 +5,7 @@ class ViewManager {
   constructor() {
     this.mainViews = {};
     this.overlays = {};
+    this.currentView = null; // Para saber qué vista restaurar
     this.fixedCta = {
       bar: null,
       btn: null,
@@ -73,6 +74,7 @@ class ViewManager {
     }
 
     // Mostrar la vista solicitada
+    this.currentView = viewName;
     showElement(this.mainViews[viewName]);
     this.updateFixedCta(viewName);
 
@@ -149,6 +151,10 @@ class ViewManager {
   showOverlay(overlayName) {
     if (this.overlays[overlayName]) {
       showElement(this.overlays[overlayName]);
+      // Ocultar la barra CTA si se muestra la ruleta en móvil
+      if (overlayName === 'roulette' && window.innerWidth <= 480) {
+        hideElement(this.fixedCta.bar);
+      }
     }
   }
 
@@ -159,6 +165,10 @@ class ViewManager {
   hideOverlay(overlayName) {
     if (this.overlays[overlayName]) {
       hideElement(this.overlays[overlayName]);
+      // Al ocultar la ruleta, restaurar el estado del CTA fijo
+      if (overlayName === 'roulette') {
+        this.updateFixedCta(this.currentView);
+      }
     }
   }
 }
