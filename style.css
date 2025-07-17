@@ -906,10 +906,10 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 0; /* Sin padding para que el botón ocupe todo */
-    background: #1a1a2e; /* Fondo sólido */
+    padding: 10px; /* Padding para crear márgenes laterales */
+    background: #1a1a2e;
     z-index: 1000;
-    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
   }
 
   /* Estilo específico para el botón en la barra fija */
@@ -917,12 +917,13 @@ body {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    border-radius: 0; /* Botón rectangular */
+    border-radius: 10px; /* Bordes suaves */
     background: linear-gradient(135deg, #f39c12, #e67e22); /* Color naranja */
     box-shadow: none;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    font-size: 22px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 18px; /* Reducimos la fuente para asegurar una línea */
+    white-space: nowrap; /* Forzar una sola línea */
   }
 
   /* Ocultamos visualmente los botones originales en móvil, pero los mantenemos accesibles para scripts */
