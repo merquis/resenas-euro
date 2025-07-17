@@ -893,30 +893,52 @@ body {
 
 /* MEJORAS PARA MÓVIL */
 @media (max-width: 480px) {
-  /* CTA Fijo en la parte inferior */
-  #valorarBtnContainer,
-  #feedbackForm .submit-btn,
-  #resenaBtn .google-btn {
-    position: -webkit-sticky; /* Para compatibilidad con Safari */
-    position: sticky;
+  /* --- BARRA DE ACCIÓN INFERIOR FIJA --- */
+  #valorarBtnContainer, 
+  #feedbackForm, 
+  #resenaBtn {
+    /* Contenedor que se hará fijo */
+    position: fixed;
     bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(180deg, rgba(26, 26, 46, 0) 0%, #1a1a2e 80%);
+    padding: 15px;
     z-index: 1000;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
     
-    /* Añadimos un fondo y padding para que no se solape con el texto */
-    background: linear-gradient(180deg, rgba(26, 26, 46, 0) 0%, #1a1a2e 40%);
-    padding: 20px 0;
-    margin-left: -20px; /* Compensa el padding del .container */
-    margin-right: -20px; /* Compensa el padding del .container */
-    width: calc(100% + 40px); /* Asegura que ocupe todo el ancho */
+    /* Para que no herede estilos que lo centren */
+    margin: 0; 
+    border-radius: 0;
   }
 
-  /* Ajuste para que el botón dentro del formulario ocupe el ancho correcto */
+  /* Ajustes para que el contenido principal no quede debajo de la barra fija */
+  .main-wrapper {
+    padding-bottom: 100px; /* Añade espacio en la parte inferior */
+  }
+
+  /* Estilos para los botones dentro de la barra fija */
+  #valorarBtnContainer .confirmation-btn,
   #feedbackForm .submit-btn,
   #resenaBtn .google-btn {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    border-radius: 10px; /* Bordes menos redondeados para un look de barra */
+  }
+
+  /* El formulario necesita un tratamiento especial */
+  #feedbackForm {
+    background: #1a1a2e; /* Fondo sólido para el formulario */
+    padding-bottom: 90px; /* Espacio extra para que el botón no tape el último campo */
+  }
+
+  #feedbackForm .submit-btn {
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 90%;
-    max-width: 400px;
-    margin: 0 auto;
-    display: block;
   }
 
   .urgency-timer {
