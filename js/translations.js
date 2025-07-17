@@ -1,8 +1,8 @@
 // Sistema de traducciones - OPTIMIZADO PARA MÁXIMA CONVERSIÓN
 export const translations = {
   es: {
-    title_part1: '🤔 ¿Te animas a compartir tu opinión?, tu reseña nos ayuda a mejorar cada día.',
-    title_part2: '🎉 Además como agradecimiento por tu visita, tienes un regalo garantizado en nuestra ruleta de la suerte.',
+    title_part1: '¡Comparte tu experiencia en 30 segundos! Tu opinión nos ayuda a mejorar.',
+    title_part2: '🎁 Gira nuestra ruleta y llévate un regalo seguro por tu visita.',
     prizes_subtitle: 'Alguno de nuestros premios...',
     vipBadge: '👑 ZONA VIP - PREMIOS EXCLUSIVOS 👑',
     ratingInstruction: '¿Qué tal ha sido tu experiencia?',

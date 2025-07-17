@@ -893,6 +893,32 @@ body {
 
 /* MEJORAS PARA MÓVIL */
 @media (max-width: 480px) {
+  /* CTA Fijo en la parte inferior */
+  #valorarBtnContainer,
+  #feedbackForm .submit-btn,
+  #resenaBtn .google-btn {
+    position: -webkit-sticky; /* Para compatibilidad con Safari */
+    position: sticky;
+    bottom: 0;
+    z-index: 1000;
+    
+    /* Añadimos un fondo y padding para que no se solape con el texto */
+    background: linear-gradient(180deg, rgba(26, 26, 46, 0) 0%, #1a1a2e 40%);
+    padding: 20px 0;
+    margin-left: -20px; /* Compensa el padding del .container */
+    margin-right: -20px; /* Compensa el padding del .container */
+    width: calc(100% + 40px); /* Asegura que ocupe todo el ancho */
+  }
+
+  /* Ajuste para que el botón dentro del formulario ocupe el ancho correcto */
+  #feedbackForm .submit-btn,
+  #resenaBtn .google-btn {
+    width: 90%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: block;
+  }
+
   .urgency-timer {
     font-size: 14px;
     padding: 10px;
