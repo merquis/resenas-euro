@@ -189,6 +189,12 @@ export class RatingManager {
       this.errorElement.textContent = message;
       this.errorElement.classList.remove('hidden');
       this.stars.forEach(s => s.classList.add('pulse-error')); // Iniciar animación de error
+      
+      // Scroll hacia la sección de estrellas si estamos en móvil
+      if (window.innerWidth <= 480) {
+        this.container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      
       return;
     }
 
