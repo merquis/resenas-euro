@@ -101,18 +101,24 @@ class ViewManager {
   updateFixedCta(currentView) {
     if (!this.fixedCta.bar || !this.fixedCta.btn) return;
 
+    // Ocultar todos los botones originales primero
+    Object.values(this.originalCtas).forEach(btn => btn && btn.parentElement.classList.remove('visually-hidden'));
+
     const ctaConfig = {
       initial: {
         text: document.querySelector('#valorarBtn span').textContent,
-        action: () => this.originalCtas.initial.click()
+        action: () => this.originalCtas.initial.click(),
+        originalBtnContainer: this.originalCtas.initial.parentElement
       },
       form: {
         text: document.querySelector('#submitText').textContent,
-        action: () => this.originalCtas.form.click()
+        action: () => this.originalCtas.form.click(),
+        originalBtnContainer: this.originalCtas.form
       },
       review: {
         text: document.querySelector('#resenaBtn .google-btn span').textContent,
-        action: () => this.originalCtas.review.click()
+        action: () => this.originalCtas.review.click(),
+        originalBtnContainer: this.originalCtas.review.parentElement.parentElement // #resenaBtn
       }
     };
 
@@ -120,9 +126,19 @@ class ViewManager {
       this.fixedCta.btn.textContent = ctaConfig[currentView].text;
       this.fixedCta.action = ctaConfig[currentView].action;
       showElement(this.fixedCta.bar);
+      // Ocultar el botón original correspondiente
+      if(ctaConfig[currentView].originalBtnContainer) {
+        ctaConfig[currentView].originalBtnContainer.classList.add('visually-hidden');
+      }
     } else {
       hideElement(this.fixedCta.bar);
       this.fixedCta.action = null;
+      // Asegurarse de que todos los botones originales son visibles en escritorio
+      for (const key in ctaConfig) {
+        if (ctaConfig[key].originalBtnContainer) {
+          ctaConfig[key].originalBtnContainer.classList.remove('visually-hidden');
+        }
+      }
     }
   }
 

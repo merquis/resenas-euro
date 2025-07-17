@@ -911,12 +911,18 @@ body {
     z-index: 1000;
   }
 
-  /* Ocultamos los contenedores originales de los botones en móvil */
-  #valorarBtnContainer,
-  #feedbackForm .form-group + .submit-btn, /* Selector más específico para el botón del form */
-  #resenaBtn {
-    display: none; /* Los ocultamos para reemplazarlos por la barra fija */
+  /* Ocultamos visualmente los botones originales en móvil, pero los mantenemos accesibles para scripts */
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    border: 0 !important;
   }
+
 
   .urgency-timer {
     font-size: 14px;
