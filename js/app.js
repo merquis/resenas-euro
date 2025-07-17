@@ -163,7 +163,9 @@ class App {
       
       // Mostramos el premio y el mensaje del email personalizado
       let prizeByEmailMessage = languageManager.getTranslation('prizeByEmail');
-      const highlightedEmail = `<span class="highlight-email">${this.currentFormData.email}</span>`;
+      // Añadimos un salto de línea opcional en el email para mejorar la visualización en móviles
+      const formattedEmail = this.currentFormData.email.replace('@', '@<wbr>');
+      const highlightedEmail = `<span class="highlight-email">${formattedEmail}</span>`;
       prizeByEmailMessage = prizeByEmailMessage
         .replace('{{name}}', this.currentFormData.name)
         .replace('{{email}}', highlightedEmail)
