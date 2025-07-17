@@ -5,6 +5,12 @@ class ViewManager {
   constructor() {
     this.mainViews = {};
     this.overlays = {};
+    this.fixedCta = {
+      bar: null,
+      btn: null,
+      action: null
+    };
+    this.originalCtas = {};
   }
 
   /**
@@ -15,7 +21,8 @@ class ViewManager {
     this.mainViews = {
       initial: document.querySelector('#initial-view'),
       form: document.querySelector('#formulario'),
-      prize: document.querySelector('#codigoContainer')
+      prize: document.querySelector('#codigoContainer'),
+      review: document.querySelector('#resenaBtn') // Añadimos la vista de reseña
     };
 
     // Vistas que se superponen a todo
@@ -23,9 +30,29 @@ class ViewManager {
       roulette: document.querySelector('.roulette-screen')
     };
 
+    // Barra CTA fija
+    this.fixedCta.bar = document.querySelector('#fixed-cta-bar');
+    this.fixedCta.btn = document.querySelector('#fixed-cta-btn');
+
+    // Botones de acción originales
+    this.originalCtas = {
+      initial: document.querySelector('#valorarBtn'),
+      form: document.querySelector('#feedbackForm button[type="submit"]'),
+      review: document.querySelector('#resenaBtn .google-btn')
+    };
+
     // Ocultar todas las vistas al inicio para un estado limpio
     Object.values(this.mainViews).forEach(view => view && hideElement(view));
     Object.values(this.overlays).forEach(view => view && hideElement(view));
+
+    // Event listener para el botón fijo
+    if (this.fixedCta.btn) {
+      this.fixedCta.btn.addEventListener('click', () => {
+        if (typeof this.fixedCta.action === 'function') {
+          this.fixedCta.action();
+        }
+      });
+    }
   }
 
   /**
@@ -47,6 +74,7 @@ class ViewManager {
 
     // Mostrar la vista solicitada
     showElement(this.mainViews[viewName]);
+    this.updateFixedCta(viewName);
 
     // Si es la vista del premio, mostrar la fecha actual para Canarias
     if (viewName === 'prize') {
@@ -63,6 +91,38 @@ class ViewManager {
       if (dateElement) {
         dateElement.textContent = formattedDate;
       }
+    }
+  }
+
+  /**
+   * Actualiza el estado y contenido de la barra CTA fija
+   * @param {string} currentView - El nombre de la vista actual
+   */
+  updateFixedCta(currentView) {
+    if (!this.fixedCta.bar || !this.fixedCta.btn) return;
+
+    const ctaConfig = {
+      initial: {
+        text: document.querySelector('#valorarBtn span').textContent,
+        action: () => this.originalCtas.initial.click()
+      },
+      form: {
+        text: document.querySelector('#submitText').textContent,
+        action: () => this.originalCtas.form.click()
+      },
+      review: {
+        text: document.querySelector('#resenaBtn .google-btn span').textContent,
+        action: () => this.originalCtas.review.click()
+      }
+    };
+
+    if (ctaConfig[currentView] && window.innerWidth <= 480) {
+      this.fixedCta.btn.textContent = ctaConfig[currentView].text;
+      this.fixedCta.action = ctaConfig[currentView].action;
+      showElement(this.fixedCta.bar);
+    } else {
+      hideElement(this.fixedCta.bar);
+      this.fixedCta.action = null;
     }
   }
 
