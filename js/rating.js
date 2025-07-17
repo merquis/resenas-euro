@@ -175,7 +175,14 @@ export class RatingManager {
     } else {
       text = languageManager.getTranslation('rateNow');
     }
+    // Actualizar el botón original
     this.buttonText.textContent = text;
+
+    // Actualizar también el botón de la barra fija si está visible
+    const fixedCtaBtn = document.getElementById('fixed-cta-btn');
+    if (fixedCtaBtn && !fixedCtaBtn.parentElement.classList.contains('hidden')) {
+      fixedCtaBtn.textContent = text;
+    }
   }
 
   /**
