@@ -165,7 +165,7 @@ export class RouletteManager {
       // 0.1% para CENA PARA 2 (índice 0)
       prizeIndex = 0;
     } else if (random < 0.002) {
-      // 0.1% para 50€ DESCUENTO (índice 1)
+      // 0.1% para 30€ DESCUENTO (índice 1)
       prizeIndex = 1;
     } else if (random < 0.012) {
       // 1% para BOTELLA VINO (índice 2)
