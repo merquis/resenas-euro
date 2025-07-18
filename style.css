@@ -907,7 +907,7 @@ body {
     left: 0;
     width: 100%;
     padding: 15px; /* Aumentado para más margen */
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    background: #181E37;
     z-index: 1000;
     box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
   }
