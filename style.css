@@ -907,7 +907,7 @@ body {
     left: 0;
     width: 100%;
     padding: 15px; /* Aumentado para más margen */
-    background: #1a1a2e;
+    background: transparent;
     z-index: 1000;
     box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
   }
