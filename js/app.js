@@ -203,6 +203,11 @@ class App {
         this.startGoogleTimer();
         // Forzamos la actualización del CTA para la vista de reseña en móvil
         viewManager.updateFixedCta('review');
+
+        // Hacemos scroll hacia la nueva sección en móviles
+        if (window.innerWidth <= 480) {
+          this.resenaBtn.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }
     }, 1000);
   }
