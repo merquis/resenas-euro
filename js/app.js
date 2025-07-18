@@ -15,6 +15,7 @@ class App {
     this.currentFormData = null; // Para guardar temporalmente los datos del formulario
     this.privacyPopup = null;
     this.closePrivacyPopupBtn = null;
+    this.closePrivacyTextBtn = null;
     this.privacyPopupContent = null;
   }
 
@@ -39,6 +40,7 @@ class App {
     this.resenaBtn = document.getElementById('resenaBtn');
     this.privacyPopup = document.getElementById('privacyPopup');
     this.closePrivacyPopupBtn = document.getElementById('closePrivacyPopup');
+    this.closePrivacyTextBtn = document.getElementById('closePrivacyTextBtn');
     this.privacyPopupContent = document.getElementById('privacyPopupContent');
   }
 
@@ -74,10 +76,12 @@ class App {
     document.body.addEventListener('click', (e) => {
       if (e.target.id === 'openPrivacyPopup') {
         e.preventDefault();
+        e.stopPropagation(); // Evita que el clic se propague al label
         this.showPrivacyPopup();
       }
     });
     this.closePrivacyPopupBtn.addEventListener('click', () => this.hidePrivacyPopup());
+    this.closePrivacyTextBtn.addEventListener('click', () => this.hidePrivacyPopup());
     this.privacyPopup.addEventListener('click', (e) => {
       if (e.target === this.privacyPopup) {
         this.hidePrivacyPopup();
@@ -206,7 +210,9 @@ class App {
    */
   showPrivacyPopup() {
     const privacyText = languageManager.getTranslation('privacyPolicyFullText');
+    const closeBtnText = languageManager.getTranslation('closePrivacyPopupBtn');
     this.privacyPopupContent.innerHTML = privacyText;
+    this.closePrivacyTextBtn.textContent = closeBtnText;
     this.privacyPopup.classList.remove('hidden');
   }
 

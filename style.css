@@ -1032,3 +1032,49 @@ body {
 .popup-content a {
   color: #ffd700;
 }
+
+.privacy-policy-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.privacy-check-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espacio entre el checkbox y el texto */
+}
+
+.privacy-check-wrapper label {
+  cursor: pointer; /* Muestra la manita al pasar el ratón */
+}
+
+.privacy-link {
+  font-size: 0.9em;
+  white-space: nowrap; /* Evita que el enlace se parta en dos líneas */
+  color: #ccc;
+  text-decoration: underline;
+}
+
+.popup-close-text-btn {
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+  text-transform: uppercase;
+  display: block;
+  width: fit-content;
+  margin: 20px auto 0;
+}
+
+.popup-close-text-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(243, 156, 18, 0.6);
+}

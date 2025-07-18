@@ -14,6 +14,7 @@ export class FormManager {
     this.emailInput = null;
     this.privacyPolicyCheckbox = null;
     this.privacyPolicyLabel = null;
+    this.privacyLink = null;
     this.onSubmitCallback = null;
   }
 
@@ -36,6 +37,7 @@ export class FormManager {
     this.submitButton = document.getElementById('submitText');
     this.privacyPolicyCheckbox = document.getElementById('privacyPolicy');
     this.privacyPolicyLabel = document.getElementById('privacyPolicyLabel');
+    this.privacyLink = document.getElementById('openPrivacyPopup');
     
     const inputs = this.form.querySelectorAll('input');
     inputs.forEach(input => {
@@ -88,8 +90,9 @@ export class FormManager {
    */
   updatePrivacyPolicyLabel() {
     const labelText = languageManager.getTranslation('privacyPolicy');
-    console.log('Privacy Policy Label Text:', labelText);
-    this.privacyPolicyLabel.innerHTML = labelText;
+    const linkText = languageManager.getTranslation('privacyLinkText');
+    this.privacyPolicyLabel.textContent = labelText;
+    this.privacyLink.textContent = linkText;
   }
 
   /**
