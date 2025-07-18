@@ -201,6 +201,8 @@ class App {
       if (rating === 5) {
         showElement(this.resenaBtn);
         this.startGoogleTimer();
+        // Forzamos la actualización del CTA para la vista de reseña en móvil
+        viewManager.updateFixedCta('review');
       }
     }, 1000);
   }

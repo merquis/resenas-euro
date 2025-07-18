@@ -118,9 +118,9 @@ class ViewManager {
         originalBtnContainer: this.originalCtas.form
       },
       review: {
-        text: languageManager.getTranslation('googleBtn'),
+        text: document.querySelector('#resenaBtn .google-btn span').textContent,
         action: () => this.originalCtas.review.click(),
-        originalBtnContainer: this.originalCtas.review.parentElement
+        originalBtnContainer: this.originalCtas.review.parentElement.parentElement // #resenaBtn
       }
     };
 
@@ -130,21 +130,14 @@ class ViewManager {
       showElement(this.fixedCta.bar);
       // Ocultar el botón original correspondiente
       if(ctaConfig[currentView].originalBtnContainer) {
-        // Special case for review view, as it's nested differently
-        if (currentView === 'review') {
-          this.mainViews.review.classList.add('visually-hidden');
-        } else {
-          ctaConfig[currentView].originalBtnContainer.classList.add('visually-hidden');
-        }
+        ctaConfig[currentView].originalBtnContainer.classList.add('visually-hidden');
       }
     } else {
       hideElement(this.fixedCta.bar);
       this.fixedCta.action = null;
       // Asegurarse de que todos los botones originales son visibles en escritorio
       for (const key in ctaConfig) {
-        if (key === 'review') {
-          this.mainViews.review.classList.remove('visually-hidden');
-        } else if (ctaConfig[key].originalBtnContainer) {
+        if (ctaConfig[key].originalBtnContainer) {
           ctaConfig[key].originalBtnContainer.classList.remove('visually-hidden');
         }
       }
@@ -173,7 +166,7 @@ class ViewManager {
     if (this.overlays[overlayName]) {
       hideElement(this.overlays[overlayName]);
       // Al ocultar la ruleta, restaurar el estado del CTA fijo
-      if (overlayName === 'roulette') {
+      if (overlayName === 'roulette' && this.currentView) {
         this.updateFixedCta(this.currentView);
       }
     }
