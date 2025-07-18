@@ -3,7 +3,7 @@ export const translations = {
   es: {
     title_part1: '¡Comparte tu experiencia en 30 segundos! Tu opinión nos ayuda a mejorar. ✨',
     title_part2: '🎁 Gira nuestra ruleta y llévate un regalo seguro por tu visita.',
-    prizes_subtitle: 'Alguno de nuestros premios...',
+    prizes_subtitle: 'Estos son algunos de nuestros premios.',
     vipBadge: '👑 ZONA VIP - PREMIOS EXCLUSIVOS 👑',
     ratingInstruction: '¿Qué tal ha sido tu experiencia?',
     dinnerForTwo: 'CENA PARA 2',
