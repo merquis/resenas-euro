@@ -120,7 +120,7 @@ class ViewManager {
       review: {
         text: document.querySelector('#resenaBtn .google-btn span').textContent,
         action: () => this.originalCtas.review.click(),
-        originalBtnContainer: this.originalCtas.review.parentElement.parentElement // #resenaBtn
+        originalBtnContainer: document.getElementById('googleBtnContainer')
       }
     };
 
