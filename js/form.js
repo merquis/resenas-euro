@@ -158,7 +158,7 @@ export class FormManager {
 
     // Verificación de email duplicado
     try {
-      const email = this.emailInput.value.trim();
+      const email = this.emailInput.value.trim().toLowerCase();
       const response = await fetch(CONFIG.n8nVerifyEmailUrl, {
         method: 'POST',
         headers: {
@@ -250,7 +250,7 @@ export class FormManager {
   getFormData() {
     return {
       name: this.nameInput.value.trim(),
-      email: this.emailInput.value.trim(),
+      email: this.emailInput.value.trim().toLowerCase(),
       feedback: this.feedbackTextarea.value.trim()
     };
   }
