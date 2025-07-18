@@ -118,9 +118,9 @@ class ViewManager {
         originalBtnContainer: this.originalCtas.form
       },
       review: {
-        text: document.querySelector('#resenaBtn .google-btn span').textContent,
+        text: languageManager.getTranslation('googleBtn'),
         action: () => this.originalCtas.review.click(),
-        originalBtnContainer: this.originalCtas.review.parentElement.parentElement // #resenaBtn
+        originalBtnContainer: this.originalCtas.review.parentElement
       }
     };
 
@@ -130,14 +130,21 @@ class ViewManager {
       showElement(this.fixedCta.bar);
       // Ocultar el botón original correspondiente
       if(ctaConfig[currentView].originalBtnContainer) {
-        ctaConfig[currentView].originalBtnContainer.classList.add('visually-hidden');
+        // Special case for review view, as it's nested differently
+        if (currentView === 'review') {
+          this.mainViews.review.classList.add('visually-hidden');
+        } else {
+          ctaConfig[currentView].originalBtnContainer.classList.add('visually-hidden');
+        }
       }
     } else {
       hideElement(this.fixedCta.bar);
       this.fixedCta.action = null;
       // Asegurarse de que todos los botones originales son visibles en escritorio
       for (const key in ctaConfig) {
-        if (ctaConfig[key].originalBtnContainer) {
+        if (key === 'review') {
+          this.mainViews.review.classList.remove('visually-hidden');
+        } else if (ctaConfig[key].originalBtnContainer) {
           ctaConfig[key].originalBtnContainer.classList.remove('visually-hidden');
         }
       }

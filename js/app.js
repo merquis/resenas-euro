@@ -196,12 +196,12 @@ class App {
       this.sendDataToN8N(payload);
       this.currentFormData = null;
 
+      viewManager.showView('prize');
+
       if (rating === 5) {
         showElement(this.resenaBtn);
         this.startGoogleTimer();
       }
-
-    viewManager.showView('prize');
     }, 1000);
   }
 
