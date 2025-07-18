@@ -29,7 +29,7 @@ export const CONFIG = {
 
 // Colores de la ruleta (en orden)
 export const ROULETTE_COLORS = [
-  { color: '#e67e22', start: 0,   end: 45 },   // CENA PARA 2
+  { color: '#e67e22', start: 0,   end: 45 },   // CENA (VALOR 60€)
   { color: '#e74c3c', start: 45,  end: 90 },   // 30€ DESCUENTO
   { color: '#2980b9', start: 90,  end: 135 },  // BOTELLA VINO
   { color: '#8e44ad', start: 135, end: 180 },  // HELADO
