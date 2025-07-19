@@ -178,7 +178,7 @@ export class FormManager {
         this.showError(this.emailInput, 'Este correo electrónico ya ha sido utilizado');
         return; // Detiene el envío del formulario
       }
-      if (result && result.existe === false) {
+      if (result && result.valid === false) {
         this.showError(this.emailInput, 'Email no válido. Introduzca uno nuevo.');
         return; // Detiene el envío del formulario
       }
