@@ -156,45 +156,44 @@ export class FormManager {
       return;
     }
 
-   // Verificación de email duplicado y formato válido
-try {
-  const email = this.emailInput.value.trim().toLowerCase();
-  const response = await fetch(CONFIG.n8nVerifyEmailUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ email })
-  });
+    // Verificación de email duplicado
+    try {
+      const email = this.emailInput.value.trim().toLowerCase();
+      const response = await fetch(CONFIG.n8nVerifyEmailUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email })
+      });
 
-  if (!response.ok) {
-    throw new Error('Error en la respuesta del servidor de verificación');
+      if (!response.ok) {
+        throw new Error('Error en la respuesta del servidor de verificación');
+      }
+
+      const result = await response.json();
+
+      // La respuesta de n8n es un objeto directo.
+      if (result && result.existe === true) {
+        this.showError(this.emailInput, 'Este correo electrónico ya ha sido utilizado');
+        return; // Detiene el envío del formulario
+      }
+      if (result && result.existe === false) {
+        this.showError(this.emailInput, 'Email no válido. Introduzca uno nuevo.');
+        return; // Detiene el envío del formulario
+      }
+    } catch (error) {
+      console.error('Error al verificar el email:', error);
+      // Mostramos un error genérico y detenemos el envío si la verificación falla.
+      this.showError(this.emailInput, 'No se pudo verificar el email. Inténtalo de nuevo.');
+      return;
+    }
+
+
+    if (this.onSubmitCallback) {
+      this.onSubmitCallback(this.getFormData());
+    }
   }
-
-  const result = await response.json();
-
-  // Si el email ya existe en la base de datos
-  if (result && result.existe === true) {
-    this.showError(this.emailInput, 'Este correo electrónico ya ha sido utilizado');
-    return; // Detiene el envío del formulario
-  }
-
-  // Si el email no es válido (según Mailcheck u otro criterio)
-  if (result && result.email_valido === false) {
-    this.showError(this.emailInput, 'Este correo no es válido. Por favor, utiliza uno nuevo.');
-    return; // Detiene el envío del formulario
-  }
-
-} catch (error) {
-  console.error('Error al verificar el email:', error);
-  this.showError(this.emailInput, 'No se pudo verificar el email. Inténtalo de nuevo.');
-  return;
-}
-
-if (this.onSubmitCallback) {
-  this.onSubmitCallback(this.getFormData());
-}
-
 
   /**
    * Valida todo el formulario
