@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const ITEMS_PER_PAGE = 10;
     let paginationData = {};
 
-    // --- NUEVA FUNCIÓN: Actualiza la URL del navegador ---
     const updateBrowserUrl = () => {
         const params = new URLSearchParams();
         const selectedRating = ratingFilter.value;
@@ -72,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const fetchOpiniones = async () => {
         container.innerHTML = '<div class="loader">Cargando opiniones...</div>';
+        statsGrid.innerHTML = '<div class="loader">Calculando estadísticas...</div>';
         const url = buildApiUrl();
 
         try {
@@ -85,26 +85,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             renderOpiniones(opiniones, paginationData);
             renderPagination(paginationData);
+            renderStats(opiniones); // Calcula estadísticas con los datos de la página actual
 
         } catch (error) {
             container.innerHTML = `<div class="message">Error al cargar las opiniones: ${error.message}</div>`;
+            statsGrid.innerHTML = `<div class="message">No se pudieron calcular las estadísticas.</div>`;
             paginationContainer.innerHTML = '';
             counterElement.textContent = '';
-        }
-    };
-    
-    const fetchAllOpinionesForStats = async () => {
-        statsGrid.innerHTML = '<div class="loader">Calculando estadísticas...</div>';
-        try {
-            const response = await fetch(`${REVIEWS_API_URL}?limit=10000&t=${new Date().getTime()}`);
-            if (!response.ok) throw new Error(`Error en la petición: ${response.statusText}`);
-            
-            const result = await response.json();
-            const allOpiniones = result.data || [];
-            renderStats(allOpiniones);
-
-        } catch (error) {
-            statsGrid.innerHTML = `<div class="message">No se pudieron calcular las estadísticas.</div>`;
         }
     };
 
@@ -151,14 +138,14 @@ document.addEventListener('DOMContentLoaded', () => {
         paginationContainer.innerHTML = buttonsHTML;
     };
 
-    const renderStats = (allOpiniones) => {
-        const totalOpiniones = allOpiniones.length;
+    const renderStats = (opinionesDeLaPagina) => {
+        const totalOpiniones = opinionesDeLaPagina.length;
         if (totalOpiniones === 0) {
             statsGrid.innerHTML = '<div class="message">No hay datos para mostrar estadísticas.</div>';
             return;
         }
         const counts = ALL_PRIZES.reduce((acc, prize) => ({ ...acc, [prize]: 0 }), {});
-        allOpiniones.forEach(opinion => {
+        opinionesDeLaPagina.forEach(opinion => {
             if (opinion.premio && counts.hasOwnProperty(opinion.premio)) {
                 counts[opinion.premio]++;
             }
@@ -175,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.changePage = (newPage) => {
         if (newPage < 1 || newPage > (paginationData.totalPages || 1)) return;
         currentPage = newPage;
-        updateBrowserUrl(); // Actualiza la URL del navegador
+        updateBrowserUrl();
         fetchOpiniones();
         window.scrollTo(0, 0);
     };
@@ -202,51 +189,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const handleFilterChange = () => {
         currentPage = 1;
-        updateBrowserUrl(); // Actualiza la URL del navegador
+        updateBrowserUrl();
         fetchOpiniones();
     };
 
-    // --- NUEVA FUNCIÓN: Lee la URL al cargar la página ---
     const applyFiltersFromUrl = () => {
         const params = new URLSearchParams(window.location.search);
         
-        // Puntuación
         const rating = params.get('rating');
         if (rating && ratingFilter.querySelector(`option[value="${rating}"]`)) {
             ratingFilter.value = rating;
         }
 
-        // Fecha
         const date = params.get('date');
         const dateMap = { 'today': 'today', '7days': 'week', '1month': 'month', '3months': '3months' };
         Object.values(timeFilterButtons).forEach(btn => btn.classList.remove('active'));
         
-        let activeDateButton = timeFilterButtons.all; // Por defecto 'Todas'
+        let activeDateButton = timeFilterButtons.all;
         if (date && dateMap[date]) {
             const buttonId = `filter-${dateMap[date]}`;
             const button = document.getElementById(buttonId);
             if (button) {
                 activeDateButton = button;
             } else {
-                // Si el parametro no es valido, default a 'today'
                 activeDateButton = timeFilterButtons.today;
             }
         } else {
            activeDateButton = timeFilterButtons.today;
         }
         
-        // Si no hay ningun parametro, el default es 'today'
         if(!date && !rating){
             activeDateButton = timeFilterButtons.today;
         }
 
         activeDateButton.classList.add('active');
-
-        // Página
         currentPage = parseInt(params.get('page') || '1', 10);
     };
 
-    // --- Lógica de Carga Inicial Actualizada ---
     ratingFilter.addEventListener('change', handleFilterChange);
     Object.values(timeFilterButtons).forEach(button => {
         button.addEventListener('click', (e) => {
@@ -256,8 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    applyFiltersFromUrl(); // Aplica filtros desde la URL al cargar
-    updateBrowserUrl(); // ACTUALIZACIÓN: Sincroniza la URL con el estado inicial
-    fetchOpiniones(); // Llama a fetch con los filtros de la URL
-    fetchAllOpinionesForStats();
+    applyFiltersFromUrl();
+    updateBrowserUrl();
+    fetchOpiniones();
 });
