@@ -22,38 +22,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const ITEMS_PER_PAGE = 20;
     let paginationData = {};
 
-    const buildApiUrl = () => {
+    // --- NUEVA FUNCIÓN: Actualiza la URL del navegador ---
+    const updateBrowserUrl = () => {
         const params = new URLSearchParams();
-
-        // Filtro de Puntuación
         const selectedRating = ratingFilter.value;
         if (selectedRating !== 'all') {
             params.append('rating', selectedRating);
         }
 
-        // Filtro de Fecha
         const activeTimeFilter = document.querySelector('.filters button.active');
         if (activeTimeFilter && activeTimeFilter.id !== 'filter-all') {
             const dateRange = activeTimeFilter.id.replace('filter-', '');
-            // Mapeo de IDs a valores de la API
-            const dateMap = {
-                'today': 'today',
-                'week': '7days',
-                'month': '1month',
-                '3months': '3months'
-            };
+            const dateMap = { 'today': 'today', 'week': '7days', 'month': '1month', '3months': '3months' };
             if (dateMap[dateRange]) {
                 params.append('date', dateMap[dateRange]);
             }
         }
 
-        // Paginación
-        params.append('page', currentPage);
-        params.append('limit', ITEMS_PER_PAGE);
-        
-        // Cache-busting
-        params.append('t', new Date().getTime());
+        if (currentPage > 1) {
+            params.append('page', currentPage);
+        }
 
+        const newUrl = `${window.location.pathname}?${params.toString()}`;
+        history.pushState({ path: newUrl }, '', newUrl);
+    };
+
+    const buildApiUrl = () => {
+        const params = new URLSearchParams(window.location.search); // Lee los params de la URL del navegador
+        params.set('limit', ITEMS_PER_PAGE);
+        params.set('page', currentPage); // Asegura que la página actual sea la correcta para la API
+        params.append('t', new Date().getTime());
         return `${REVIEWS_API_URL}?${params.toString()}`;
     };
 
@@ -67,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const result = await response.json();
             
-            // Asumimos la nueva estructura: { pagination: {...}, data: [...] }
             const opiniones = result.data || [];
             paginationData = result.pagination || {};
 
@@ -84,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const fetchAllOpinionesForStats = async () => {
         statsGrid.innerHTML = '<div class="loader">Calculando estadísticas...</div>';
         try {
-            // Llamada sin filtros para obtener todos los datos para las estadísticas
             const response = await fetch(`${REVIEWS_API_URL}?limit=10000&t=${new Date().getTime()}`);
             if (!response.ok) throw new Error(`Error en la petición: ${response.statusText}`);
             
@@ -113,42 +109,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const renderPagination = (pagination) => {
         const { totalPages = 0, currentPage = 1 } = pagination;
-
         if (totalPages <= 1) {
             paginationContainer.innerHTML = '';
             return;
         }
-
         let buttonsHTML = '';
         buttonsHTML += `<button onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>Anterior</button>`;
-        
-        // Lógica para mostrar un número limitado de páginas
         const maxButtons = 5;
         let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
         let endPage = Math.min(totalPages, startPage + maxButtons - 1);
-
         if (endPage - startPage + 1 < maxButtons) {
             startPage = Math.max(1, endPage - maxButtons + 1);
         }
-
         if (startPage > 1) {
             buttonsHTML += `<button onclick="changePage(1)">1</button>`;
-            if (startPage > 2) {
-                buttonsHTML += `<span>...</span>`;
-            }
+            if (startPage > 2) buttonsHTML += `<span>...</span>`;
         }
-
         for (let i = startPage; i <= endPage; i++) {
             buttonsHTML += `<button onclick="changePage(${i})" class="${i === currentPage ? 'active' : ''}">${i}</button>`;
         }
-
         if (endPage < totalPages) {
-            if (endPage < totalPages - 1) {
-                buttonsHTML += `<span>...</span>`;
-            }
+            if (endPage < totalPages - 1) buttonsHTML += `<span>...</span>`;
             buttonsHTML += `<button onclick="changePage(${totalPages})">${totalPages}</button>`;
         }
-
         buttonsHTML += `<button onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Siguiente</button>`;
         paginationContainer.innerHTML = buttonsHTML;
     };
@@ -177,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.changePage = (newPage) => {
         if (newPage < 1 || newPage > (paginationData.totalPages || 1)) return;
         currentPage = newPage;
+        updateBrowserUrl(); // Actualiza la URL del navegador
         fetchOpiniones();
         window.scrollTo(0, 0);
     };
@@ -186,7 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const reviewText = opinion.review || 'Comentario no proporcionado';
         const date = opinion.timestamp ? new Date(opinion.timestamp).toLocaleDateString('es-ES') : 'N/A';
         const time = opinion.timestamp ? new Date(opinion.timestamp).toLocaleTimeString('es-ES') : 'N/A';
-
         return `
             <div class="opinion-card">
                 <div class="opinion-card-header">
@@ -204,9 +187,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const handleFilterChange = () => {
         currentPage = 1;
+        updateBrowserUrl(); // Actualiza la URL del navegador
         fetchOpiniones();
     };
 
+    // --- NUEVA FUNCIÓN: Lee la URL al cargar la página ---
+    const applyFiltersFromUrl = () => {
+        const params = new URLSearchParams(window.location.search);
+        
+        // Puntuación
+        const rating = params.get('rating');
+        if (rating && ratingFilter.querySelector(`option[value="${rating}"]`)) {
+            ratingFilter.value = rating;
+        }
+
+        // Fecha
+        const date = params.get('date');
+        const dateMap = { 'today': 'today', '7days': 'week', '1month': 'month', '3months': '3months' };
+        Object.values(timeFilterButtons).forEach(btn => btn.classList.remove('active'));
+        
+        let activeDateButton = timeFilterButtons.today; // Por defecto
+        if (date && dateMap[date]) {
+            const buttonId = `filter-${dateMap[date]}`;
+            const button = document.getElementById(buttonId);
+            if (button) activeDateButton = button;
+        } else if (!date && !rating) {
+            activeDateButton = timeFilterButtons.all;
+        }
+        activeDateButton.classList.add('active');
+
+        // Página
+        currentPage = parseInt(params.get('page') || '1', 10);
+    };
+
+    // --- Lógica de Carga Inicial Actualizada ---
     ratingFilter.addEventListener('change', handleFilterChange);
     Object.values(timeFilterButtons).forEach(button => {
         button.addEventListener('click', (e) => {
@@ -216,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Carga inicial
-    fetchOpiniones();
+    applyFiltersFromUrl(); // Aplica filtros desde la URL al cargar
+    fetchOpiniones(); // Llama a fetch con los filtros de la URL
     fetchAllOpinionesForStats();
 });
