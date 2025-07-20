@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Opiniones</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #1c1e21;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        h2 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        .stats-container {
+            padding: 15px;
+            background-color: #f7f8fa;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+            gap: 10px;
+            font-size: 0.9em;
+            text-align: center;
+        }
+        .stats-item {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            padding: 15px;
+            background-color: #f7f8fa;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+        .filters .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .filters label {
+            font-weight: 600;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+            color: #606770;
+        }
+        .filters button, .filters select {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+        .filters button:hover, .filters select:hover {
+            background-color: #e9ebee;
+        }
+        .filters button.active {
+            background-color: #1877f2;
+            color: #fff;
+            border-color: #1877f2;
+        }
+        #opiniones-container {
+            margin-top: 20px;
+        }
+        .opinion-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .opinion-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .opinion-card-header .name {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .opinion-card-header .rating {
+            font-size: 1.2em;
+            color: #f5b301;
+        }
+        .opinion-card .review {
+            font-style: italic;
+            color: #555;
+            background-color: #f9f9f9;
+            border-left: 3px solid #eee;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .opinion-card-footer {
+            font-size: 0.9em;
+            color: #606770;
+            text-align: right;
+            margin-top: 15px;
+        }
+        .loader, .message {
+            text-align: center;
+            font-size: 1.2em;
+            color: #606770;
+            padding: 40px;
+        }
+        .opiniones-counter {
+            margin: -10px 0 15px 0;
+            text-align: right;
+            font-size: 0.9em;
+            color: #606770;
+        }
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .pagination-container button {
+            margin: 2px;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+            cursor: pointer;
+        }
+        .pagination-container button:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+        .pagination-container button.active {
+            background-color: #1877f2;
+            color: #fff;
+            border-color: #1877f2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Panel de Opiniones</h1>
+
+        <div class="stats-container">
+            <h2>Estadísticas de Premios</h2>
+            <div id="stats-grid" class="stats-grid">
+                <div class="loader">Calculando estadísticas...</div>
+            </div>
+        </div>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label>Ver opiniones de:</label>
+                <div>
+                    <button id="filter-all">Todas</button>
+                    <button id="filter-today" class="active">Hoy</button>
+                    <button id="filter-week">Última Semana</button>
+                    <button id="filter-month">Último Mes</button>
+                    <button id="filter-3months">Últimos 3 Meses</button>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label for="rating-filter">Filtrar por puntuación:</label>
+                <select id="rating-filter">
+                    <option value="all">Todas</option>
+                    <option value="5">★★★★★ (5)</option>
+                    <option value="4">★★★★☆ (4)</option>
+                    <option value="3">★★★☆☆ (3)</option>
+                    <option value="2">★★☆☆☆ (2)</option>
+                    <option value="1">★☆☆☆☆ (1)</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="opiniones-counter"></div>
+
+        <div id="opiniones-container">
+            <div class="loader">Cargando opiniones...</div>
+        </div>
+
+        <div id="pagination-container" class="pagination-container"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const REVIEWS_API_URL = 'https://n8n-n8n.hpv7eo.easypanel.host/webhook/opiniones';
+            const container = document.getElementById('opiniones-container');
+            const statsGrid = document.getElementById('stats-grid');
+            const ratingFilter = document.getElementById('rating-filter');
+            const timeFilterButtons = {
+                all: document.getElementById('filter-all'),
+                today: document.getElementById('filter-today'),
+                week: document.getElementById('filter-week'),
+                month: document.getElementById('filter-month'),
+                '3months': document.getElementById('filter-3months'),
+            };
+
+            const ALL_PRIZES = [
+                '🍽️ CENA (VALOR 60€)', '💶 30€ DESCUENTO', '🍾 BOTELLA VINO', '🍦 HELADO',
+                '🍺 CERVEZA', '🥤 REFRESCO', '🍹 MOJITO', '🍷 COPA VINO'
+            ];
+
+            let allOpiniones = [];
+            let currentPage = 1;
+            const ITEMS_PER_PAGE = 20;
+
+            const fetchOpiniones = async () => {
+                try {
+                    const response = await fetch(`${REVIEWS_API_URL}?t=${new Date().getTime()}`);
+                    if (!response.ok) throw new Error(`Error en la petición: ${response.statusText}`);
+                    
+                    const data = await response.json();
+                    const opinionesArray = Array.isArray(data) ? data : [data];
+
+                    allOpiniones = opinionesArray.sort((a, b) => {
+                        const dateA = parseDate(a.date, a.time);
+                        const dateB = parseDate(b.date, b.time);
+                        return dateB - dateA;
+                    });
+
+                    renderStats();
+                    renderOpiniones();
+                } catch (error) {
+                    container.innerHTML = `<div class="message">Error al cargar las opiniones: ${error.message}</div>`;
+                    statsGrid.innerHTML = `<div class="message">No se pudieron calcular las estadísticas.</div>`;
+                }
+            };
+
+            const parseDate = (dateStr, timeStr) => {
+                if (!dateStr || !timeStr) return new Date(0);
+                const [day, month, year] = dateStr.split('/');
+                const [hour = 0, minute = 0, second = 0] = timeStr.split(':');
+                return new Date(year, month - 1, day, hour, minute, second);
+            };
+
+            const renderStats = () => {
+                const totalOpiniones = allOpiniones.length;
+                if (totalOpiniones === 0) {
+                    statsGrid.innerHTML = '<div class="message">No hay datos para mostrar estadísticas.</div>';
+                    return;
+                }
+                const counts = ALL_PRIZES.reduce((acc, prize) => ({ ...acc, [prize]: 0 }), {});
+                allOpiniones.forEach(opinion => {
+                    if (opinion.premio && counts.hasOwnProperty(opinion.premio)) {
+                        counts[opinion.premio]++;
+                    }
+                });
+                statsGrid.innerHTML = ALL_PRIZES.map(prize => {
+                    const count = counts[prize];
+                    const percentage = ((count / totalOpiniones) * 100).toFixed(1);
+                    const [emoji, ...nameParts] = prize.split(' ');
+                    const name = nameParts.join(' ');
+                    return `<div class="stats-item"><div>${emoji} ${name}</div><strong>${percentage}%</strong><div>(${count})</div></div>`;
+                }).join('');
+            };
+
+            const renderOpiniones = () => {
+                const counterElement = document.getElementById('opiniones-counter');
+                const selectedRating = ratingFilter.value;
+                const activeTimeFilter = document.querySelector('.filters button.active').id.replace('filter-', '');
+
+                const now = new Date();
+                const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                
+                const filteredOpiniones = allOpiniones.filter(opinion => {
+                    const ratingMatch = selectedRating === 'all' || (opinion.rating && opinion.rating.toString() === selectedRating);
+                    if (!ratingMatch) return false;
+                    const opinionDate = parseDate(opinion.date, opinion.time);
+                    if (activeTimeFilter === 'all') return true;
+                    if (activeTimeFilter === 'today') return opinionDate >= today;
+                    if (activeTimeFilter === 'week') {
+                        const lastWeek = new Date(today);
+                        lastWeek.setDate(today.getDate() - 7);
+                        return opinionDate >= lastWeek;
+                    }
+                    if (activeTimeFilter === 'month') {
+                        const lastMonth = new Date(today);
+                        lastMonth.setMonth(today.getMonth() - 1);
+                        return opinionDate >= lastMonth;
+                    }
+                    if (activeTimeFilter === '3months') {
+                        const last3Months = new Date(today);
+                        last3Months.setMonth(today.getMonth() - 3);
+                        return opinionDate >= last3Months;
+                    }
+                    return true;
+                });
+
+                const totalPages = Math.ceil(filteredOpiniones.length / ITEMS_PER_PAGE);
+                const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+                const endIndex = startIndex + ITEMS_PER_PAGE;
+                const paginatedOpiniones = filteredOpiniones.slice(startIndex, endIndex);
+
+                const startEntry = filteredOpiniones.length > 0 ? startIndex + 1 : 0;
+                const endEntry = startIndex + paginatedOpiniones.length;
+                counterElement.textContent = `Mostrando ${startEntry} - ${endEntry} de ${filteredOpiniones.length} opiniones.`;
+
+                if (paginatedOpiniones.length === 0) {
+                    container.innerHTML = '<div class="message">No se encontraron opiniones con los filtros seleccionados.</div>';
+                } else {
+                    container.innerHTML = paginatedOpiniones.map(createOpinionHTML).join('');
+                }
+                
+                renderPagination(totalPages);
+            };
+
+            const renderPagination = (totalPages) => {
+                const paginationContainer = document.getElementById('pagination-container');
+                if (totalPages <= 1) {
+                    paginationContainer.innerHTML = '';
+                    return;
+                }
+
+                let buttonsHTML = '';
+                buttonsHTML += `<button onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>Anterior</button>`;
+                
+                for (let i = 1; i <= totalPages; i++) {
+                    buttonsHTML += `<button onclick="changePage(${i})" class="${i === currentPage ? 'active' : ''}">${i}</button>`;
+                }
+
+                buttonsHTML += `<button onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Siguiente</button>`;
+                paginationContainer.innerHTML = buttonsHTML;
+            };
+
+            window.changePage = (newPage) => {
+                currentPage = newPage;
+                renderOpiniones();
+                window.scrollTo(0, 0);
+            };
+
+            const createOpinionHTML = (opinion) => {
+                const stars = '★'.repeat(opinion.rating || 0) + '☆'.repeat(5 - (opinion.rating || 0));
+                const reviewText = opinion.review || 'El usuario no dejó un comentario.';
+                return `
+                    <div class="opinion-card">
+                        <div class="opinion-card-header">
+                            <span class="name">${opinion.name || 'Anónimo'}</span>
+                            <span class="rating">${stars}</span>
+                        </div>
+                        <div class="review"><blockquote>${reviewText}</blockquote></div>
+                        <div class="opinion-card-footer">
+                            <span><strong>Fecha:</strong> ${opinion.date || 'N/A'}, ${opinion.time || 'N/A'}</span> |
+                            <span><strong>Premio:</strong> ${opinion.premio || 'N/A'}</span> |
+                            <span><strong>Idioma:</strong> ${(opinion.lang || 'N/A').toUpperCase()}</span>
+                        </div>
+                    </div>`;
+            };
+
+            const resetAndRender = () => {
+                currentPage = 1;
+                renderOpiniones();
+            };
+
+            ratingFilter.addEventListener('change', resetAndRender);
+            Object.values(timeFilterButtons).forEach(button => {
+                button.addEventListener('click', () => {
+                    Object.values(timeFilterButtons).forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    resetAndRender();
+                });
+            });
+
+            fetchOpiniones();
+        });
+    </script>
+</body>
+</html>
