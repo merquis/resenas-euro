@@ -257,6 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     applyFiltersFromUrl(); // Aplica filtros desde la URL al cargar
+    updateBrowserUrl(); // ACTUALIZACIÓN: Sincroniza la URL con el estado inicial
     fetchOpiniones(); // Llama a fetch con los filtros de la URL
     fetchAllOpinionesForStats();
 });
