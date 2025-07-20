@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentPage = 1;
     const ITEMS_PER_PAGE = 20;
+    let paginationData = {};
 
     const buildApiUrl = () => {
         const params = new URLSearchParams();
@@ -68,10 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Asumimos la nueva estructura: { pagination: {...}, data: [...] }
             const opiniones = result.data || [];
-            const pagination = result.pagination || {};
+            paginationData = result.pagination || {};
 
-            renderOpiniones(opiniones, pagination);
-            renderPagination(pagination);
+            renderOpiniones(opiniones, paginationData);
+            renderPagination(paginationData);
 
         } catch (error) {
             container.innerHTML = `<div class="message">Error al cargar las opiniones: ${error.message}</div>`;
@@ -174,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.changePage = (newPage) => {
-        if (newPage < 1 || newPage > (pagination.totalPages || 1)) return;
+        if (newPage < 1 || newPage > (paginationData.totalPages || 1)) return;
         currentPage = newPage;
         fetchOpiniones();
         window.scrollTo(0, 0);
