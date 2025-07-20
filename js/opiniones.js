@@ -1,7 +1,5 @@
-import { CONFIG } from '../js/config.js';
-
 document.addEventListener('DOMContentLoaded', () => {
-    const REVIEWS_API_URL = CONFIG.n8nOpinionesUrl;
+    const REVIEWS_API_URL = 'https://n8n-n8n.hpv7eo.easypanel.host/webhook-test/opiniones';
     const container = document.getElementById('opiniones-container');
     const statsGrid = document.getElementById('stats-grid');
     const ratingFilter = document.getElementById('rating-filter');
@@ -87,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             renderOpiniones(opiniones, paginationData);
             renderPagination(paginationData);
-            renderStats(opiniones); // Calcula estadísticas con los datos de la página actual
+            renderStats(opiniones);
 
         } catch (error) {
             container.innerHTML = `<div class="message">Error al cargar las opiniones: ${error.message}</div>`;
