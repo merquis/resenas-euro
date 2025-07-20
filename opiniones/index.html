@@ -130,8 +130,29 @@
         .opinion-card-footer {
             font-size: 0.9em;
             color: #606770;
-            text-align: right;
             margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 0 8px;
+        }
+
+        .opinion-card-footer span:not(:last-child)::after {
+            content: "|";
+            padding-left: 8px;
+            color: #ccc;
+        }
+
+        @media (max-width: 550px) {
+            .opinion-card-footer {
+                flex-direction: column;
+                gap: 4px;
+                align-items: flex-end;
+            }
+            .opinion-card-footer span:not(:last-child)::after {
+                content: "";
+                padding-left: 0;
+            }
         }
         .loader, .message {
             text-align: center;
@@ -374,8 +395,8 @@
                         </div>
                         <div class="review"><blockquote>${reviewText}</blockquote></div>
                         <div class="opinion-card-footer">
-                            <span><strong>Fecha:</strong> ${opinion.date || 'N/A'}, ${opinion.time || 'N/A'}</span> |
-                            <span><strong>Premio:</strong> ${opinion.premio || 'N/A'} (${opinion.codigoPremio || 'N/A'})</span> |
+                            <span><strong>Fecha:</strong> ${opinion.date || 'N/A'}, ${opinion.time || 'N/A'}</span>
+                            <span><strong>Premio:</strong> ${opinion.premio || 'N/A'} (${opinion.codigoPremio || 'N/A'})</span>
                             <span><strong>Idioma:</strong> ${(opinion.lang || 'N/A').toUpperCase()}</span>
                         </div>
                     </div>`;
