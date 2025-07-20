@@ -365,7 +365,7 @@
 
             const createOpinionHTML = (opinion) => {
                 const stars = '★'.repeat(opinion.rating || 0) + '☆'.repeat(5 - (opinion.rating || 0));
-                const reviewText = opinion.review || 'El usuario no dejó un comentario.';
+                const reviewText = opinion.review || 'Comentario en Google';
                 return `
                     <div class="opinion-card">
                         <div class="opinion-card-header">
