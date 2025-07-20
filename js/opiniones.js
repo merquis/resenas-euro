@@ -48,9 +48,23 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const buildApiUrl = () => {
-        const params = new URLSearchParams(window.location.search); // Lee los params de la URL del navegador
-        params.set('limit', ITEMS_PER_PAGE);
-        params.set('page', currentPage); // Asegura que la página actual sea la correcta para la API
+        const params = new URLSearchParams();
+        const selectedRating = ratingFilter.value;
+        if (selectedRating !== 'all') {
+            params.append('rating', selectedRating);
+        }
+
+        const activeTimeFilter = document.querySelector('.filters button.active');
+        if (activeTimeFilter && activeTimeFilter.id !== 'filter-all') {
+            const dateRange = activeTimeFilter.id.replace('filter-', '');
+            const dateMap = { 'today': 'today', 'week': '7days', 'month': '1month', '3months': '3months' };
+            if (dateMap[dateRange]) {
+                params.append('date', dateMap[dateRange]);
+            }
+        }
+
+        params.append('page', currentPage);
+        params.append('limit', ITEMS_PER_PAGE);
         params.append('t', new Date().getTime());
         return `${REVIEWS_API_URL}?${params.toString()}`;
     };
@@ -206,14 +220,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const dateMap = { 'today': 'today', '7days': 'week', '1month': 'month', '3months': '3months' };
         Object.values(timeFilterButtons).forEach(btn => btn.classList.remove('active'));
         
-        let activeDateButton = timeFilterButtons.today; // Por defecto
+        let activeDateButton = timeFilterButtons.all; // Por defecto 'Todas'
         if (date && dateMap[date]) {
             const buttonId = `filter-${dateMap[date]}`;
             const button = document.getElementById(buttonId);
-            if (button) activeDateButton = button;
-        } else if (!date && !rating) {
-            activeDateButton = timeFilterButtons.all;
+            if (button) {
+                activeDateButton = button;
+            } else {
+                // Si el parametro no es valido, default a 'today'
+                activeDateButton = timeFilterButtons.today;
+            }
+        } else {
+           activeDateButton = timeFilterButtons.today;
         }
+        
+        // Si no hay ningun parametro, el default es 'today'
+        if(!date && !rating){
+            activeDateButton = timeFilterButtons.today;
+        }
+
         activeDateButton.classList.add('active');
 
         // Página
