@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fetchOpiniones = async () => {
         container.innerHTML = '<div class="loader">Cargando opiniones...</div>';
         const url = buildApiUrl();
+        console.log('Fetching URL:', url);
 
         try {
             const response = await fetch(url);
