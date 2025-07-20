@@ -43,7 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
             params.append('page', currentPage);
         }
 
-        const newUrl = `${window.location.pathname}?${params.toString()}`;
+        const queryString = params.toString();
+        const newUrl = queryString ? `${window.location.pathname}?${queryString}` : window.location.pathname;
         history.pushState({ path: newUrl }, '', newUrl);
     };
 
