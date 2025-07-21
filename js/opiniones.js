@@ -14,9 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     const counterElement = document.getElementById('opiniones-counter');
     const paginationContainer = document.getElementById('pagination-container');
+    const limitFilter = document.getElementById('limit-filter');
 
     let currentPage = 1;
-    const limit = 10;
+    let limit = 10;
     let totalOpiniones = 0;
 
     const ALL_PRIZES = [
@@ -42,6 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (currentPage > 1) {
             params.append('page', currentPage);
+        }
+
+        if (limit !== 10) {
+            params.append('limit', limit);
         }
 
         const queryString = params.toString();
@@ -151,7 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         statsGrid.innerHTML = ALL_PRIZES.map(prize => {
             const count = counts[prize];
-            // Para las estadisticas, usaremos el total de opiniones, no solo las de la pagina
             const percentage = ((count / totalOpiniones) * 100).toFixed(1);
             const [emoji, ...nameParts] = prize.split(' ');
             const name = nameParts.join(' ');
@@ -181,30 +185,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const handleFilterChange = () => {
         currentPage = 1;
+        limit = parseInt(limitFilter.value, 10) || 10;
         updateBrowserUrl();
         fetchOpiniones();
     };
 
     const applyFiltersFromUrl = () => {
         const params = new URLSearchParams(window.location.search);
+
+        if (params.toString() === '') {
+            params.set('date', 'today');
+            history.replaceState(null, '', `?${params.toString()}`);
+        }
         
         const rating = params.get('rating');
         if (rating && ratingFilter.querySelector(`option[value="${rating}"]`)) {
             ratingFilter.value = rating;
         }
 
+        const urlLimit = parseInt(params.get('limit'), 10);
+        if (urlLimit >= 10 && urlLimit <= 100) {
+            limit = urlLimit;
+            limitFilter.value = urlLimit;
+        }
+
         const date = params.get('date');
-        const dateMap = { 'today': 'today', '7days': 'week', '1month': 'month', '3months': '3months' };
+        const dateMap = { 'today': 'today', 'week': '7days', 'month': '1month', '3months': '3months' };
         Object.values(timeFilterButtons).forEach(btn => btn.classList.remove('active'));
         
-        let activeDateButton = timeFilterButtons.today;
+        let activeDateButton;
         if (date && dateMap[date]) {
             const buttonId = `filter-${dateMap[date]}`;
-            const button = document.getElementById(buttonId);
-            if (button) {
-                activeDateButton = button;
-            }
-        } else if (!date && !rating) {
+            activeDateButton = document.getElementById(buttonId);
+        } else {
             activeDateButton = timeFilterButtons.all;
         }
         activeDateButton.classList.add('active');
@@ -216,6 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     ratingFilter.addEventListener('change', handleFilterChange);
+    limitFilter.addEventListener('change', handleFilterChange);
     Object.values(timeFilterButtons).forEach(button => {
         button.addEventListener('click', (e) => {
             Object.values(timeFilterButtons).forEach(btn => btn.classList.remove('active'));
@@ -225,6 +239,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     applyFiltersFromUrl();
-    updateBrowserUrl();
     fetchOpiniones();
 });
