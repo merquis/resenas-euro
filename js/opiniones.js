@@ -204,7 +204,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const urlLimit = parseInt(params.get('limit'), 10);
-        if (urlLimit && limitFilter.querySelector(`option[value="${urlLimit}"]`)) {
+        // Comprueba si el valor de la URL es un número y si existe como opción en el select.
+        if (!isNaN(urlLimit) && limitFilter.querySelector(`option[value="${urlLimit}"]`)) {
             limit = urlLimit;
             limitFilter.value = urlLimit;
         }
