@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const limitFilter = document.getElementById('limit-filter');
 
     let currentPage = 1;
-    let limit = 10;
+    let limit = 100;
     let totalOpiniones = 0;
 
     const ALL_PRIZES = [
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
             params.append('page', currentPage);
         }
 
-        if (limit !== 10) {
+        if (limit !== 100) {
             params.append('limit', limit);
         }
 
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const handleFilterChange = () => {
         currentPage = 1;
-        limit = parseInt(limitFilter.value, 10) || 10;
+        limit = parseInt(limitFilter.value, 10) || 100;
         updateBrowserUrl();
         fetchOpiniones();
     };
