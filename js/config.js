@@ -24,7 +24,7 @@ export const CONFIG = {
   n8nVerifyEmailUrl: 'https://n8n-n8n.hpv7eo.easypanel.host/webhook/verificar-email',
 
   // URL del webhook de n8n para obtener opiniones
-  n8nOpinionesUrl: 'https://n8n-n8n.hpv7eo.easypanel.host/webhook-test/opiniones',
+  n8nOpinionesUrl: 'https://n8n-n8n.hpv7eo.easypanel.host/webhook/opiniones',
   
   // Idioma por defecto
   defaultLanguage: 'es'
