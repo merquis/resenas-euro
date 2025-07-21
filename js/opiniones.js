@@ -76,22 +76,15 @@ document.addEventListener('DOMContentLoaded', () => {
         statsGrid.innerHTML = '<div class="loader">Calculando estadísticas...</div>';
         paginationContainer.innerHTML = '';
         const url = buildApiUrl();
-        console.log('Construyendo URL:', url);
 
         try {
             const response = await fetch(url);
-            console.log('Respuesta de la red:', response);
             if (!response.ok) throw new Error(`Error en la petición: ${response.statusText}`);
             
             const responseData = await response.json();
-            console.log('Respuesta completa del webhook (JSON):', responseData);
-            
             const data = responseData[0] || {};
-            console.log('Objeto de datos extraído (data):', data);
-
             const opiniones = data.opiniones || [];
             totalOpiniones = data.total || 0;
-            console.log(`Opiniones extraídas: ${opiniones.length}, Total de opiniones: ${totalOpiniones}`);
             
             renderOpiniones(opiniones);
             renderStats(opiniones);
