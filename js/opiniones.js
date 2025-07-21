@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error(`Error en la petición: ${response.statusText}`);
             
             const responseData = await response.json();
+            console.log('Respuesta completa del webhook:', responseData);
             const data = responseData[0] || {};
             const opiniones = data.opiniones || [];
             totalOpiniones = data.total || 0;
