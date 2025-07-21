@@ -45,11 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
             params.append('page', currentPage);
         }
 
-        // Añade el límite a la URL si no es el valor por defecto original de 10.
-        // Así nos aseguramos de que limit=100 aparezca.
-        if (limit !== 10) {
-            params.append('limit', limit);
-        }
+        // Añade siempre el límite a la URL para mayor claridad.
+        params.append('limit', limit);
 
         const queryString = params.toString();
         const newUrl = queryString ? `${window.location.pathname}?${queryString}` : window.location.pathname;
