@@ -49,11 +49,19 @@ document.addEventListener('DOMContentLoaded', () => {
         history.pushState({ path: newUrl }, '', newUrl);
     };
 
-    const buildApiUrl = () => {
-        const params = new URLSearchParams();
+    const fetchOpiniones = async () => {
+        container.innerHTML = '<div class="loader">Cargando opiniones...</div>';
+        statsGrid.innerHTML = '<div class="loader">Calculando estadísticas...</div>';
+
+        // 1. Construir el cuerpo de la petición POST
+        const bodyPayload = {
+            page: currentPage,
+            limit: ITEMS_PER_PAGE
+        };
+
         const selectedRating = ratingFilter.value;
         if (selectedRating !== 'all') {
-            params.append('rating', selectedRating);
+            bodyPayload.rating = selectedRating;
         }
 
         const activeTimeFilter = document.querySelector('.filters button.active');
@@ -61,23 +69,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const dateRange = activeTimeFilter.id.replace('filter-', '');
             const dateMap = { 'today': 'today', 'week': '7days', 'month': '1month', '3months': '3months' };
             if (dateMap[dateRange]) {
-                params.append('date', dateMap[dateRange]);
+                bodyPayload.date = dateMap[dateRange];
             }
         }
 
-        params.append('page', currentPage);
-        params.append('limit', ITEMS_PER_PAGE);
-        params.append('t', new Date().getTime());
-        return `${REVIEWS_API_URL}?${params.toString()}`;
-    };
-
-    const fetchOpiniones = async () => {
-        container.innerHTML = '<div class="loader">Cargando opiniones...</div>';
-        statsGrid.innerHTML = '<div class="loader">Calculando estadísticas...</div>';
-        const url = buildApiUrl();
-
         try {
-            const response = await fetch(url);
+            // 2. Realizar la petición POST
+            const response = await fetch(REVIEWS_API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(bodyPayload)
+            });
+
             if (!response.ok) throw new Error(`Error en la petición: ${response.statusText}`);
             
             const result = await response.json();
