@@ -1,7 +1,6 @@
 import { CONFIG } from '../js/config.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("--- Script opiniones.js cargado y ejecutándose ---");
     const REVIEWS_API_URL = CONFIG.n8nOpinionesUrl;
     const container = document.getElementById('opiniones-container');
     const statsGrid = document.getElementById('stats-grid');
