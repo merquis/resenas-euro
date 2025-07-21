@@ -13,6 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
         '3months': document.getElementById('filter-3months'),
     };
     const counterElement = document.getElementById('opiniones-counter');
+    const paginationContainer = document.getElementById('pagination-container');
+
+    let currentPage = 1;
+    const limit = 10;
+    let totalOpiniones = 0;
 
     const ALL_PRIZES = [
         '🍽️ CENA (VALOR 60€)', '💶 30€ DESCUENTO', '🍾 BOTELLA VINO', '🍦 HELADO',
@@ -33,6 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (dateMap[dateRange]) {
                 params.append('date', dateMap[dateRange]);
             }
+        }
+        
+        if (currentPage > 1) {
+            params.append('page', currentPage);
         }
 
         const queryString = params.toString();
@@ -56,6 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         
+        params.append('page', currentPage);
+        params.append('limit', limit);
         params.append('t', new Date().getTime());
         return `${REVIEWS_API_URL}?${params.toString()}`;
     };
@@ -63,17 +74,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const fetchOpiniones = async () => {
         container.innerHTML = '<div class="loader">Cargando opiniones...</div>';
         statsGrid.innerHTML = '<div class="loader">Calculando estadísticas...</div>';
+        paginationContainer.innerHTML = '';
         const url = buildApiUrl();
 
         try {
             const response = await fetch(url);
             if (!response.ok) throw new Error(`Error en la petición: ${response.statusText}`);
             
-            // Ahora esperamos un array directamente
-            const opiniones = await response.json();
+            const data = await response.json();
+            const opiniones = data.opiniones || [];
+            totalOpiniones = data.total || 0;
             
             renderOpiniones(opiniones);
             renderStats(opiniones);
+            renderPagination();
 
         } catch (error) {
             container.innerHTML = `<div class="message">Error al cargar las opiniones: ${error.message}</div>`;
@@ -83,17 +97,47 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const renderOpiniones = (opiniones) => {
-        counterElement.textContent = `Mostrando ${opiniones.length} opiniones.`;
+        const start = (currentPage - 1) * limit + 1;
+        const end = start + opiniones.length - 1;
+        counterElement.textContent = `Mostrando ${start}-${end} de ${totalOpiniones} opiniones.`;
 
-        if (opiniones.length === 0) {
+        if (totalOpiniones === 0) {
             container.innerHTML = '<div class="message">No se encontraron opiniones con los filtros seleccionados.</div>';
+            counterElement.textContent = 'No hay opiniones para mostrar.';
         } else {
             container.innerHTML = opiniones.map(createOpinionHTML).join('');
         }
     };
+    
+    const renderPagination = () => {
+        paginationContainer.innerHTML = '';
+        const totalPages = Math.ceil(totalOpiniones / limit);
+
+        if (totalPages <= 1) return;
+
+        const createButton = (text, page, isDisabled = false, isActive = false) => {
+            const button = document.createElement('button');
+            button.innerHTML = text;
+            button.disabled = isDisabled;
+            if (isActive) button.classList.add('active');
+            button.addEventListener('click', () => {
+                currentPage = page;
+                fetchOpiniones();
+                updateBrowserUrl();
+            });
+            return button;
+        };
+
+        paginationContainer.appendChild(createButton('Anterior', currentPage - 1, currentPage === 1));
+
+        for (let i = 1; i <= totalPages; i++) {
+            paginationContainer.appendChild(createButton(i, i, false, i === currentPage));
+        }
+
+        paginationContainer.appendChild(createButton('Siguiente', currentPage + 1, currentPage === totalPages));
+    };
 
     const renderStats = (opiniones) => {
-        const totalOpiniones = opiniones.length;
         if (totalOpiniones === 0) {
             statsGrid.innerHTML = '<div class="message">No hay datos para mostrar estadísticas.</div>';
             return;
@@ -106,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         statsGrid.innerHTML = ALL_PRIZES.map(prize => {
             const count = counts[prize];
+            // Para las estadisticas, usaremos el total de opiniones, no solo las de la pagina
             const percentage = ((count / totalOpiniones) * 100).toFixed(1);
             const [emoji, ...nameParts] = prize.split(' ');
             const name = nameParts.join(' ');
@@ -116,7 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const createOpinionHTML = (opinion) => {
         const stars = '★'.repeat(opinion.rating || 0) + '☆'.repeat(5 - (opinion.rating || 0));
         const reviewText = opinion.review || 'Comentario no proporcionado';
-        // Usamos date_real que es el campo ISO
         const date = opinion.date_real ? new Date(opinion.date_real).toLocaleDateString('es-ES') : 'N/A';
         const time = opinion.date_real ? new Date(opinion.date_real).toLocaleTimeString('es-ES') : 'N/A';
         return `
@@ -135,6 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const handleFilterChange = () => {
+        currentPage = 1;
         updateBrowserUrl();
         fetchOpiniones();
     };
@@ -151,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const dateMap = { 'today': 'today', '7days': 'week', '1month': 'month', '3months': '3months' };
         Object.values(timeFilterButtons).forEach(btn => btn.classList.remove('active'));
         
-        let activeDateButton = timeFilterButtons.today; // Default a Hoy
+        let activeDateButton = timeFilterButtons.today;
         if (date && dateMap[date]) {
             const buttonId = `filter-${dateMap[date]}`;
             const button = document.getElementById(buttonId);
@@ -162,6 +207,11 @@ document.addEventListener('DOMContentLoaded', () => {
             activeDateButton = timeFilterButtons.all;
         }
         activeDateButton.classList.add('active');
+        
+        const page = parseInt(params.get('page'), 10);
+        if (page > 1) {
+            currentPage = page;
+        }
     };
 
     ratingFilter.addEventListener('change', handleFilterChange);
