@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const urlLimit = parseInt(params.get('limit'), 10);
-        if (urlLimit >= 10 && urlLimit <= 100) {
+        if (urlLimit && limitFilter.querySelector(`option[value="${urlLimit}"]`)) {
             limit = urlLimit;
             limitFilter.value = urlLimit;
         }
