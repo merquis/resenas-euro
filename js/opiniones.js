@@ -81,7 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(url);
             if (!response.ok) throw new Error(`Error en la petición: ${response.statusText}`);
             
-            const data = await response.json();
+            const responseData = await response.json();
+            const data = responseData[0] || {};
             const opiniones = data.opiniones || [];
             totalOpiniones = data.total || 0;
             
