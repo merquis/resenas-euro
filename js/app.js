@@ -235,7 +235,7 @@ class App {
    */
   startGoogleTimer() {
     const googleTimerEl = document.getElementById('googleTimer');
-    let timeLeft = 30 * 60; // 30 minutos en segundos
+    let timeLeft = 5 * 60; // 5 minutos en segundos
 
     this.googleTimerInterval = setInterval(() => {
       if (googleTimerEl) {
