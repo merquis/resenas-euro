@@ -115,7 +115,7 @@ export class FormManager {
 
     if (!isValid && email !== '') {
       this.emailInput.classList.add('error');
-      this.showError(this.emailInput, 'Email inválido');
+      this.showError(this.emailInput, languageManager.getTranslation('invalidEmail'));
     } else {
       this.emailInput.classList.remove('error');
       this.hideError(this.emailInput);
@@ -175,17 +175,17 @@ export class FormManager {
 
       // La respuesta de n8n es un objeto directo.
       if (result && result.existe === true) {
-        this.showError(this.emailInput, 'Este correo electrónico ya ha sido utilizado');
+        this.showError(this.emailInput, languageManager.getTranslation('emailAlreadyUsed'));
         return; // Detiene el envío del formulario
       }
       if (result && result.valid === false) {
-        this.showError(this.emailInput, 'Email no válido. Introduzca uno nuevo.');
+      this.showError(this.emailInput, languageManager.getTranslation('invalidEmailNew'));
         return; // Detiene el envío del formulario
       }
     } catch (error) {
       console.error('Error al verificar el email:', error);
       // Mostramos un error genérico y detenemos el envío si la verificación falla.
-      this.showError(this.emailInput, 'No se pudo verificar el email. Inténtalo de nuevo.');
+      this.showError(this.emailInput, languageManager.getTranslation('emailVerificationError'));
       return;
     }
 
@@ -203,7 +203,7 @@ export class FormManager {
     let isValid = true;
 
     if (this.nameInput.value.trim() === '') {
-      this.showError(this.nameInput, 'Este campo es obligatorio');
+      this.showError(this.nameInput, languageManager.getTranslation('requiredField'));
       isValid = false;
     } else {
       this.hideError(this.nameInput);
@@ -214,14 +214,14 @@ export class FormManager {
     }
 
     if (this.feedbackTextarea.required && this.feedbackTextarea.value.trim() === '') {
-      this.showError(this.feedbackTextarea, 'Este campo es obligatorio');
+      this.showError(this.feedbackTextarea, languageManager.getTranslation('requiredField'));
       isValid = false;
     } else {
       this.hideError(this.feedbackTextarea);
     }
 
     if (!this.privacyPolicyCheckbox.checked) {
-      this.showError(this.privacyPolicyCheckbox, 'Debes aceptar la política de privacidad');
+      this.showError(this.privacyPolicyCheckbox, languageManager.getTranslation('privacyPolicy'));
       isValid = false;
     } else {
       this.hideError(this.privacyPolicyCheckbox);

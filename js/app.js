@@ -275,4 +275,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const app = new App();
   app.init();
   window.app = app;
+
+  // Traducción dinámica del título de la ruleta
+  function updateWhichPrizeTitle() {
+    const el = document.getElementById('whichPrizeTitle');
+    if (el) {
+      el.textContent = languageManager.getTranslation('whichPrize');
+    }
+  }
+  updateWhichPrizeTitle();
+  window.addEventListener('languageChanged', updateWhichPrizeTitle);
 });
