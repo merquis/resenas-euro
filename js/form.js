@@ -80,6 +80,7 @@ export class FormManager {
     window.addEventListener('languageChanged', () => {
       this.updateButtonText();
       this.updatePrivacyPolicyLabel();
+      this.revalidateVisibleErrors();
     });
   }
 
@@ -137,6 +138,25 @@ export class FormManager {
   hideError(errorElement) {
     errorElement.textContent = '';
     errorElement.style.display = 'none';
+  }
+
+  /**
+   * Vuelve a validar el formulario si hay errores visibles para actualizar las traducciones.
+   */
+  revalidateVisibleErrors() {
+    // Si el formulario no está visible, no hacer nada
+    if (this.formSection.classList.contains('hidden')) {
+      return;
+    }
+
+    const hasVisibleErrors = this.nameError.style.display === 'block' ||
+                             this.emailError.style.display === 'block' ||
+                             this.feedbackError.style.display === 'block' ||
+                             this.privacyError.style.display === 'block';
+
+    if (hasVisibleErrors) {
+      this.validateForm();
+    }
   }
 
   /**
