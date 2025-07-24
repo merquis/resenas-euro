@@ -1092,3 +1092,14 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(243, 156, 18, 0.6);
 }
+
+/* CORRECCIÓN DE POSICIONAMIENTO DEL ERROR DE PRIVACIDAD */
+.privacy-policy-group {
+  flex-wrap: wrap; /* Permite que los elementos salten a la siguiente línea */
+}
+
+#privacy-error.field-error {
+  width: 100%; /* Ocupa todo el ancho para forzar el salto de línea */
+  flex-basis: 100%; /* Asegura que ocupe toda la línea en un contenedor flex */
+  margin-top: 10px; /* Añade un poco de espacio extra arriba */
+}
