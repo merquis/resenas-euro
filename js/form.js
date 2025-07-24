@@ -15,6 +15,7 @@ export class FormManager {
     this.privacyPolicyCheckbox = null;
     this.privacyPolicyLabel = null;
     this.privacyLink = null;
+    this.privacyError = null;
     this.onSubmitCallback = null;
   }
 
@@ -38,6 +39,7 @@ export class FormManager {
     this.privacyPolicyCheckbox = document.getElementById('privacyPolicy');
     this.privacyPolicyLabel = document.getElementById('privacyPolicyLabel');
     this.privacyLink = document.getElementById('openPrivacyPopup');
+    this.privacyError = document.getElementById('privacy-error');
     
     const inputs = this.form.querySelectorAll('input');
     inputs.forEach(input => {
@@ -221,10 +223,11 @@ export class FormManager {
     }
 
     if (!this.privacyPolicyCheckbox.checked) {
-      this.showError(this.privacyPolicyCheckbox, languageManager.getTranslation('privacyPolicy'));
+      this.privacyError.textContent = languageManager.getTranslation('requiredField');
+      showElement(this.privacyError);
       isValid = false;
     } else {
-      this.hideError(this.privacyPolicyCheckbox);
+      hideElement(this.privacyError);
     }
 
     return isValid;
