@@ -1049,20 +1049,21 @@ body {
 
 .privacy-policy-group {
   display: flex;
+  flex-wrap: wrap; /* Permite que el mensaje de error se coloque debajo */
   align-items: flex-start;
   width: 100%;
-  justify-content: space-between;
 }
 
 .privacy-check-wrapper {
   display: flex;
-  align-items: flex-start;
+  align-items: flex-start; /* Alinea checkbox, texto y enlace en la parte superior */
   gap: 8px;
-  flex-basis: 75%; /* Ocupa el 75% del ancho */
+  width: 100%; /* El contenedor ocupa todo el ancho */
 }
 
 .privacy-check-wrapper label {
   cursor: pointer; /* Muestra la manita al pasar el ratón */
+  flex-grow: 1; /* Hace que la etiqueta ocupe el espacio sobrante */
 }
 
 .privacy-link {
@@ -1070,9 +1071,9 @@ body {
   white-space: nowrap;
   color: #ccc;
   text-decoration: underline;
-  flex-basis: 25%; /* Ocupa el 25% del ancho */
+  flex-basis: 25%; /* Reserva el 25% del espacio para el enlace */
   text-align: right; /* Alinea el texto a la derecha */
-  flex-shrink: 0;
+  flex-shrink: 0; /* Evita que el enlace se encoja */
 }
 
 .popup-close-text-btn {
