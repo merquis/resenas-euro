@@ -1049,14 +1049,14 @@ body {
 
 .privacy-policy-group {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 .privacy-check-wrapper {
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* Alinear arriba por si el texto ocupa varias líneas */
   gap: 8px; /* Espacio entre el checkbox y el texto */
 }
 
@@ -1069,6 +1069,8 @@ body {
   white-space: nowrap; /* Evita que el enlace se parta en dos líneas */
   color: #ccc;
   text-decoration: underline;
+  margin-left: auto; /* Mueve el enlace a la derecha */
+  padding-left: 10px; /* Añade espacio por si acaso */
 }
 
 .popup-close-text-btn {
@@ -1094,9 +1096,6 @@ body {
 }
 
 /* CORRECCIÓN DE POSICIONAMIENTO DEL ERROR DE PRIVACIDAD */
-.privacy-policy-group {
-  flex-wrap: wrap; /* Permite que los elementos salten a la siguiente línea */
-}
 
 #privacy-error.field-error {
   width: 100%; /* Ocupa todo el ancho para forzar el salto de línea */
