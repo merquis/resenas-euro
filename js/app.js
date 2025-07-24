@@ -13,6 +13,7 @@ class App {
     this.resenaBtn = null;
     this.googleTimerInterval = null;
     this.currentFormData = null; // Para guardar temporalmente los datos del formulario
+    this.lastPrizeData = null; // Para guardar los datos del último premio mostrado
     this.privacyPopup = null;
     this.closePrivacyPopupBtn = null;
     this.closePrivacyTextBtn = null;
@@ -56,7 +57,7 @@ class App {
 
     // Configurar callbacks
     formManager.setOnSubmit((formData) => this.handleFormSubmit(formData));
-    rouletteManager.setOnSpinComplete((prize, rating) => this.handleSpinComplete(prize, rating));
+    rouletteManager.setOnSpinComplete((prizeIndex, rating) => this.handleSpinComplete(prizeIndex, rating));
   }
 
   /**
@@ -153,30 +154,27 @@ class App {
 
   /**
    * Maneja la finalización del giro de la ruleta
-   * @param {string} prize - Premio ganado
+   * @param {number} prizeIndex - Índice del premio ganado
    * @param {number} rating - Valoración del usuario
    */
-  handleSpinComplete(prize, rating) {
+  handleSpinComplete(prizeIndex, rating) {
     // Pausa de 1 segundo para que el usuario vea el premio en la ruleta
     setTimeout(() => {
       viewManager.hideOverlay('roulette');
 
-      // Generamos el código internamente
-      const randomPart = Math.random().toString().slice(2, 5); // Generamos 3 dígitos aleatorios
+      // Generamos el código interno
+      const randomPart = Math.random().toString().slice(2, 5);
       const justTheCode = `EURO-${randomPart}${rating}`;
-      
-      // Mostramos el premio y el mensaje del email personalizado
-      let prizeByEmailMessage = languageManager.getTranslation('prizeByEmail');
-      // Añadimos un salto de línea opcional en el email para mejorar la visualización en móviles
-      const formattedEmail = this.currentFormData.email.replace('@', '@<wbr>');
-      const highlightedEmail = `<span class="highlight-email">${formattedEmail}</span>`;
-      prizeByEmailMessage = prizeByEmailMessage
-        .replace('{{name}}', this.currentFormData.name)
-        .replace('{{email}}', highlightedEmail)
-        .replace(/\n/g, '<br>'); // Reemplazar saltos de línea con <br>
-      
-      const displayCode = `${prize}<br><span class="email-message">${prizeByEmailMessage}</span>`;
-      this.codigoRecompensa.innerHTML = displayCode;
+
+      // Guardamos los datos necesarios para poder refrescar el mensaje si cambia el idioma
+      this.lastPrizeData = {
+        prizeIndex: prizeIndex,
+        name: this.currentFormData.name,
+        email: this.currentFormData.email,
+      };
+
+      // Mostramos el mensaje del premio por primera vez
+      this.updatePrizeMessage();
 
       // Ocultamos la sección de validez
       const expiryWarning = document.querySelector('.expiry-warning');
@@ -185,11 +183,13 @@ class App {
       }
 
       // Construimos y enviamos el payload a N8N
+      // Obtenemos el texto del premio en el idioma actual para enviarlo
+      const prizeName = languageManager.getTranslatedPrizes()[prizeIndex];
       const payload = {
         ...this.currentFormData,
         review: this.currentFormData.feedback,
-        premio: prize,
-        codigoPremio: justTheCode
+        premio: prizeName,
+        codigoPremio: justTheCode,
       };
       delete payload.feedback;
 
@@ -228,6 +228,33 @@ class App {
    */
   hidePrivacyPopup() {
     this.privacyPopup.classList.add('hidden');
+  }
+
+  /**
+   * Actualiza el mensaje del premio en la vista de recompensa.
+   * Se usa para la renderización inicial y para la actualización en cambio de idioma.
+   */
+  updatePrizeMessage() {
+    if (!this.lastPrizeData) return;
+
+    const { prizeIndex, name, email } = this.lastPrizeData;
+
+    // Obtener el nombre del premio traducido
+    const translatedPrizes = languageManager.getTranslatedPrizes();
+    const prizeName = translatedPrizes[prizeIndex];
+
+    // Obtener el mensaje de email traducido
+    let prizeByEmailMessage = languageManager.getTranslation('prizeByEmail');
+    const formattedEmail = email.replace('@', '@<wbr>');
+    const highlightedEmail = `<span class="highlight-email">${formattedEmail}</span>`;
+    
+    prizeByEmailMessage = prizeByEmailMessage
+      .replace('{{name}}', name)
+      .replace('{{email}}', highlightedEmail)
+      .replace(/\n/g, '<br>');
+
+    const displayCode = `${prizeName}<br><span class="email-message">${prizeByEmailMessage}</span>`;
+    this.codigoRecompensa.innerHTML = displayCode;
   }
 
   /**
@@ -285,4 +312,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   updateWhichPrizeTitle();
   window.addEventListener('languageChanged', updateWhichPrizeTitle);
+
+  // Traducción dinámica del mensaje del premio
+  window.addEventListener('languageChanged', () => {
+    if (window.app) {
+      window.app.updatePrizeMessage();
+    }
+  });
 });

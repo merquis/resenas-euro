@@ -190,10 +190,10 @@ export class RouletteManager {
     // Manejar el final del giro
     setTimeout(() => {
       this.isSpinning = false;
-      const prize = this.prizes[prizeIndex];
-      
+      // No pasar el texto del premio, sino su índice.
+      // La App se encargará de obtener la traducción correcta.
       if (this.onSpinComplete) {
-        this.onSpinComplete(prize, this.currentRating);
+        this.onSpinComplete(prizeIndex, this.currentRating);
       }
     }, CONFIG.roulette.spinDuration + 200);
   }
