@@ -15,7 +15,13 @@ export class FormManager {
     this.privacyPolicyCheckbox = null;
     this.privacyPolicyLabel = null;
     this.privacyLink = null;
+    
+    // Contenedores de error
+    this.nameError = null;
+    this.emailError = null;
+    this.feedbackError = null;
     this.privacyError = null;
+
     this.onSubmitCallback = null;
   }
 
@@ -39,7 +45,6 @@ export class FormManager {
     this.privacyPolicyCheckbox = document.getElementById('privacyPolicy');
     this.privacyPolicyLabel = document.getElementById('privacyPolicyLabel');
     this.privacyLink = document.getElementById('openPrivacyPopup');
-    this.privacyError = document.getElementById('privacy-error');
     
     const inputs = this.form.querySelectorAll('input');
     inputs.forEach(input => {
@@ -49,6 +54,12 @@ export class FormManager {
         this.emailInput = input;
       }
     });
+
+    // Cachear contenedores de error
+    this.nameError = document.getElementById('name-error');
+    this.emailError = document.getElementById('email-error');
+    this.feedbackError = document.getElementById('feedback-error');
+    this.privacyError = document.getElementById('privacy-error');
   }
 
   /**
@@ -60,9 +71,11 @@ export class FormManager {
       this.handleSubmit();
     });
 
-    this.emailInput.addEventListener('blur', () => {
-      this.validateEmail();
-    });
+    // Ocultar errores al empezar a escribir
+    this.nameInput.addEventListener('input', () => this.hideError(this.nameError));
+    this.emailInput.addEventListener('input', () => this.hideError(this.emailError));
+    this.feedbackTextarea.addEventListener('input', () => this.hideError(this.feedbackError));
+    this.privacyPolicyCheckbox.addEventListener('change', () => this.hideError(this.privacyError));
 
     window.addEventListener('languageChanged', () => {
       this.updateButtonText();
@@ -108,46 +121,22 @@ export class FormManager {
   }
 
   /**
-   * Valida el email
-   * @returns {boolean} True si es válido
-   */
-  validateEmail() {
-    const email = this.emailInput.value.trim();
-    const isValid = isValidEmail(email);
-
-    if (!isValid && email !== '') {
-      this.emailInput.classList.add('error');
-      this.showError(this.emailInput, languageManager.getTranslation('invalidEmail'));
-    } else {
-      this.emailInput.classList.remove('error');
-      this.hideError(this.emailInput);
-    }
-
-    return isValid;
-  }
-
-  /**
    * Muestra un error en un campo
-   * @param {HTMLElement} field - Campo con error
-   * @param {string} message - Mensaje de error
+   * @param {HTMLElement} errorElement - El div de error
+   * @param {string} messageKey - La clave de traducción para el mensaje
    */
-  showError(field, message) {
-    this.hideError(field);
-    const errorDiv = document.createElement('div');
-    errorDiv.className = 'field-error';
-    errorDiv.textContent = message;
-    field.parentElement.appendChild(errorDiv);
+  showError(errorElement, messageKey) {
+    errorElement.textContent = languageManager.getTranslation(messageKey);
+    errorElement.style.display = 'block';
   }
 
   /**
    * Oculta el error de un campo
-   * @param {HTMLElement} field - Campo
+   * @param {HTMLElement} errorElement - El div de error
    */
-  hideError(field) {
-    const error = field.parentElement.querySelector('.field-error');
-    if (error) {
-      error.remove();
-    }
+  hideError(errorElement) {
+    errorElement.textContent = '';
+    errorElement.style.display = 'none';
   }
 
   /**
@@ -175,22 +164,19 @@ export class FormManager {
 
       const result = await response.json();
 
-      // La respuesta de n8n es un objeto directo.
       if (result && result.existe === true) {
-        this.showError(this.emailInput, languageManager.getTranslation('emailAlreadyUsed'));
-        return; // Detiene el envío del formulario
+        this.showError(this.emailError, 'emailAlreadyUsed');
+        return;
       }
       if (result && result.valid === false) {
-      this.showError(this.emailInput, languageManager.getTranslation('invalidEmailNew'));
-        return; // Detiene el envío del formulario
+        this.showError(this.emailError, 'invalidEmailNew');
+        return;
       }
     } catch (error) {
       console.error('Error al verificar el email:', error);
-      // Mostramos un error genérico y detenemos el envío si la verificación falla.
-      this.showError(this.emailInput, languageManager.getTranslation('emailVerificationError'));
+      this.showError(this.emailError, 'emailVerificationError');
       return;
     }
-
 
     if (this.onSubmitCallback) {
       this.onSubmitCallback(this.getFormData());
@@ -204,30 +190,39 @@ export class FormManager {
   validateForm() {
     let isValid = true;
 
+    // Validar nombre
     if (this.nameInput.value.trim() === '') {
-      this.showError(this.nameInput, languageManager.getTranslation('requiredField'));
+      this.showError(this.nameError, 'requiredField');
       isValid = false;
     } else {
-      this.hideError(this.nameInput);
+      this.hideError(this.nameError);
     }
 
-    if (!this.validateEmail()) {
+    // Validar email
+    if (this.emailInput.value.trim() === '') {
+      this.showError(this.emailError, 'requiredField');
       isValid = false;
+    } else if (!isValidEmail(this.emailInput.value.trim())) {
+      this.showError(this.emailError, 'invalidEmail');
+      isValid = false;
+    } else {
+      this.hideError(this.emailError);
     }
 
+    // Validar feedback si es requerido
     if (this.feedbackTextarea.required && this.feedbackTextarea.value.trim() === '') {
-      this.showError(this.feedbackTextarea, languageManager.getTranslation('requiredField'));
+      this.showError(this.feedbackError, 'requiredField');
       isValid = false;
     } else {
-      this.hideError(this.feedbackTextarea);
+      this.hideError(this.feedbackError);
     }
 
+    // Validar checkbox de privacidad
     if (!this.privacyPolicyCheckbox.checked) {
-      this.privacyError.textContent = languageManager.getTranslation('requiredField');
-      showElement(this.privacyError);
+      this.showError(this.privacyError, 'requiredField');
       isValid = false;
     } else {
-      hideElement(this.privacyError);
+      this.hideError(this.privacyError);
     }
 
     return isValid;
@@ -246,8 +241,10 @@ export class FormManager {
    */
   reset() {
     this.form.reset();
-    this.form.querySelectorAll('.field-error').forEach(error => error.remove());
-    this.form.querySelectorAll('.error').forEach(field => field.classList.remove('error'));
+    this.hideError(this.nameError);
+    this.hideError(this.emailError);
+    this.hideError(this.feedbackError);
+    this.hideError(this.privacyError);
   }
 
   /**
