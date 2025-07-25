@@ -253,7 +253,7 @@ class App {
       .replace('{{premio}}', `<strong>${prizeName}</strong>`)
       .replace(/\n/g, '<br>');
 
-    const displayCode = `<span class="email-message">${prizeByEmailMessage}</span>`;
+    const displayCode = `<div class="premio-grande" style="font-size:2rem;font-weight:bold;margin-bottom:10px;">${prizeName}</div><span class="email-message">${prizeByEmailMessage}</span>`;
     this.codigoRecompensa.innerHTML = displayCode;
   }
 
