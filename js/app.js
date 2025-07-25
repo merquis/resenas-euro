@@ -237,7 +237,7 @@ class App {
   updatePrizeMessage() {
     if (!this.lastPrizeData) return;
 
-    const { prizeIndex, name, email } = this.lastPrizeData;
+    const { prizeIndex, email } = this.lastPrizeData;
 
     // Obtener el nombre del premio traducido
     const translatedPrizes = languageManager.getTranslatedPrizes();
@@ -249,11 +249,11 @@ class App {
     const highlightedEmail = `<span class="highlight-email">${formattedEmail}</span>`;
     
     prizeByEmailMessage = prizeByEmailMessage
-      .replace('{{name}}', name)
       .replace('{{email}}', highlightedEmail)
+      .replace('{{premio}}', `<strong>${prizeName}</strong>`)
       .replace(/\n/g, '<br>');
 
-    const displayCode = `${prizeName}<br><span class="email-message">${prizeByEmailMessage}</span>`;
+    const displayCode = `<span class="email-message">${prizeByEmailMessage}</span>`;
     this.codigoRecompensa.innerHTML = displayCode;
   }
 
