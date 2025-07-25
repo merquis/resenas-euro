@@ -218,12 +218,15 @@ class App {
         // Mostrar tanto el mensaje de premio como el bloque de reseña
         showElement(document.getElementById('codigoContainer'));
         showElement(document.getElementById('resenaBtn'));
-        // Ocultar las demás vistas principales
+        // No ocultar ninguna de las dos vistas, solo las demás
         Object.values(viewManager.mainViews).forEach(view => {
           if (view && view.id !== 'codigoContainer' && view.id !== 'resenaBtn') {
             hideElement(view);
           }
         });
+        // Asegurar que ambas vistas siguen visibles
+        showElement(document.getElementById('codigoContainer'));
+        showElement(document.getElementById('resenaBtn'));
         viewManager.updateFixedCta('review');
 
         // Hacemos scroll hacia la nueva sección en móviles
