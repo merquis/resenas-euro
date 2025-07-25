@@ -210,11 +210,12 @@ class App {
         payload.valoracion_externa = false;
         this.sendDataToN8N(payload);
         this.currentFormData = null;
+        viewManager.showView('prize');
       } else if (rating === 5) {
         // Guardar el payload para el siguiente paso (botón completar reseña)
         this.pendingExternalReviewPayload = { ...payload };
-        showElement(this.resenaBtn);
         this.startGoogleTimer();
+        viewManager.showView('review');
         // Forzamos la actualización del CTA para la vista de reseña en móvil
         viewManager.updateFixedCta('review');
 
@@ -223,8 +224,6 @@ class App {
           this.resenaBtn.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
-
-      viewManager.showView('prize');
     }, 1000);
   }
 
