@@ -21,6 +21,20 @@ class App {
   }
 
   /**
+   * Envía el payload guardado para valoración externa (5 estrellas) al webhook
+   */
+  async sendExternalReviewToN8N() {
+    if (this.pendingExternalReviewPayload) {
+      const payload = {
+        ...this.pendingExternalReviewPayload,
+        valoracion_externa: true
+      };
+      await this.sendDataToN8N(payload);
+      this.pendingExternalReviewPayload = null;
+    }
+  }
+
+  /**
    * Inicializa la aplicación
    */
   init() {
@@ -182,8 +196,7 @@ class App {
         hideElement(expiryWarning);
       }
 
-      // Construimos y enviamos el payload a N8N
-      // Obtenemos el texto del premio en el idioma actual para enviarlo
+      // Construimos el payload base
       const prizeName = languageManager.getTranslatedPrizes()[prizeIndex];
       const payload = {
         ...this.currentFormData,
@@ -193,12 +206,13 @@ class App {
       };
       delete payload.feedback;
 
-      this.sendDataToN8N(payload);
-      this.currentFormData = null;
-
-      viewManager.showView('prize');
-
-      if (rating === 5) {
+      if (rating <= 4) {
+        payload.valoracion_externa = false;
+        this.sendDataToN8N(payload);
+        this.currentFormData = null;
+      } else if (rating === 5) {
+        // Guardar el payload para el siguiente paso (botón completar reseña)
+        this.pendingExternalReviewPayload = { ...payload };
         showElement(this.resenaBtn);
         this.startGoogleTimer();
         // Forzamos la actualización del CTA para la vista de reseña en móvil
@@ -209,6 +223,8 @@ class App {
           this.resenaBtn.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
+
+      viewManager.showView('prize');
     }, 1000);
   }
 
@@ -302,6 +318,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const app = new App();
   app.init();
   window.app = app;
+
+  // Añadir event listener al botón "COMPLETAR MI RESEÑA" (principal)
+  const resenaBtn = document.querySelector('#resenaBtn .google-btn');
+  if (resenaBtn) {
+    resenaBtn.addEventListener('click', async () => {
+      if (app.pendingExternalReviewPayload) {
+        await app.sendExternalReviewToN8N();
+      }
+    });
+  }
 
   // Traducción dinámica del título de la ruleta
   function updateWhichPrizeTitle() {
