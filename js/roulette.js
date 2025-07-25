@@ -152,46 +152,60 @@ export class RouletteManager {
     this.isSpinning = true;
     this.spinButton.disabled = true;
 
-    // Calcular resultado con probabilidades controladas
     const N = this.prizes.length;
     const randomSpins = getRandomNumber(CONFIG.roulette.minSpins, CONFIG.roulette.maxSpins);
     
-    // Determinar el premio basado en probabilidades
     let prizeIndex;
-    const random = Math.random();
-    
-    // Probabilidades ajustadas
-    if (random < 0.001) {
-      // 0.1% para CENA (VALOR 60€) (índice 0)
-      prizeIndex = 0;
-    } else if (random < 0.002) {
-      // 0.1% para 30€ DESCUENTO (índice 1)
-      prizeIndex = 1;
-    } else if (random < 0.012) {
-      // 1% para BOTELLA VINO (índice 2)
-      prizeIndex = 2;
+    const random = Math.random(); // Genera un número aleatorio entre 0 y 1
+
+    // --- INICIO DE LA LÓGICA MODIFICADA ---
+    if (this.currentRating >= 1 && this.currentRating <= 4) {
+      // LÓGICA PARA 1-4 ESTRELLAS
+      const lowTierPrizes = [3, 4, 7]; // Índices para HELADO, CERVEZA, CHUPITO
+      
+      // Comprobamos las probabilidades fijas del 0.01% cada una
+      if (random < 0.0001) {        // 0.01%
+        prizeIndex = 0; // CENA
+      } else if (random < 0.0002) { // 0.01%
+        prizeIndex = 1; // 30€ DESCUENTO
+      } else if (random < 0.0003) { // 0.01%
+        prizeIndex = 2; // BOTELLA VINO
+      } else if (random < 0.0004) { // 0.01%
+        prizeIndex = 5; // REFRESCO
+      } else if (random < 0.0005) { // 0.01%
+        prizeIndex = 6; // MOJITO
+      } else {
+        // El 99.95% restante se reparte entre los 3 premios menores
+        const randomIndex = Math.floor(Math.random() * lowTierPrizes.length);
+        prizeIndex = lowTierPrizes[randomIndex];
+      }
     } else {
-      // 98.8% para los otros 5 premios
-      prizeIndex = Math.floor(Math.random() * 5) + 3;
+      // LÓGICA PARA 5 ESTRELLAS
+      // Comprobamos las probabilidades fijas del 0.1% cada una
+      if (random < 0.001) {        // 0.1%
+        prizeIndex = 0; // CENA
+      } else if (random < 0.002) { // 0.1%
+        prizeIndex = 1; // 30€ DESCUENTO
+      } else if (random < 0.003) { // 0.1%
+        prizeIndex = 2; // BOTELLA VINO
+      } else {
+        // El 99.7% restante se reparte entre los 5 premios restantes
+        const highTierLowPrizes = [3, 4, 5, 6, 7]; // Helado, Cerveza, Refresco, Mojito, Chupito
+        const randomIndex = Math.floor(Math.random() * highTierLowPrizes.length);
+        prizeIndex = highTierLowPrizes[randomIndex];
+      }
     }
-    
-    // Ajustar el índice para que la flecha apunte al premio correcto
-    // La flecha está en la parte superior (270°), así que ajustamos
+    // --- FIN DE LA LÓGICA MODIFICADA ---
+
     const targetIndex = (prizeIndex - 2 + N) % N;
-    
-    // Calcular rotación final
     const rotation = 270 - (targetIndex * this.sliceAngle) - (this.sliceAngle / 2);
     const totalRotation = (randomSpins * 360) + rotation;
 
-    // Aplicar animación
     this.wheel.style.transition = `transform ${CONFIG.roulette.spinDuration}ms ${CONFIG.roulette.easing}`;
     this.wheel.style.transform = `rotate(${totalRotation}deg)`;
 
-    // Manejar el final del giro
     setTimeout(() => {
       this.isSpinning = false;
-      // No pasar el texto del premio, sino su índice.
-      // La App se encargará de obtener la traducción correcta.
       if (this.onSpinComplete) {
         this.onSpinComplete(prizeIndex, this.currentRating);
       }
