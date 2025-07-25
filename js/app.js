@@ -215,6 +215,9 @@ class App {
         // Guardar el payload para el siguiente paso (botón completar reseña)
         this.pendingExternalReviewPayload = { ...payload };
         this.startGoogleTimer();
+        // Ocultar explícitamente el premio y mostrar la reseña
+        hideElement(document.getElementById('codigoContainer'));
+        showElement(document.getElementById('resenaBtn'));
         viewManager.showView('review');
         // Forzamos la actualización del CTA para la vista de reseña en móvil
         viewManager.updateFixedCta('review');
