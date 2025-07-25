@@ -44,7 +44,7 @@ export const translations = {
     hurryUp: '¡DATE PRISA!',
     almostGone: '¡CASI AGOTADO!',
     morePrizes: '🎁 + 5 premios más en la ruleta',
-    prizeByEmail: 'Se va a generar el código de tu premio. Lo recibirás en {{email}} en unos minutos, con formato <span class="codigo-premio">EURO‑XXXX</span>.<br>Preséntalo en el local para obtener tu {{premio}}.',
+    prizeByEmail: 'Se va a generar el código de tu premio. Lo recibirás en {{email}} en unos minutos, con formato <span class="codigo-premio">EURO‑XXXX</span>.<br>Preséntalo en el local para obtener tu regalo.',
     guaranteedPrize: '✅ PREMIO GARANTIZADO',
     rateWithStars: 'VALORAR CON {{count}} ESTRELLAS',
     rateNow: 'VALORAR AHORA',
