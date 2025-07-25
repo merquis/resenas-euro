@@ -1110,3 +1110,22 @@ body {
   flex-basis: 100%; /* Asegura que ocupe toda la línea en un contenedor flex */
   margin-top: 10px; /* Añade un poco de espacio extra arriba */
 }
+
+/* PREMIO GRANDE - AJUSTE DE PALABRAS LARGAS */
+.premio-grande {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  line-height: 1.1;
+  max-width: 100%;
+  display: block;
+}
+
+@media (max-width: 480px) {
+  .premio-grande {
+    font-size: 1.3rem;
+  }
+}

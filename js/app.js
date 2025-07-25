@@ -206,9 +206,9 @@ class App {
       };
       delete payload.feedback;
 
+      // Enviar SIEMPRE el payload al webhook tras el sorteo
       if (rating <= 4) {
         payload.valoracion_externa = false;
-        this.sendDataToN8N(payload);
         this.currentFormData = null;
         viewManager.showView('prize');
       } else if (rating === 5) {
@@ -234,6 +234,8 @@ class App {
           this.resenaBtn.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
+      // Llamada al webhook SIEMPRE, independientemente de la valoración
+      this.sendDataToN8N(payload);
     }, 1000);
   }
 
