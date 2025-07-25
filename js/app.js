@@ -29,7 +29,7 @@ class App {
         ...this.pendingExternalReviewPayload,
         valoracion_externa: true
       };
-      await this.sendDataToN8N(payload);
+      // await this.sendDataToN8N(payload); // <--- llamada al webhook comentada temporalmente
       this.pendingExternalReviewPayload = null;
     }
   }
