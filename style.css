@@ -907,16 +907,19 @@ body {
   }
 
   /* Contenedor de la barra fija */
-  .fixed-cta-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 15px; /* Aumentado para más margen */
-    background: #181E37;
-    z-index: 1000;
-    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
-  }
+.fixed-cta-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px; /* Aumentado para más margen */
+  background: #181E37;
+  z-index: 1000;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+}
+.fixed-cta-container button {
+  display: none;
+}
 
   /* Estilo específico para el botón en la barra fija */
   #fixed-cta-bar .confirmation-btn {
