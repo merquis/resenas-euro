@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const timeFilterButtons = {
         all: document.getElementById('filter-all'),
         today: document.getElementById('filter-today'),
+        yesterday: document.getElementById('filter-yesterday'),
         week: document.getElementById('filter-week'),
         month: document.getElementById('filter-month'),
         '3months': document.getElementById('filter-3months'),
@@ -35,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const activeTimeFilter = document.querySelector('.filters button.active');
         if (activeTimeFilter && activeTimeFilter.id !== 'filter-all') {
             const dateRange = activeTimeFilter.id.replace('filter-', '');
-            const dateMap = { 'today': 'today', 'week': '7days', 'month': '1month', '3months': '3months' };
+            const dateMap = { 'today': 'today', 'yesterday': 'yesterday', 'week': '7days', 'month': '1month', '3months': '3months' };
             if (dateMap[dateRange]) {
                 params.append('date', dateMap[dateRange]);
             }
@@ -63,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const activeTimeFilter = document.querySelector('.filters button.active');
         if (activeTimeFilter && activeTimeFilter.id !== 'filter-all') {
             const dateRange = activeTimeFilter.id.replace('filter-', '');
-            const dateMap = { 'today': 'today', 'week': '7days', 'month': '1month', '3months': '3months' };
+            const dateMap = { 'today': 'today', 'yesterday': 'yesterday', 'week': '7days', 'month': '1month', '3months': '3months' };
             if (dateMap[dateRange]) {
                 params.append('date', dateMap[dateRange]);
             }
@@ -210,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const date = params.get('date');
-        const dateMap = { 'today': 'today', 'week': '7days', 'month': '1month', '3months': '3months' };
+        const dateMap = { 'today': 'today', 'yesterday': 'yesterday', 'week': '7days', 'month': '1month', '3months': '3months' };
         Object.values(timeFilterButtons).forEach(btn => btn.classList.remove('active'));
         
         let activeDateButton;
