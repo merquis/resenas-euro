@@ -125,15 +125,37 @@ class ViewManager {
     };
 
     if (ctaConfig[currentView] && window.innerWidth <= 480) {
-      this.fixedCta.btn.textContent = ctaConfig[currentView].text;
+      // Mostrar solo el botón correspondiente
+      if (currentView === 'initial') {
+        showElement(this.fixedCta.bar);
+        const mainBtnText = document.querySelector('#valorarBtn #btnText');
+        if (mainBtnText) {
+          this.fixedCta.btn.textContent = mainBtnText.textContent;
+        }
+        this.fixedCta.btn.style.display = 'block';
+      } else {
+        this.fixedCta.btn.style.display = 'none';
+      }
+      if (currentView === 'form' && this.fixedCta.btnForm) {
+        this.fixedCta.btnForm.style.display = 'block';
+      } else if (this.fixedCta.btnForm) {
+        this.fixedCta.btnForm.style.display = 'none';
+      }
+      if (currentView === 'review' && this.fixedCta.btnReview) {
+        this.fixedCta.btnReview.style.display = 'block';
+      } else if (this.fixedCta.btnReview) {
+        this.fixedCta.btnReview.style.display = 'none';
+      }
       this.fixedCta.action = ctaConfig[currentView].action;
-      showElement(this.fixedCta.bar);
       // Ocultar el botón original correspondiente
       if(ctaConfig[currentView].originalBtnContainer) {
         ctaConfig[currentView].originalBtnContainer.classList.add('visually-hidden');
       }
     } else {
       hideElement(this.fixedCta.bar);
+      this.fixedCta.btn.style.display = 'none';
+      if (this.fixedCta.btnForm) this.fixedCta.btnForm.style.display = 'none';
+      if (this.fixedCta.btnReview) this.fixedCta.btnReview.style.display = 'none';
       this.fixedCta.action = null;
       // Asegurarse de que todos los botones originales son visibles en escritorio
       for (const key in ctaConfig) {
