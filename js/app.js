@@ -307,7 +307,7 @@ class App {
         
         if (timeLeft < 0) {
           clearInterval(this.googleTimerInterval);
-          googleTimerEl.textContent = '¡EXPIRADO!';
+          googleTimerEl.textContent = languageManager.getTranslation('expired');
         }
       }
     }, 1000);
