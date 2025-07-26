@@ -166,6 +166,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const createOpinionHTML = (opinion) => {
         const stars = '★'.repeat(opinion.rating || 0) + '☆'.repeat(5 - (opinion.rating || 0));
         const reviewText = opinion.review || 'Comentario no proporcionado';
+        // DEBUG: Mostrar en consola el valor original y cómo lo interpreta JS
+        if (opinion.date_real) {
+          console.log('DEBUG date_real original:', opinion.date_real);
+          console.log('DEBUG interpretado JS (UTC):', new Date(opinion.date_real).toISOString());
+        }
         const date = opinion.date_real ? new Date(opinion.date_real).toLocaleDateString('es-ES', { timeZone: 'Atlantic/Canary' }) : 'N/A';
         const time = opinion.date_real ? new Date(opinion.date_real).toLocaleTimeString('es-ES', { timeZone: 'Atlantic/Canary' }) : 'N/A';
         return `
