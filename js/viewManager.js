@@ -34,6 +34,8 @@ class ViewManager {
     // Barra CTA fija
     this.fixedCta.bar = document.querySelector('#fixed-cta-bar');
     this.fixedCta.btn = document.querySelector('#fixed-cta-btn');
+    this.fixedCta.btnForm = document.querySelector('#fixed-cta-btn-form');
+    this.fixedCta.btnReview = document.querySelector('#fixed-cta-btn-review');
 
     // Botones de acción originales
     this.originalCtas = {
