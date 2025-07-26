@@ -137,7 +137,11 @@ class ViewManager {
         this.fixedCta.btn.style.display = 'none';
       }
       if (currentView === 'form' && this.fixedCta.btnForm) {
+        showElement(this.fixedCta.bar);
         this.fixedCta.btnForm.style.display = 'block';
+        if (this.originalCtas.form && this.originalCtas.form.parentElement) {
+          this.originalCtas.form.parentElement.classList.add('visually-hidden');
+        }
       } else if (this.fixedCta.btnForm) {
         this.fixedCta.btnForm.style.display = 'none';
       }
