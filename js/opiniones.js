@@ -192,9 +192,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const applyFiltersFromUrl = () => {
         const params = new URLSearchParams(window.location.search);
+        let changed = false;
 
-        if (params.toString() === '') {
+        // Si falta 'date', ponerlo a 'today'
+        if (!params.has('date')) {
             params.set('date', 'today');
+            changed = true;
+        }
+        // Si falta 'limit', ponerlo al valor por defecto (100)
+        if (!params.has('limit')) {
+            params.set('limit', '100');
+            changed = true;
+        }
+        // Si hemos cambiado algo, actualizar la URL sin recargar
+        if (changed) {
             history.replaceState(null, '', `?${params.toString()}`);
         }
         
