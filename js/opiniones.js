@@ -166,8 +166,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const createOpinionHTML = (opinion) => {
         const stars = '★'.repeat(opinion.rating || 0) + '☆'.repeat(5 - (opinion.rating || 0));
         const reviewText = opinion.review || 'Comentario no proporcionado';
-        const date = opinion.date_real ? new Date(opinion.date_real).toLocaleDateString('es-ES') : 'N/A';
-        const time = opinion.date_real ? new Date(opinion.date_real).toLocaleTimeString('es-ES') : 'N/A';
+        const date = opinion.date_real ? new Date(opinion.date_real).toLocaleDateString('es-ES', { timeZone: 'Atlantic/Canary' }) : 'N/A';
+        const time = opinion.date_real ? new Date(opinion.date_real).toLocaleTimeString('es-ES', { timeZone: 'Atlantic/Canary' }) : 'N/A';
         return `
             <div class="opinion-card">
                 <div class="opinion-card-header">
