@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const ALL_PRIZES = [
         '🍽️ CENA (VALOR 60€)', '💶 30€ DESCUENTO', '🍾 BOTELLA VINO', '🍦 HELADO',
-        '🍺 CERVEZA', '🥤 REFRESCO', '🍹 MOJITO', '🍷 COPA VINO'
+        '🍺 CERVEZA', '🥤 REFRESCO', '🍹 MOJITO', '🥃 CHUPITO'
     ];
 
     const updateBrowserUrl = () => {

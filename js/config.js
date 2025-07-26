@@ -39,5 +39,5 @@ export const ROULETTE_COLORS = [
   { color: '#27ae60', start: 180, end: 225 },  // CERVEZA
   { color: '#f1c40f', start: 225, end: 270 },  // REFRESCO
   { color: '#3498db', start: 270, end: 315 },  // MOJITO
-  { color: '#9b59b6', start: 315, end: 360 }   // COPA VINO
+  { color: '#9b59b6', start: 315, end: 360 }   // CHUPITO
 ];
