@@ -159,6 +159,7 @@ class App {
       ...formData,
       rating: rating,
       lang: languageManager.getCurrentLanguage(),
+      // Guardar SIEMPRE en UTC. El backend debe almacenar este valor tal cual, sin modificar la zona horaria.
       timestamp: new Date().toISOString()
     };
     
