@@ -56,6 +56,12 @@ class ViewManager {
         }
       });
     }
+    // Event listener para el botón fijo de formulario
+    if (this.fixedCta.btnForm && this.originalCtas.form) {
+      this.fixedCta.btnForm.addEventListener('click', () => {
+        this.originalCtas.form.click();
+      });
+    }
   }
 
   /**
