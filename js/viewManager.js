@@ -141,8 +141,8 @@ class ViewManager {
       if (currentView === 'form' && this.fixedCta.btnForm) {
         showElement(this.fixedCta.bar);
         this.fixedCta.btnForm.style.display = 'block';
-        if (this.originalCtas.form && this.originalCtas.form.parentElement) {
-          this.originalCtas.form.parentElement.classList.add('visually-hidden');
+        if (this.originalCtas.form) {
+          this.originalCtas.form.classList.add('visually-hidden');
         }
       } else if (this.fixedCta.btnForm) {
         this.fixedCta.btnForm.style.display = 'none';
