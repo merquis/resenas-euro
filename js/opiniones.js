@@ -171,8 +171,13 @@ document.addEventListener('DOMContentLoaded', () => {
           console.log('DEBUG date_real original:', opinion.date_real);
           console.log('DEBUG interpretado JS (UTC):', new Date(opinion.date_real).toISOString());
         }
-        const date = opinion.date_real ? new Date(opinion.date_real).toLocaleDateString('es-ES', { timeZone: 'Atlantic/Canary' }) : 'N/A';
-        const time = opinion.date_real ? new Date(opinion.date_real).toLocaleTimeString('es-ES', { timeZone: 'Atlantic/Canary' }) : 'N/A';
+        // Mostrar la fecha y hora tal cual vienen en el string ISO, sin conversión de zona horaria
+        let date = 'N/A', time = 'N/A';
+        if (opinion.date_real) {
+          const [fecha, hora] = opinion.date_real.split('T');
+          date = fecha.split('-').reverse().join('/'); // Formato DD/MM/YYYY
+          time = hora ? hora.substring(0, 8) : '';
+        }
         return `
             <div class="opinion-card">
                 <div class="opinion-card-header">
