@@ -204,6 +204,7 @@ class App {
         review: this.currentFormData.feedback,
         premio: prizeName,
         codigoPremio: justTheCode,
+        prizeIndex: prizeIndex,
       };
       delete payload.feedback;
 
