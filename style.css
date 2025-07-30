@@ -898,8 +898,13 @@ body {
 }
 
 /* MEJORAS PARA MÓVIL */
-@media (max-width: 480px) and (orientation: portrait) {
-  /* --- BARRA DE ACCIÓN INFERIOR FIJA --- */
+@media (max-width: 768px) {
+  /* --- BARRA DE ACCIÓN INFERIOR FIJA Y AJUSTES MÓVILES --- */
+
+  /* Ocultamos el botón de valoración original para evitar duplicados */
+  #valorarBtnContainer {
+    display: none;
+  }
   
   /* Espacio reservado en la parte inferior para la barra fija */
   body {
@@ -907,57 +912,46 @@ body {
   }
 
   /* Contenedor de la barra fija */
-.fixed-cta-container {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 15px; /* Aumentado para más margen */
-  background: #181E37;
-  z-index: 1000;
-  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
-}
-.fixed-cta-container button {
-  display: none;
-}
+  .fixed-cta-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    background: #181E37;
+    z-index: 1000;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .fixed-cta-container button {
+    display: none; /* Los botones internos se gestionan por JS */
+  }
 
   /* Estilo específico para el botón en la barra fija */
   #fixed-cta-bar .confirmation-btn {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    border-radius: 10px; /* Bordes suaves */
-    background: linear-gradient(135deg, #f39c12, #e67e22); /* Color naranja */
+    border-radius: 10px;
+    background: linear-gradient(135deg, #f39c12, #e67e22);
     box-shadow: none;
     padding-top: 15px;
     padding-bottom: 15px;
-    font-size: 18px; /* Reducimos la fuente para asegurar una línea */
-    white-space: nowrap; /* Forzar una sola línea */
+    font-size: 18px;
+    white-space: nowrap;
     animation: heartbeat 1.5s ease-in-out infinite;
   }
 
-@keyframes heartbeat {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-  /* Ocultamos visualmente los botones originales en móvil, pero los mantenemos accesibles para scripts */
-  .visually-hidden {
-    position: absolute !important;
-    width: 1px !important;
-    height: 1px !important;
-    margin: -1px !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-    clip: rect(0, 0, 0, 0) !important;
-    border: 0 !important;
+  @keyframes heartbeat {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
 
 
