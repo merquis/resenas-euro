@@ -198,7 +198,7 @@ export class RatingManager {
       this.stars.forEach(s => s.classList.add('pulse-error')); // Iniciar animación de error
       
       // Scroll hacia la sección de estrellas si estamos en móvil
-      if (window.innerWidth <= 480) {
+      if (window.innerWidth <= 768) {
         this.container.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
       

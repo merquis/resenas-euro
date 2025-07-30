@@ -233,7 +233,7 @@ class App {
         viewManager.updateFixedCta('review');
 
         // Hacemos scroll hacia la nueva sección en móviles
-        if (window.innerWidth <= 480) {
+        if (window.innerWidth <= 768) {
           this.resenaBtn.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
