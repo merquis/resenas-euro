@@ -207,6 +207,39 @@ class ViewManager {
       if (overlayName === 'roulette' && window.innerWidth <= 768) {
         hideElement(this.fixedCta.bar);
       }
+
+      // --- NUEVA LÓGICA PARA REESTRUCTURAR EL DOM EN VISTA RULETA ---
+      if (overlayName === 'roulette') {
+        this.restructureRouletteDOM();
+      }
+    }
+  }
+
+  /**
+   * Reestructura el DOM de la ruleta para el layout horizontal, si es necesario.
+   */
+  restructureRouletteDOM() {
+    const rouletteContent = document.querySelector('.roulette-content');
+    if (!rouletteContent) return;
+
+    const header = rouletteContent.querySelector('.roulette-header');
+    const spinBtn = rouletteContent.querySelector('#spinBtn');
+    
+    // Si ya existe el wrapper, no hacer nada
+    if (rouletteContent.querySelector('.roulette-right-column')) {
+      return;
+    }
+
+    if (header && spinBtn) {
+      const rightColumn = document.createElement('div');
+      rightColumn.className = 'roulette-right-column';
+      
+      // Mover el header y el botón dentro de la nueva columna
+      rightColumn.appendChild(header);
+      rightColumn.appendChild(spinBtn);
+      
+      // Añadir la nueva columna al contenido de la ruleta
+      rouletteContent.appendChild(rightColumn);
     }
   }
 

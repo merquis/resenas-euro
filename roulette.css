@@ -129,29 +129,45 @@
 @media (max-height: 500px) and (orientation: landscape) {
   .roulette-content {
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
     padding: 1rem;
+    max-width: 95vw;
+  }
+
+  #rouletteContainer {
+    flex: 0 0 60%;
   }
 
   #rouletteWheel {
-    width: 60vh; /* Usar altura de la ventana como referencia */
-    height: 60vh;
-    max-width: 280px; /* Limitar tamaño máximo */
-    max-height: 280px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1; /* Mantener la proporción cuadrada */
+    max-width: 300px;
+  }
+
+  .roulette-right-column {
+    flex: 0 0 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
   }
 
   .roulette-header {
-    position: absolute;
-    top: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
+    position: static; /* Quitar posicionamiento absoluto */
+    transform: none;
+    width: auto;
+    margin-bottom: 0; /* Resetear margen */
   }
 
   #spinBtn {
     margin-top: 0; /* Resetear margen superior */
     flex-shrink: 0; /* Evitar que el botón se encoja */
+    padding: 15px 20px;
+    font-size: 18px;
   }
 }
