@@ -124,3 +124,34 @@
     top: -20px;
   }
 }
+
+/* Estilos para móviles en horizontal */
+@media (max-height: 500px) and (orientation: landscape) {
+  .roulette-content {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem;
+  }
+
+  #rouletteWheel {
+    width: 60vh; /* Usar altura de la ventana como referencia */
+    height: 60vh;
+    max-width: 280px; /* Limitar tamaño máximo */
+    max-height: 280px;
+  }
+
+  .roulette-header {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+
+  #spinBtn {
+    margin-top: 0; /* Resetear margen superior */
+    flex-shrink: 0; /* Evitar que el botón se encoja */
+  }
+}
