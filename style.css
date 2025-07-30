@@ -898,7 +898,7 @@ body {
 }
 
 /* MEJORAS PARA MÓVIL */
-@media (max-width: 480px) {
+@media (max-width: 480px) and (orientation: portrait) {
   /* --- BARRA DE ACCIÓN INFERIOR FIJA --- */
   
   /* Espacio reservado en la parte inferior para la barra fija */
