@@ -901,8 +901,10 @@ body {
 @media (max-width: 768px) {
   /* --- BARRA DE ACCIÓN INFERIOR FIJA Y AJUSTES MÓVILES --- */
 
-  /* Ocultamos el botón de valoración original para evitar duplicados */
-  #valorarBtnContainer {
+  /* Ocultamos los botones de acción originales para evitar duplicados en móviles */
+  #valorarBtnContainer,
+  #feedbackForm button[type="submit"],
+  #googleBtnContainer {
     display: none;
   }
   

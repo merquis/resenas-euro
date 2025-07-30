@@ -150,7 +150,7 @@ class ViewManager {
       }
     };
 
-    if (ctaConfig[currentView] && window.innerWidth <= 480) {
+    if (ctaConfig[currentView] && window.innerWidth <= 768) {
       // Mostrar solo el botón correspondiente
       if (currentView === 'initial') {
         showElement(this.fixedCta.bar);
@@ -204,7 +204,7 @@ class ViewManager {
     if (this.overlays[overlayName]) {
       showElement(this.overlays[overlayName]);
       // Ocultar la barra CTA si se muestra la ruleta en móvil
-      if (overlayName === 'roulette' && window.innerWidth <= 480) {
+      if (overlayName === 'roulette' && window.innerWidth <= 768) {
         hideElement(this.fixedCta.bar);
       }
     }
